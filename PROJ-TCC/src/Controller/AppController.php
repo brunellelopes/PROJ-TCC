@@ -42,12 +42,48 @@ class AppController extends Controller
         parent::initialize();
 
         $this->loadComponent('RequestHandler');
-        $this->loadComponent('Flash');
+        $this->loadComponent('Auth', [
+            'authenticate' => [
+                'Form' => [
+                    'fields' => [
+                        'username' => 'email',
+                        'password' => 'password'
+                    ]
+                ]
+            ],
+            'loginAction' => [
+                'controller' => 'Users',
+                'action' => 'login'
+            ]
+        ]);
 
+        // Permite a ação display, assim nosso pages controller
+        // continua a funcionar.
+        $this->Auth->allow(['display']);
         /*
          * Enable the following component for recommended CakePHP form protection settings.
          * see https://book.cakephp.org/4/en/controllers/components/form-protection.html
          */
         //$this->loadComponent('FormProtection');
+    }
+
+    public function Login(){
+        if ($this->request->is('post')) {
+            $coordenador = $this->Auth->identify();
+            $professor = $this->Auth->identify();
+            $aluno = $this->Auth->identify();
+            if ($coordenador) {
+                $this->Auth->setUser($coordenador);
+                return $this->redirect($this->Auth->redirectUrl());
+            }else if($professor){
+                $this->Auth->setUser($professor);
+                return $this->redirect($this->Auth->redirectUrl());
+            }else if($aluno){
+                $this->Auth->setUser($aluno);
+                return $this->redirect($this->Auth->redirectUrl());
+            }
+            $this->Flash->error('Usuario e/ou senha incorretos.');
+            
+        }
     }
 }

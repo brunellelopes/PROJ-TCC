@@ -43,6 +43,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
 
+    <!-- Instrucao basica para chamar o css, similar ao Js, utilizando this, uma orientacao a objeto-->
     <?= $this->Html->css(['normalize.min', 'milligram.min', 'cake', 'home']) ?>
 
     <?= $this->fetch('meta') ?>
