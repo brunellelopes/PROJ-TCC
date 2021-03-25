@@ -8,7 +8,7 @@ use Cake\ORM\Entity;
 /**
  * Account Entity
  *
- * @property int $codAccount
+ * @property int $cdAccount
  * @property string|null $descAccount
  */
 class Account extends Entity

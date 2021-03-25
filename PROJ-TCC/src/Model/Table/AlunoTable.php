@@ -39,7 +39,7 @@ class AlunoTable extends Table
 
         $this->setTable('aluno');
         $this->setDisplayField('loginAluno');
-        $this->setPrimaryKey('loginAluno');
+        $this->setPrimaryKey('cdAluno');
     }
 
     /**
@@ -51,9 +51,14 @@ class AlunoTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
+            ->integer('cdAluno')
+            ->allowEmptyString('cdAluno', null, 'create');
+
+        $validator
             ->scalar('loginAluno')
             ->maxLength('loginAluno', 15)
-            ->allowEmptyString('loginAluno', 'create');
+            ->requirePresence('loginAluno', 'create')
+            ->notEmptyString('loginAluno');
 
         $validator
             ->scalar('senhaAluno')
@@ -69,7 +74,8 @@ class AlunoTable extends Table
         $validator
             ->scalar('nomeAluno')
             ->maxLength('nomeAluno', 50)
-            ->allowEmptyString('nomeAluno');
+            ->requirePresence('nomeAluno', 'create')
+            ->notEmptyString('nomeAluno');
 
         $validator
             ->scalar('emailAluno')
@@ -78,9 +84,9 @@ class AlunoTable extends Table
             ->notEmptyString('emailAluno');
 
         $validator
-            ->integer('codAccount')
-            ->requirePresence('codAccount', 'create')
-            ->notEmptyString('codAccount');
+            ->integer('cdAccount')
+            ->requirePresence('cdAccount', 'create')
+            ->notEmptyString('cdAccount');
 
         return $validator;
     }

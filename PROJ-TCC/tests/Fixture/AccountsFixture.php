@@ -17,10 +17,10 @@ class AccountsFixture extends TestFixture
      */
     // phpcs:disable
     public $fields = [
-        'codAccount' => ['type' => 'integer', 'length' => null, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
+        'cdAccount' => ['type' => 'integer', 'length' => null, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
         'descAccount' => ['type' => 'string', 'length' => 15, 'null' => true, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
         '_constraints' => [
-            'primary' => ['type' => 'primary', 'columns' => ['codAccount'], 'length' => []],
+            'primary' => ['type' => 'primary', 'columns' => ['cdAccount'], 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -37,7 +37,7 @@ class AccountsFixture extends TestFixture
     {
         $this->records = [
             [
-                'codAccount' => 1,
+                'cdAccount' => 1,
                 'descAccount' => 'Lorem ipsum d',
             ],
         ];

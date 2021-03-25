@@ -35,12 +35,16 @@
                     <td><?= h($aluno->emailAluno) ?></td>
                 </tr>
                 <tr>
+                    <th><?= __('CdAluno') ?></th>
+                    <td><?= $this->Number->format($aluno->cdAluno) ?></td>
+                </tr>
+                <tr>
                     <th><?= __('MatAluno') ?></th>
                     <td><?= $this->Number->format($aluno->matAluno) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('CodAccount') ?></th>
-                    <td><?= $this->Number->format($aluno->codAccount) ?></td>
+                    <th><?= __('CdAccount') ?></th>
+                    <td><?= $this->Number->format($aluno->cdAccount) ?></td>
                 </tr>
             </table>
         </div>

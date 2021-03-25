@@ -9,13 +9,13 @@ use Cake\ORM\Entity;
  * Projeto Entity
  *
  * @property int $cdProj
- * @property string $loginProf
- * @property string $loginCoord
- * @property string $loginAluno
- * @property string|null $loginAluno2
- * @property string|null $loginAluno3
- * @property string|null $loginAluno4
- * @property string|null $nomeProj
+ * @property int $cdProf
+ * @property int $cdCoord
+ * @property int $cdAluno
+ * @property int|null $cdAluno2
+ * @property int|null $cdAluno3
+ * @property int|null $cdAluno4
+ * @property string $nomeProj
  * @property string|null $descrProj
  * @property \Cake\I18n\FrozenDate|null $dtInicio
  * @property \Cake\I18n\FrozenDate|null $dtFim
@@ -35,12 +35,12 @@ class Projeto extends Entity
      * @var array
      */
     protected $_accessible = [
-        'loginProf' => true,
-        'loginCoord' => true,
-        'loginAluno' => true,
-        'loginAluno2' => true,
-        'loginAluno3' => true,
-        'loginAluno4' => true,
+        'cdProf' => true,
+        'cdCoord' => true,
+        'cdAluno' => true,
+        'cdAluno2' => true,
+        'cdAluno3' => true,
+        'cdAluno4' => true,
         'nomeProj' => true,
         'descrProj' => true,
         'dtInicio' => true,

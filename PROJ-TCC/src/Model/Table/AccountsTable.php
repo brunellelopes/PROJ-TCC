@@ -38,8 +38,8 @@ class AccountsTable extends Table
         parent::initialize($config);
 
         $this->setTable('accounts');
-        $this->setDisplayField('codAccount');
-        $this->setPrimaryKey('codAccount');
+        $this->setDisplayField('cdAccount');
+        $this->setPrimaryKey('cdAccount');
     }
 
     /**
@@ -51,8 +51,8 @@ class AccountsTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
-            ->integer('codAccount')
-            ->allowEmptyString('codAccount', null, 'create');
+            ->integer('cdAccount')
+            ->allowEmptyString('cdAccount', null, 'create');
 
         $validator
             ->scalar('descAccount')

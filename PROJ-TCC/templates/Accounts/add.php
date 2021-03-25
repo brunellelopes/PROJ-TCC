@@ -17,6 +17,7 @@
             <fieldset>
                 <legend><?= __('Add Account') ?></legend>
                 <?php
+                    echo $this->Form->control('cdAccount');
                     echo $this->Form->control('descAccount');
                 ?>
             </fieldset>

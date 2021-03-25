@@ -8,11 +8,12 @@ use Cake\ORM\Entity;
 /**
  * Coordenador Entity
  *
+ * @property int $cdCoord
  * @property string $loginCoord
  * @property string $senhaCoord
- * @property string|null $nomeCoord
+ * @property string $nomeCoord
  * @property string|null $emailCoord
- * @property int $codAccount
+ * @property int $cdAccount
  */
 class Coordenador extends Entity
 {
@@ -26,9 +27,10 @@ class Coordenador extends Entity
      * @var array
      */
     protected $_accessible = [
+        'loginCoord' => true,
         'senhaCoord' => true,
         'nomeCoord' => true,
         'emailCoord' => true,
-        'codAccount' => true,
+        'cdAccount' => true,
     ];
 }

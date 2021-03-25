@@ -23,19 +23,20 @@ class ProfessorFixture extends TestFixture
      */
     // phpcs:disable
     public $fields = [
+        'cdProf' => ['type' => 'integer', 'length' => null, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
         'loginProf' => ['type' => 'string', 'length' => 15, 'null' => false, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
         'senhaProf' => ['type' => 'string', 'length' => 10, 'null' => false, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
-        'nomeProf' => ['type' => 'string', 'length' => 50, 'null' => true, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
+        'nomeProf' => ['type' => 'string', 'length' => 50, 'null' => false, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
         'emailProf' => ['type' => 'string', 'length' => 40, 'null' => false, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
         'celProf' => ['type' => 'string', 'length' => 11, 'null' => true, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
-        'codAccount' => ['type' => 'integer', 'length' => null, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'cdAccount' => ['type' => 'integer', 'length' => null, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         '_indexes' => [
-            'FK_Professor_Account' => ['type' => 'index', 'columns' => ['codAccount'], 'length' => []],
+            'FK_Professor_Account' => ['type' => 'index', 'columns' => ['cdAccount'], 'length' => []],
         ],
         '_constraints' => [
-            'primary' => ['type' => 'primary', 'columns' => ['loginProf'], 'length' => []],
-            'emailProf' => ['type' => 'unique', 'columns' => ['emailProf'], 'length' => []],
-            'FK_Professor_Account' => ['type' => 'foreign', 'columns' => ['codAccount'], 'references' => ['accounts', 'codAccount'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
+            'primary' => ['type' => 'primary', 'columns' => ['cdProf'], 'length' => []],
+            'loginProf' => ['type' => 'unique', 'columns' => ['loginProf', 'emailProf'], 'length' => []],
+            'FK_Professor_Account' => ['type' => 'foreign', 'columns' => ['cdAccount'], 'references' => ['accounts', 'cdAccount'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -52,12 +53,13 @@ class ProfessorFixture extends TestFixture
     {
         $this->records = [
             [
-                'loginProf' => '0a40a549-7b17-4d7b-976a-f1c32d3e24b8',
+                'cdProf' => 1,
+                'loginProf' => 'Lorem ipsum d',
                 'senhaProf' => 'Lorem ip',
                 'nomeProf' => 'Lorem ipsum dolor sit amet',
                 'emailProf' => 'Lorem ipsum dolor sit amet',
                 'celProf' => 'Lorem ips',
-                'codAccount' => 1,
+                'cdAccount' => 1,
             ],
         ];
         parent::init();

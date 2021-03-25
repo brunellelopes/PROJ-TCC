@@ -39,7 +39,7 @@ class ProfessorTable extends Table
 
         $this->setTable('professor');
         $this->setDisplayField('loginProf');
-        $this->setPrimaryKey('loginProf');
+        $this->setPrimaryKey('cdProf');
     }
 
     /**
@@ -51,9 +51,14 @@ class ProfessorTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
+            ->integer('cdProf')
+            ->allowEmptyString('cdProf', null, 'create');
+
+        $validator
             ->scalar('loginProf')
             ->maxLength('loginProf', 15)
-            ->allowEmptyString('loginProf', null, 'create');
+            ->requirePresence('loginProf', 'create')
+            ->notEmptyString('loginProf');
 
         $validator
             ->scalar('senhaProf')
@@ -64,14 +69,14 @@ class ProfessorTable extends Table
         $validator
             ->scalar('nomeProf')
             ->maxLength('nomeProf', 50)
-            ->allowEmptyString('nomeProf');
+            ->requirePresence('nomeProf', 'create')
+            ->notEmptyString('nomeProf');
 
         $validator
             ->scalar('emailProf')
             ->maxLength('emailProf', 40)
             ->requirePresence('emailProf', 'create')
-            ->notEmptyString('emailProf')
-            ->add('emailProf', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->notEmptyString('emailProf');
 
         $validator
             ->scalar('celProf')
@@ -79,24 +84,10 @@ class ProfessorTable extends Table
             ->allowEmptyString('celProf');
 
         $validator
-            ->integer('codAccount')
-            ->requirePresence('codAccount', 'create')
-            ->notEmptyString('codAccount');
+            ->integer('cdAccount')
+            ->requirePresence('cdAccount', 'create')
+            ->notEmptyString('cdAccount');
 
         return $validator;
-    }
-
-    /**
-     * Returns a rules checker object that will be used for validating
-     * application integrity.
-     *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\ORM\RulesChecker
-     */
-    public function buildRules(RulesChecker $rules): RulesChecker
-    {
-        $rules->add($rules->isUnique(['emailProf']), ['errorField' => 'emailProf']);
-
-        return $rules;
     }
 }

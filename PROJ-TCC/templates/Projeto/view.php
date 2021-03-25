@@ -19,30 +19,6 @@
             <h3><?= h($projeto->cdProj) ?></h3>
             <table>
                 <tr>
-                    <th><?= __('LoginProf') ?></th>
-                    <td><?= h($projeto->loginProf) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('LoginCoord') ?></th>
-                    <td><?= h($projeto->loginCoord) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('LoginAluno') ?></th>
-                    <td><?= h($projeto->loginAluno) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('LoginAluno2') ?></th>
-                    <td><?= h($projeto->loginAluno2) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('LoginAluno3') ?></th>
-                    <td><?= h($projeto->loginAluno3) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('LoginAluno4') ?></th>
-                    <td><?= h($projeto->loginAluno4) ?></td>
-                </tr>
-                <tr>
                     <th><?= __('NomeProj') ?></th>
                     <td><?= h($projeto->nomeProj) ?></td>
                 </tr>
@@ -57,6 +33,30 @@
                 <tr>
                     <th><?= __('CdProj') ?></th>
                     <td><?= $this->Number->format($projeto->cdProj) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('CdProf') ?></th>
+                    <td><?= $this->Number->format($projeto->cdProf) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('CdCoord') ?></th>
+                    <td><?= $this->Number->format($projeto->cdCoord) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('CdAluno') ?></th>
+                    <td><?= $this->Number->format($projeto->cdAluno) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('CdAluno2') ?></th>
+                    <td><?= $this->Number->format($projeto->cdAluno2) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('CdAluno3') ?></th>
+                    <td><?= $this->Number->format($projeto->cdAluno3) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('CdAluno4') ?></th>
+                    <td><?= $this->Number->format($projeto->cdAluno4) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('NotaProj') ?></th>

@@ -22,10 +22,11 @@
             <fieldset>
                 <legend><?= __('Edit Coordenador') ?></legend>
                 <?php
+                    echo $this->Form->control('loginCoord');
                     echo $this->Form->control('senhaCoord');
                     echo $this->Form->control('nomeCoord');
                     echo $this->Form->control('emailCoord');
-                    echo $this->Form->control('codAccount');
+                    echo $this->Form->control('cdAccount');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

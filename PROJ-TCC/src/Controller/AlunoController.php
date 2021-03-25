@@ -50,11 +50,11 @@ class AlunoController extends AppController
         if ($this->request->is('post')) {
             $aluno = $this->Aluno->patchEntity($aluno, $this->request->getData());
             if ($this->Aluno->save($aluno)) {
-                $this->Flash->success(__($aluno->nomeAluno,' {0} foi salvo com sucesso.'));
+                $this->Flash->success(__('The aluno has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__($aluno->nomeAluno, '{0} nao pode ser salvo. Por favor, tente novamente.'));
+            $this->Flash->error(__('The aluno could not be saved. Please, try again.'));
         }
         $this->set(compact('aluno'));
     }

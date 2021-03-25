@@ -39,7 +39,7 @@ class CoordenadorTable extends Table
 
         $this->setTable('coordenador');
         $this->setDisplayField('loginCoord');
-        $this->setPrimaryKey('loginCoord');
+        $this->setPrimaryKey('cdCoord');
     }
 
     /**
@@ -51,9 +51,14 @@ class CoordenadorTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
+            ->integer('cdCoord')
+            ->allowEmptyString('cdCoord', null, 'create');
+
+        $validator
             ->scalar('loginCoord')
             ->maxLength('loginCoord', 15)
-            ->allowEmptyString('loginCoord', null, 'create');
+            ->requirePresence('loginCoord', 'create')
+            ->notEmptyString('loginCoord');
 
         $validator
             ->scalar('senhaCoord')
@@ -64,33 +69,19 @@ class CoordenadorTable extends Table
         $validator
             ->scalar('nomeCoord')
             ->maxLength('nomeCoord', 50)
-            ->allowEmptyString('nomeCoord');
+            ->requirePresence('nomeCoord', 'create')
+            ->notEmptyString('nomeCoord');
 
         $validator
             ->scalar('emailCoord')
             ->maxLength('emailCoord', 40)
-            ->allowEmptyString('emailCoord')
-            ->add('emailCoord', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->allowEmptyString('emailCoord');
 
         $validator
-            ->integer('codAccount')
-            ->requirePresence('codAccount', 'create')
-            ->notEmptyString('codAccount');
+            ->integer('cdAccount')
+            ->requirePresence('cdAccount', 'create')
+            ->notEmptyString('cdAccount');
 
         return $validator;
-    }
-
-    /**
-     * Returns a rules checker object that will be used for validating
-     * application integrity.
-     *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\ORM\RulesChecker
-     */
-    public function buildRules(RulesChecker $rules): RulesChecker
-    {
-        $rules->add($rules->isUnique(['emailCoord']), ['errorField' => 'emailCoord']);
-
-        return $rules;
     }
 }

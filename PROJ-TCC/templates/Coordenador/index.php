@@ -11,22 +11,24 @@
         <table>
             <thead>
                 <tr>
+                    <th><?= $this->Paginator->sort('cdCoord') ?></th>
                     <th><?= $this->Paginator->sort('loginCoord') ?></th>
                     <th><?= $this->Paginator->sort('senhaCoord') ?></th>
                     <th><?= $this->Paginator->sort('nomeCoord') ?></th>
                     <th><?= $this->Paginator->sort('emailCoord') ?></th>
-                    <th><?= $this->Paginator->sort('codAccount') ?></th>
+                    <th><?= $this->Paginator->sort('cdAccount') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($coordenador as $coordenador): ?>
                 <tr>
+                    <td><?= $this->Number->format($coordenador->cdCoord) ?></td>
                     <td><?= h($coordenador->loginCoord) ?></td>
                     <td><?= h($coordenador->senhaCoord) ?></td>
                     <td><?= h($coordenador->nomeCoord) ?></td>
                     <td><?= h($coordenador->emailCoord) ?></td>
-                    <td><?= $this->Number->format($coordenador->codAccount) ?></td>
+                    <td><?= $this->Number->format($coordenador->cdAccount) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $coordenador->loginCoord]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $coordenador->loginCoord]) ?>

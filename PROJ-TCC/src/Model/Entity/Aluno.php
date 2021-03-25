@@ -8,12 +8,13 @@ use Cake\ORM\Entity;
 /**
  * Aluno Entity
  *
+ * @property int $cdAluno
  * @property string $loginAluno
  * @property string $senhaAluno
  * @property int $matAluno
- * @property string|null $nomeAluno
+ * @property string $nomeAluno
  * @property string $emailAluno
- * @property int $codAccount
+ * @property int $cdAccount
  */
 class Aluno extends Entity
 {
@@ -32,6 +33,6 @@ class Aluno extends Entity
         'matAluno' => true,
         'nomeAluno' => true,
         'emailAluno' => true,
-        'codAccount' => true,
+        'cdAccount' => true,
     ];
 }

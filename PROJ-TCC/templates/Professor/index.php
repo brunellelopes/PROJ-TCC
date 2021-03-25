@@ -11,24 +11,26 @@
         <table>
             <thead>
                 <tr>
+                    <th><?= $this->Paginator->sort('cdProf') ?></th>
                     <th><?= $this->Paginator->sort('loginProf') ?></th>
                     <th><?= $this->Paginator->sort('senhaProf') ?></th>
                     <th><?= $this->Paginator->sort('nomeProf') ?></th>
                     <th><?= $this->Paginator->sort('emailProf') ?></th>
                     <th><?= $this->Paginator->sort('celProf') ?></th>
-                    <th><?= $this->Paginator->sort('codAccount') ?></th>
+                    <th><?= $this->Paginator->sort('cdAccount') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($professor as $professor): ?>
                 <tr>
+                    <td><?= $this->Number->format($professor->cdProf) ?></td>
                     <td><?= h($professor->loginProf) ?></td>
                     <td><?= h($professor->senhaProf) ?></td>
                     <td><?= h($professor->nomeProf) ?></td>
                     <td><?= h($professor->emailProf) ?></td>
                     <td><?= h($professor->celProf) ?></td>
-                    <td><?= $this->Number->format($professor->codAccount) ?></td>
+                    <td><?= $this->Number->format($professor->cdAccount) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $professor->loginProf]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $professor->loginProf]) ?>
