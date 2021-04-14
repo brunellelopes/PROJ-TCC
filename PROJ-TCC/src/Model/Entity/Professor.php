@@ -8,12 +8,13 @@ use Cake\ORM\Entity;
 /**
  * Professor Entity
  *
+ * @property int $cdProf
  * @property string $loginProf
  * @property string $senhaProf
- * @property string|null $nomeProf
+ * @property string $nomeProf
  * @property string $emailProf
  * @property string|null $celProf
- * @property int $codAccount
+ * @property int $cdAccount
  */
 class Professor extends Entity
 {
@@ -27,10 +28,11 @@ class Professor extends Entity
      * @var array
      */
     protected $_accessible = [
+        'loginProf' => true,
         'senhaProf' => true,
         'nomeProf' => true,
         'emailProf' => true,
         'celProf' => true,
-        'codAccount' => true,
+        'cdAccount' => true,
     ];
 }

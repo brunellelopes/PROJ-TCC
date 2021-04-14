@@ -35,8 +35,12 @@
                     <td><?= h($coordenador->emailCoord) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('CodAccount') ?></th>
-                    <td><?= $this->Number->format($coordenador->codAccount) ?></td>
+                    <th><?= __('CdCoord') ?></th>
+                    <td><?= $this->Number->format($coordenador->cdCoord) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('CdAccount') ?></th>
+                    <td><?= $this->Number->format($coordenador->cdAccount) ?></td>
                 </tr>
             </table>
         </div>

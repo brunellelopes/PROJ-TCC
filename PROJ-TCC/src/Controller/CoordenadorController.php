@@ -50,11 +50,11 @@ class CoordenadorController extends AppController
         if ($this->request->is('post')) {
             $coordenador = $this->Coordenador->patchEntity($coordenador, $this->request->getData());
             if ($this->Coordenador->save($coordenador)) {
-                $this->Flash->success(__('O aluno foi adicionado com sucesso.'));
+                $this->Flash->success(__('The coordenador has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Erro ao salvar o Coordenador. Por favor, verifique os dados ou entre em contato com o administrador.'));
+            $this->Flash->error(__('The coordenador could not be saved. Please, try again.'));
         }
         $this->set(compact('coordenador'));
     }

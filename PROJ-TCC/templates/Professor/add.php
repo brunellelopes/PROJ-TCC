@@ -17,11 +17,12 @@
             <fieldset>
                 <legend><?= __('Add Professor') ?></legend>
                 <?php
+                    echo $this->Form->control('loginProf');
                     echo $this->Form->control('senhaProf');
                     echo $this->Form->control('nomeProf');
                     echo $this->Form->control('emailProf');
                     echo $this->Form->control('celProf');
-                    echo $this->Form->control('codAccount');
+                    echo $this->Form->control('cdAccount');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

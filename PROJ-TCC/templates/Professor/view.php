@@ -39,8 +39,12 @@
                     <td><?= h($professor->celProf) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('CodAccount') ?></th>
-                    <td><?= $this->Number->format($professor->codAccount) ?></td>
+                    <th><?= __('CdProf') ?></th>
+                    <td><?= $this->Number->format($professor->cdProf) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('CdAccount') ?></th>
+                    <td><?= $this->Number->format($professor->cdAccount) ?></td>
                 </tr>
             </table>
         </div>

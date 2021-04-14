@@ -12,12 +12,12 @@
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('cdProj') ?></th>
-                    <th><?= $this->Paginator->sort('loginProf') ?></th>
-                    <th><?= $this->Paginator->sort('loginCoord') ?></th>
-                    <th><?= $this->Paginator->sort('loginAluno') ?></th>
-                    <th><?= $this->Paginator->sort('loginAluno2') ?></th>
-                    <th><?= $this->Paginator->sort('loginAluno3') ?></th>
-                    <th><?= $this->Paginator->sort('loginAluno4') ?></th>
+                    <th><?= $this->Paginator->sort('cdProf') ?></th>
+                    <th><?= $this->Paginator->sort('cdCoord') ?></th>
+                    <th><?= $this->Paginator->sort('cdAluno') ?></th>
+                    <th><?= $this->Paginator->sort('cdAluno2') ?></th>
+                    <th><?= $this->Paginator->sort('cdAluno3') ?></th>
+                    <th><?= $this->Paginator->sort('cdAluno4') ?></th>
                     <th><?= $this->Paginator->sort('nomeProj') ?></th>
                     <th><?= $this->Paginator->sort('descrProj') ?></th>
                     <th><?= $this->Paginator->sort('dtInicio') ?></th>
@@ -32,12 +32,12 @@
                 <?php foreach ($projeto as $projeto): ?>
                 <tr>
                     <td><?= $this->Number->format($projeto->cdProj) ?></td>
-                    <td><?= h($projeto->loginProf) ?></td>
-                    <td><?= h($projeto->loginCoord) ?></td>
-                    <td><?= h($projeto->loginAluno) ?></td>
-                    <td><?= h($projeto->loginAluno2) ?></td>
-                    <td><?= h($projeto->loginAluno3) ?></td>
-                    <td><?= h($projeto->loginAluno4) ?></td>
+                    <td><?= $this->Number->format($projeto->cdProf) ?></td>
+                    <td><?= $this->Number->format($projeto->cdCoord) ?></td>
+                    <td><?= $this->Number->format($projeto->cdAluno) ?></td>
+                    <td><?= $this->Number->format($projeto->cdAluno2) ?></td>
+                    <td><?= $this->Number->format($projeto->cdAluno3) ?></td>
+                    <td><?= $this->Number->format($projeto->cdAluno4) ?></td>
                     <td><?= h($projeto->nomeProj) ?></td>
                     <td><?= h($projeto->descrProj) ?></td>
                     <td><?= h($projeto->dtInicio) ?></td>

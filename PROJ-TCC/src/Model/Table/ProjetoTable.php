@@ -55,42 +55,37 @@ class ProjetoTable extends Table
             ->allowEmptyString('cdProj', null, 'create');
 
         $validator
-            ->scalar('loginProf')
-            ->maxLength('loginProf', 15)
-            ->requirePresence('loginProf', 'create')
-            ->notEmptyString('loginProf');
+            ->integer('cdProf')
+            ->requirePresence('cdProf', 'create')
+            ->notEmptyString('cdProf');
 
         $validator
-            ->scalar('loginCoord')
-            ->maxLength('loginCoord', 15)
-            ->requirePresence('loginCoord', 'create')
-            ->notEmptyString('loginCoord');
+            ->integer('cdCoord')
+            ->requirePresence('cdCoord', 'create')
+            ->notEmptyString('cdCoord');
 
         $validator
-            ->scalar('loginAluno')
-            ->maxLength('loginAluno', 15)
-            ->requirePresence('loginAluno', 'create')
-            ->notEmptyString('loginAluno');
+            ->integer('cdAluno')
+            ->requirePresence('cdAluno', 'create')
+            ->notEmptyString('cdAluno');
 
         $validator
-            ->scalar('loginAluno2')
-            ->maxLength('loginAluno2', 15)
-            ->allowEmptyString('loginAluno2');
+            ->integer('cdAluno2')
+            ->allowEmptyString('cdAluno2');
 
         $validator
-            ->scalar('loginAluno3')
-            ->maxLength('loginAluno3', 15)
-            ->allowEmptyString('loginAluno3');
+            ->integer('cdAluno3')
+            ->allowEmptyString('cdAluno3');
 
         $validator
-            ->scalar('loginAluno4')
-            ->maxLength('loginAluno4', 15)
-            ->allowEmptyString('loginAluno4');
+            ->integer('cdAluno4')
+            ->allowEmptyString('cdAluno4');
 
         $validator
             ->scalar('nomeProj')
             ->maxLength('nomeProj', 255)
-            ->allowEmptyString('nomeProj');
+            ->requirePresence('nomeProj', 'create')
+            ->notEmptyString('nomeProj');
 
         $validator
             ->scalar('descrProj')

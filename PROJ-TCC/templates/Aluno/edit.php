@@ -22,11 +22,12 @@
             <fieldset>
                 <legend><?= __('Edit Aluno') ?></legend>
                 <?php
+                    echo $this->Form->control('loginAluno');
                     echo $this->Form->control('senhaAluno');
                     echo $this->Form->control('matAluno');
                     echo $this->Form->control('nomeAluno');
                     echo $this->Form->control('emailAluno');
-                    echo $this->Form->control('codAccount');
+                    echo $this->Form->control('cdAccount');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

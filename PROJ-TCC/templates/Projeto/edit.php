@@ -22,12 +22,12 @@
             <fieldset>
                 <legend><?= __('Edit Projeto') ?></legend>
                 <?php
-                    echo $this->Form->control('loginProf');
-                    echo $this->Form->control('loginCoord');
-                    echo $this->Form->control('loginAluno');
-                    echo $this->Form->control('loginAluno2');
-                    echo $this->Form->control('loginAluno3');
-                    echo $this->Form->control('loginAluno4');
+                    echo $this->Form->control('cdProf');
+                    echo $this->Form->control('cdCoord');
+                    echo $this->Form->control('cdAluno');
+                    echo $this->Form->control('cdAluno2');
+                    echo $this->Form->control('cdAluno3');
+                    echo $this->Form->control('cdAluno4');
                     echo $this->Form->control('nomeProj');
                     echo $this->Form->control('descrProj');
                     echo $this->Form->control('dtInicio', ['empty' => true]);

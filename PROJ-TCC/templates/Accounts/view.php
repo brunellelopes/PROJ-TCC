@@ -23,8 +23,8 @@
                     <td><?= h($account->descAccount) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('CodAccount') ?></th>
-                    <td><?= $this->Number->format($account->codAccount) ?></td>
+                    <th><?= __('CdAccount') ?></th>
+                    <td><?= $this->Number->format($account->cdAccount) ?></td>
                 </tr>
             </table>
         </div>

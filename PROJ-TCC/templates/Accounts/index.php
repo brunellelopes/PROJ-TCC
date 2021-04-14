@@ -11,7 +11,7 @@
         <table>
             <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('codAccount') ?></th>
+                    <th><?= $this->Paginator->sort('cdAccount') ?></th>
                     <th><?= $this->Paginator->sort('descAccount') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
@@ -19,7 +19,7 @@
             <tbody>
                 <?php foreach ($accounts as $account): ?>
                 <tr>
-                    <td><?= $this->Number->format($account->codAccount) ?></td>
+                    <td><?= $this->Number->format($account->cdAccount) ?></td>
                     <td><?= h($account->descAccount) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $account->codAccount]) ?>

@@ -23,18 +23,19 @@ class CoordenadorFixture extends TestFixture
      */
     // phpcs:disable
     public $fields = [
+        'cdCoord' => ['type' => 'integer', 'length' => null, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
         'loginCoord' => ['type' => 'string', 'length' => 15, 'null' => false, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
         'senhaCoord' => ['type' => 'string', 'length' => 10, 'null' => false, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
-        'nomeCoord' => ['type' => 'string', 'length' => 50, 'null' => true, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
+        'nomeCoord' => ['type' => 'string', 'length' => 50, 'null' => false, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
         'emailCoord' => ['type' => 'string', 'length' => 40, 'null' => true, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
-        'codAccount' => ['type' => 'integer', 'length' => null, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'cdAccount' => ['type' => 'integer', 'length' => null, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         '_indexes' => [
-            'FK_Coordenador_Account' => ['type' => 'index', 'columns' => ['codAccount'], 'length' => []],
+            'FK_Coordenador_Account' => ['type' => 'index', 'columns' => ['cdAccount'], 'length' => []],
         ],
         '_constraints' => [
-            'primary' => ['type' => 'primary', 'columns' => ['loginCoord'], 'length' => []],
-            'emailCoord' => ['type' => 'unique', 'columns' => ['emailCoord'], 'length' => []],
-            'FK_Coordenador_Account' => ['type' => 'foreign', 'columns' => ['codAccount'], 'references' => ['accounts', 'codAccount'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
+            'primary' => ['type' => 'primary', 'columns' => ['cdCoord'], 'length' => []],
+            'loginCoord' => ['type' => 'unique', 'columns' => ['loginCoord', 'emailCoord'], 'length' => []],
+            'FK_Coordenador_Account' => ['type' => 'foreign', 'columns' => ['cdAccount'], 'references' => ['accounts', 'cdAccount'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -51,11 +52,12 @@ class CoordenadorFixture extends TestFixture
     {
         $this->records = [
             [
-                'loginCoord' => 'a2eeb8bc-70e7-4e5c-bd2d-0dca41df6a69',
+                'cdCoord' => 1,
+                'loginCoord' => 'Lorem ipsum d',
                 'senhaCoord' => 'Lorem ip',
                 'nomeCoord' => 'Lorem ipsum dolor sit amet',
                 'emailCoord' => 'Lorem ipsum dolor sit amet',
-                'codAccount' => 1,
+                'cdAccount' => 1,
             ],
         ];
         parent::init();

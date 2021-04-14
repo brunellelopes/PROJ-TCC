@@ -50,7 +50,7 @@ class HistoricoFixture extends TestFixture
             [
                 'versaoProj' => 'Lorem ip',
                 'nmArquivo' => 'Lorem ipsum dolor sit amet',
-                'dtVersao' => '2021-03-17',
+                'dtVersao' => '2021-03-25',
                 'cdProj' => 1,
             ],
         ];
