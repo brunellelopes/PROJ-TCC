@@ -5,6 +5,7 @@
  */
 ?>
 <div class="professor index content">
+    <?= $this->Html->link(__('Logout'), ['action' => 'logout'], ['class' => 'button float-right']) ?>
     <?= $this->Html->link(__('New Professor'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Professor') ?></h3>
     <div class="table-responsive">

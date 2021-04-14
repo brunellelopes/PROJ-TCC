@@ -5,6 +5,7 @@
  */
 ?>
 <div class="aluno index content">
+    <?= $this->Html->link(__('Logout'), ['action' => 'logout']) ?>
     <?= $this->Html->link(__('New Aluno'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Aluno') ?></h3>
     <div class="table-responsive">

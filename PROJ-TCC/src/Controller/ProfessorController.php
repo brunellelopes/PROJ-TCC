@@ -102,4 +102,9 @@ class ProfessorController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function logout($id = null){
+        $this->Flash->success('You are now logged out.');
+        return $this->redirect(['action' => 'logout']);
+    }
 }

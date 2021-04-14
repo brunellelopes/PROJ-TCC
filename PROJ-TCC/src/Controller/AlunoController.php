@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Model\Entity\Aluno;
+
 /**
  * Aluno Controller
  *
@@ -19,7 +21,7 @@ class AlunoController extends AppController
     public function index()
     {
         $aluno = $this->paginate($this->Aluno);
-
+        $this->Auth->user('nomeAluno');
         $this->set(compact('aluno'));
     }
 
@@ -101,5 +103,20 @@ class AlunoController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function painel(){
+
+    }
+
+    public function login(){
+        
+    }
+    public function logout($id = null){
+        $this->Flash->success('You are now logged out.');
+        return $this->redirect(([
+            'controller' => 'Users',
+            'action' => 'login'
+        ]));
     }
 }

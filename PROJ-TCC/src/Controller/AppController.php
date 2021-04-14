@@ -20,7 +20,7 @@ use Cake\Controller\Controller;
 
 /**
  * Application Controller
- *
+ * 
  * Add your application-wide methods in the class below, your controllers
  * will inherit them.
  *
@@ -42,49 +42,55 @@ class AppController extends Controller
         parent::initialize();
 
         $this->loadComponent('RequestHandler');
-        /*$this->loadComponent('Auth', [
-            'authenticate' => [
+        $this->loadComponent('Auth', [
                 'Form' => [
                     'fields' => [
-                        'username' => 'email',
-                        'password' => 'password'
+                        'username' => 'login',
+                        'password' => 'senha'
                     ]
-                ]
-            ],
+                ],
+                'authorize'=>[
+                    'Controller',
+                ],
             'loginAction' => [
+                'action' => 'login',
+                'authError' => 'Você deve fazer login para ter acesso a essa área!',
+                'loginError'=> 'Combinação de usuário e senha errada!'
+            ],
+            'logoutAction' =>[
                 'controller' => 'Users',
-                'action' => 'login'
+                'action' => 'logout'
             ]
-        ]);*/
+        ]);
         $this->loadComponent('Flash');
+        $this->Auth->allow(['Coordeador','Professor','Aluno']);
 
         // Permite a ação display, assim nosso pages controller
         // continua a funcionar.
-        //$this->Auth->allow(['display']);
         /*
-         * Enable the following component for recommended CakePHP form protection settings.
-         * see https://book.cakephp.org/4/en/controllers/components/form-protection.html
-         */
+        * Enable the following component for recommended CakePHP form protection settings.
+        * see https://book.cakephp.org/4/en/controllers/components/form-protection.html
+        */
         //$this->loadComponent('FormProtection');
     }
-
-    public function Login(){
-        if ($this->request->is('post')) {
-            $coordenador = $this->Auth->identify();
-            $professor = $this->Auth->identify();
-            $aluno = $this->Auth->identify();
-            if ($coordenador) {
-                $this->Auth->setUser($coordenador);
-                return $this->redirect($this->Auth->redirectUrl());
-            }else if($professor){
-                $this->Auth->setUser($professor);
-                return $this->redirect($this->Auth->redirectUrl());
-            }else if($aluno){
-                $this->Auth->setUser($aluno);
-                return $this->redirect($this->Auth->redirectUrl());
-            }
-            $this->Flash->error('Usuario e/ou senha incorretos.');
-            
+    
+    public function isAuthorized($user = null){
+         // Qualquer usuário registrado pode acessar funções públicas
+        if (!$this->request->getParam('prefix')) {
+            return true;
         }
+        // Somente administradores podem acessar funções 
+        if ($this->request->getParam('prefix') === 'Coordenador') {
+            return (bool)($user['role'] === 'Coordenador');
+        }
+        if ($this->request->getParam('prefix') === 'Professor') {
+            return (bool)($user['role'] === 'Professor');
+        }
+        if ($this->request->getParam('prefix') === 'Aluno') {
+            return (bool)($user['role'] === 'Aluno');
+        }
+
+        // Negação padrão
+        return false;
     }
 }
