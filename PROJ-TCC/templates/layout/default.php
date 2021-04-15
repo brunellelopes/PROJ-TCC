@@ -27,7 +27,11 @@
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
 
-    <?= $this->Html->css(['normalize.min', 'milligram.min', 'cake']) ?>
+    <?= $this->Html->css('bootstrap.min') ?>
+    <?= $this->Html->css('bootstrap-grid.min')?>
+    <?= $this->Html->css('bootstrap-reboot.min') ?>
+    <?= $this->Html->css('main') ?>
+
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -46,6 +50,8 @@
         </div>
     </main>
     <footer>
+    <?= $this->Html->script('main.js') ?>
     </footer>
 </body>
 </html>
+

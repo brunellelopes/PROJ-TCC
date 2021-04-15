@@ -72,32 +72,15 @@ class UsersController extends AppController
     }
     public function login()
     {
-        $coordenador = $this->Auth->identify();
-        $professor = $this->Auth->identify();
-        $aluno = $this->Auth->identify();
+        
         if ($this->request->is('post')) {
-            if ($coordenador) {
-                $this->Auth->setUser($coordenador);
-                return $this->redirect(([
-                    'controller' => 'Coordenador',
-                    'action' => 'index'
-                ]));
+            $user = $this->Auth->identify();
+            if ($user) {
+                $this->Auth->setUser($user);
             }
-            if ($professor) {
-                $this->Auth->setUser($professor);
-                return $this->redirect(([
-                    'controller' => 'Professor',
-                    'action' => 'index'
-                ]));
+            else{
+                return $this->redirect($this->Auth->redirectUrl());
             }
-            if ($aluno) {
-                $this->Auth->setUser($aluno);
-                return $this->redirect(([
-                    'controller' => 'Aluno',
-                    'action' => 'index'
-                ]));
-            }
-            $this->Flash->error('Usuario e/ou senha incorretos.');
         }
     }
     public function logout()

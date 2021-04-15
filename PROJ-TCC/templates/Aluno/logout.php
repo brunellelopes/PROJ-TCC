@@ -34,7 +34,9 @@ use Phinx\Db\Action\Action;
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
 
     <!-- Instrucao basica para chamar o css, similar ao Js, utilizando this, uma orientacao a objeto-->
-    <?= $this->Html->css(['normalize.min', 'milligram.min', 'cake', 'home']) ?>
+    <?= $this->Html->css('normalize.min')?>
+    <?= $this->Html->css('milligram.min')?>
+    <?= $this->Html->css('home')?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>

@@ -21,7 +21,6 @@ class AlunoController extends AppController
     public function index()
     {
         $aluno = $this->paginate($this->Aluno);
-        $this->Auth->user('nomeAluno');
         $this->set(compact('aluno'));
     }
 
@@ -106,8 +105,30 @@ class AlunoController extends AppController
     }
 
     public function painel(){
-
+        //MESMA FUNCAO DO INDEX
     }
+
+    public function mural(){
+        //
+    }
+
+    public function addDoc($doc = null){
+        $send = $doc;
+        //RECEBER O PARAMETRO DO OBJETO A SER ENVIADO
+        //FAZER O ENVIO DO OBJETO PARA O BANCO DE DADOS,OU ENVIAR O NOME PARA O BANCO 
+        //E ARMAZENAR O ARQUIVO EM UM LOCAL DE ARMAZENAMENTO
+    }
+
+    public function viewDoc(){
+        //ARCHTETCTURE
+            //DEFINIR UMA VARIAVEL DE CONTROLE
+            //SWITCH CASE()
+            //CASE 1: --VISUALIZAR HISTORICO
+                //QUERY PRA VISUALIUZAR
+            //CASE 2: --VISUALIZAR DOCUMENTO ENVIADO
+                //QUERY PARA VISUALIZAR OU APENAR RESGATAR O DOCUMENTO
+    }
+
 
     public function login(){
         
