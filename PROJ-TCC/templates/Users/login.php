@@ -20,72 +20,26 @@ use Cake\Datasource\ConnectionManager;
 use Phinx\Db\Action\Action;
 
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <?= $this->Html->charset() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>
-        <?= $cakeDescription ?>:
-        <?= $this->fetch('title') ?>
-    </title>
-    <?= $this->Html->meta('icon') ?>
-
-    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
-
-    <!-- Instrucao basica para chamar o css, similar ao Js, utilizando this, uma orientacao a objeto-->
-    <?= $this->Html->css(['normalize.min', 'milligram.min', 'main']) ?>
-
-    
-    <?= $this->fetch('meta') ?>
-    <?= $this->fetch('css') ?>
-    <?= $this->fetch('script') ?>
-</head>
-<body>
-    <header>
-        <div class="container text-center">
-            </a>
-            <h1>
-                FEUC-GEN TCC
-            </h1>
+<div class="content">
+    <div class="row">
+        <div id="logo"><?=$this->Html->image('logo-png.png',['url'=>'#'] );?></div>
+    </div>
+    <div id="login">
+        <div class="message default text-center">
+            <p>Insira seu login e senha.</p>
         </div>
-    </header>
-    <main class="main">
-        <div class="container">
-            <div class="content">
-                <div class="row">
-                    <div class="column">
-                        <div class="message default text-center">
-                            <p>Insira seu login e senha.</p>
-                        </div>
-                        <!-- <div id="url-rewriting-warning" class="alert url-rewriting">
-                            <ul>
-                                <li class="bullet problem">
-                                    URL rewriting is not properly configured on your server.<br />
-                                    1) <a target="_blank" rel="noopener" href="https://book.cakephp.org/4/en/installation.html#url-rewriting">Help me configure it</a><br />
-                                    2) <a target="_blank" rel="noopener" href="https://book.cakephp.org/4/en/development/configuration.html#general-configuration">I don't / can't use URL rewriting</a>
-                                </li>
-                            </ul>
-                        </div> -->
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="column">
-                        <h4>LOGIN</h4>
-                        <?= $this->Form->create() ?>
-
-                        <?= $this->Form->input(('loginAluno'),['placeholder'=>'login']) ?>
-                        <br>
-                        <?= $this->Form->input(('senhaAluno'),['placeholder'=>'senha']) ?>
-                        <br>
-                        <?= $this->Form->button(('Acessar'),['action'=>'login'],['class' => 'button float-right']) ?>
-                        <?= $this->Form->end() ?>       
-                    </div>
-                    
-                </div>
-                <hr>
-            </div>
-        </div>
-    </main>
-</body>
-</html>
+        <h4 style="text-align: center;">LOGIN</h4>
+            <form>
+                <?= $this->Form->create() ?>
+                <br>
+                    <?= $this->Form->input(('login'),['placeholder'=>'login']) ?>
+                <br>
+                <br>
+                    <?= $this->Form->password(('senha'),['placeholder'=>'senha']) ?>
+                <br>
+                <br>
+                    <button class="btn btn-primary button" id="buttonLogin" <?= $this->Form->button(('Acessar'),['action'=>'login'],['class' => 'button float-right'])?></button>
+                <?= $this->Form->end() ?>
+        </form> 
+    </div>
+</div>

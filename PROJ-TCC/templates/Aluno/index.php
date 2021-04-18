@@ -4,12 +4,12 @@
  * @var \App\Model\Entity\Aluno[]|\Cake\Collection\CollectionInterface $aluno
  */
 ?>
-<div class="aluno index content">
+<div class="aluno index content"></div>
     <div class="container-fluid">
-        <div id="particles-container"></div>
+            <div id="particles-container"> </div>
             <div class="wrapper">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light" >
-                    <a class="navbar-brand pull-right" ><img src="" id="brand-logo"></a>
+                <nav class="navbar navbar-expand navbar-light bg-light" >
+                    <!--lOGO DO PROJETO NO NAVBAR<a class="navbar-brand pull-right" ><img src="" id="brand-logo"></a>-->
                     <hr/>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -20,7 +20,7 @@
                                 Documentos de referência
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li class="dropdown-item" id="options" href="#">Etapas para o desenvolvimento do Projeto Final Individual </a>
+                                    <li class="dropdown-item" id="options" href="#">Etapas para o desenvolvimento do Projeto Final Individual </a></li>
                                     <a class="dropdown-item" id="options" href="#">Modelo de cronograma</a>
                                     <a class="dropdown-item" id="options" href="#">EXEMPLO: Documentação do modelo de casos de uso</a>
                                     <a class="dropdown-item" id="options" href="#">Projeto de banco - Passo a passo (Modelo)</a>
@@ -39,20 +39,20 @@
                 </nav>  
             </div>
     </div>
-    <?= $this->Html->link(__('New Aluno'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Aluno') ?></h3>
+    <br>
+    <br>
     <div class="row">   
         <div class="col-md-2" id="project">
             <br>
             <label>Projetos</label>
             <div class="dropdown-divider"></div>
-            <div id="envios">
+                <div id="envios">
                 Enviar documento
-                <input type= "file" class="btn btn-primary btn-md " id="addFile" >
+                <input type="file" class="btn btn-primary btn-sm" id="addFile" >
                 <br>
                 <br>
-                <a href="#" class="btn btn-danger btn-md" role="button" type="Reset">Limpar</a>
-                <a href="#" class="btn btn-success btn-md" role="button" type="submit">Enviar</a>
+                <a href="#" class="btn btn-danger btn-sm" role="button" type="Reset">Limpar</a>
+                <a href="#" class="btn btn-success btn-sm" role="button" type="submit">Enviar</a>
             </div>
             <br />
                 <div id="status">
@@ -70,9 +70,9 @@
                 <!--Placeholder para apresentação-->
                     <p id="professorFeed">Orientador: Documentação revisada. </p>
                 </section>
-                <!--<div class="dropdown-divider"></div>
+                <div class="dropdown-divider"></div>
                 <textarea id="comments" placeholder="Insira seu comentário..."></textarea>
-                <button class="btn btn-success btn-lg" id="enviarcomentario">Enviar</button>-->
+                <button class="btn btn-success btn-lg" id="enviarcomentario">Enviar</button>
             </div>
         <div class="col-md-2" id="final">
             <br />
@@ -166,7 +166,6 @@
                     </div>
             </div>
         </div>
-        <?= $this->Html->script('main.js') ?>
 </div>
     <!--<div class="table-responsive">
         <table>

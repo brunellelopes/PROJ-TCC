@@ -15,7 +15,7 @@
  */
 
 ?>
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
     <?= $this->Html->charset() ?>
@@ -27,22 +27,20 @@
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
 
-    <?= $this->Html->css('bootstrap.min') ?>
-    <?= $this->Html->css('bootstrap-grid.min')?>
-    <?= $this->Html->css('bootstrap-reboot.min') ?>
-    <?= $this->Html->css('main') ?>
+    <?= $this->Html->css('https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css', array('inline' => false)); ?>
+    <?= $this->Html->css('main'); ?>
 
+    <?= $this->Html->script('https://code.jquery.com/jquery-3.3.1.slim.min.js', array('inline' => false));?>
+    <?= $this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js', array('inline'=> false));?>
+    <?= $this->Html->script('https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js', array('inline'=> false));?>
+    
+    <?= $this->Html->script('main.js') ?> 
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
-<body>
-    <nav class="top-nav">
-        <div class="top-nav-title">
-            <a href="<?= $this->Url->build('/') ?>"><span>FEUC</span></a>
-        </div>
-    </nav>
+<body>  
     <main class="main">
         <div class="container">
             <?= $this->Flash->render() ?>
@@ -50,7 +48,7 @@
         </div>
     </main>
     <footer>
-    <?= $this->Html->script('main.js') ?>
+
     </footer>
 </body>
 </html>
