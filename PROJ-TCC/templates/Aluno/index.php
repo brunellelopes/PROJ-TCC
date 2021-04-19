@@ -9,7 +9,7 @@
             <div id="particles-container"> </div>
             <div class="wrapper">
                 <nav class="navbar navbar-expand navbar-light bg-light" >
-                    <!--lOGO DO PROJETO NO NAVBAR<a class="navbar-brand pull-right" ><img src="" id="brand-logo"></a>-->
+                    <a class="navbar-brand pull-right" ><img src= <?=$this->Html->image('logo-feuc-site.png', ['url'=>'#'], ['id'=>'brand-logo']);?>></a>
                     <hr/>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <ul class="nav justify-content-end">
-                        
+                        <h6> Olá, <!--Inserir instrucao pra retornar nome do coordenador.--><?= $this->Html->link(__('Sair'), ['action' => 'logout'], ['class' => 'logout']) ?></h6>
                     </div>
                 </nav>  
             </div>
@@ -48,7 +48,8 @@
             <div class="dropdown-divider"></div>
                 <div id="envios">
                 Enviar documento
-                <input type="file" class="btn btn-primary btn-sm" id="addFile" >
+                <label for="addFile" class="btn btn-primary btn-sm">Enviar documento</label>
+                <input type="file" name="documents" id="addFile" >
                 <br>
                 <br>
                 <a href="#" class="btn btn-danger btn-sm" role="button" type="Reset">Limpar</a>

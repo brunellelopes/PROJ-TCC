@@ -22,7 +22,7 @@ use Phinx\Db\Action\Action;
 ?>
 <div class="content">
     <div class="row">
-        <div id="logo"><?=$this->Html->image('logo-png.png',['url'=>'#'] );?></div>
+        <div id="logo"><?=$this->Html->image('logo-completa.png',['url'=>'#'] );?></div>
     </div>
     <div id="login">
         <div class="message default text-center">
@@ -32,10 +32,10 @@ use Phinx\Db\Action\Action;
             <form>
                 <?= $this->Form->create() ?>
                 <br>
-                    <?= $this->Form->input(('login'),['placeholder'=>'login']) ?>
+                    <?= $this->Form->input(('login'),['placeholder'=>'login','id'=>'login']) ?>
                 <br>
                 <br>
-                    <?= $this->Form->password(('senha'),['placeholder'=>'senha']) ?>
+                    <?= $this->Form->password(('senha'),['placeholder'=>'senha', 'id'=>'login']) ?>
                 <br>
                 <br>
                     <button class="btn btn-primary button" id="buttonLogin" <?= $this->Form->button(('Acessar'),['action'=>'login'],['class' => 'button float-right'])?></button>

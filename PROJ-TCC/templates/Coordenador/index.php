@@ -4,7 +4,7 @@
  * @var \App\Model\Entity\Coordenador[]|\Cake\Collection\CollectionInterface $coordenador
  */
 ?>
-
+<div class="coordenador index content"></div>
 <div class="container-fluid">
 <div id="particles-container"></div>
     <div class="wrapper">
@@ -27,22 +27,22 @@
                         </div>
                     </div>
                 <div>
-                    <button type="button" class="btn btn-light" <?=$this->Html->script('main', ['block' => 'PopUp']); ?>"> Gerar relatório</button>
+                    <button type="button" class="btn btn-light" href="#" onclick="Popup()"> Gerar relatório</button>
                 </div>
                 <div>
                     <button type="button" class="btn btn-light" href="#" onclick="PopupB()"> Projetos aprovados</button>
                 </div>
             </div>
             <div class="nav justify-content-end">
-                <!--<h6> Olá, <!--Inserir instrucao pra retornar nome do coordenador. <a class="logout" href=Logout</a></h6>-->
+                <h6> Olá, <!--Inserir instrucao pra retornar nome do coordenador.--><?= $this->Html->link(__('Sair'), ['action' => 'logout'], ['class' => 'logout']) ?></h6>
             </div>
         </nav>
     </div>
     <br>
     <div class="row">   
-        <div class="col-md-9" id="painelCoord">
+        <div class="col-lg" id="painelCoord">
             <br />
-            <label>Painel</label>
+            <label>Menu principal</label>
             <br />
             <div class="dropdown-divider"></div>
             <div class="row">
@@ -51,8 +51,8 @@
                     <label id="proflabel">Novo aluno</label>
                     <div class="dropdown-divider"></div>
                         <br/> 
-                        <a href="#" class="btn btn-outline-success btn-md" onclick="PopupC()">Cadastrar</a>
-                        <a href="#" class="btn btn-outline-warning btn-md" onclick="PopupF()">Alterar</a>
+                        <a href="#" class="btn btn-success btn-sm" onclick="PopupC()">Cadastrar</a>
+                        <a href="#" class="btn btn-warning btn-sm" onclick="PopupF()">Alterar</a>
                     <br/>
                 </div>
                 <div class="col-md-4" id="newProfessor">
@@ -60,26 +60,26 @@
                     <label id="proflabel">Novo professor</label>
                     <div class="dropdown-divider"></div>
                         <br/>
-                        <a href="#" class="btn btn-outline-success btn-md" onclick="PopupD()">Cadastrar</a>
-                        <a href="#" class="btn btn-outline-warning btn-md" onclick="PopupG()">Alterar</a>
+                        <a href="#" class="btn btn-success btn-sm" onclick="PopupD()">Cadastrar</a>
+                        <a href="#" class="btn btn-warning btn-sm" onclick="PopupG()">Alterar</a>
                 </div>
                 <div class="col-md-4" id="approved">
                     <br/>
                     <label id="proflabel">Novo projeto</label>
                     <div class="dropdown-divider"></div>
                         <br/>
-                        <a href="#" class="btn btn-outline-success btn-md" onclick="PopupE()">Cadastrar</a>
-                        <a href="#" class="btn btn-outline-warning btn-md" onclick="PopupH()">Alterar</a>
+                        <a href="#" class="btn btn-success btn-sm" onclick="PopupE()">Cadastrar</a>
+                        <a href="#" class="btn btn-warning btn-sm" onclick="PopupH()">Alterar</a>
                 </div>
                 <div class="col-md-4" id="sendDoc">
                     <br/>
                     <label id="proflabel">Enviar documentos de referência</label>
                     <div class="dropdown-divider"></div>
-                        <input type= "file" class="btn btn-outline-primary btn-md " id="addFile" >
+                        <label for="addFile" class="btn btn-primary btn-sm">Enviar documento</label>
+                        <input type= "file" id="addFile" >
                         <br/>
-                        <br/>
-                        <a href="#" class="btn btn-outline-success btn-md" role="button" type="submit">Enviar</a>
-                        <a href="#" class="btn btn-outline-danger btn-md" role="button" type="Reset">Limpar</a>
+                        <a href="#" class="btn btn-success btn-sm" role="button" type="submit">Enviar</a>
+                        <a href="#" class="btn btn-danger btn-sm" role="button" type="Reset">Limpar</a>
                 </div>
             </div>
         </div>

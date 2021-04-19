@@ -1,7 +1,11 @@
+html{
+    overflow-x:hidden;
+}
 * {
 	margin: 0px; 
 	padding: 0px; 
 	box-sizing: border-box;
+    border-radius: 3px;
 }
 
 .top-nav-links,
@@ -89,7 +93,6 @@ body {
     margin-bottom: 50px;
     margin-left: 30%;
     margin-right: 30%;
-    padding-bottom: 20px;
 }
 .actions a {
     font-weight: bold;
@@ -188,11 +191,14 @@ th {
 .input.radio label:first-of-type {
     margin-bottom: 2.0rem;
 }
-input {
+input{
     align-self: center;
     outline: none;
     border: none;
-    border-radius: 2px;
+    border-radius: 3px;
+}
+input#login{
+    margin-left: 30%;
 }
 
 /* LOGIN */
@@ -277,6 +283,8 @@ a.logout{
     cursor: pointer;
 }
 
+label{cursor: pointer;}
+
 #logo{align-content: center !important;}
 
 div.bloco{background-color:#fff !important;font-size: 25px;width: 500px; height: 250px;float: left; margin: 10px; border: 10px;}
@@ -285,7 +293,7 @@ div.bloco>div{background-color:#6f88f5 !important;font-size: 25px;}
 
 div.bloco>div>p{color: #b3adad70 !important; font-size: 25px;}
 
-#addFile{clip-path:margin-box;}
+#addFile{width: 80%; opacity:0; position: absolute; z-index: -1;}
 
 #Note{border: 4px rgb(209, 209, 209); }
 
@@ -296,7 +304,7 @@ div>div>#status{border-radius: 2px;}
 #professorFeed{border-radius: 3px!important; background-color: #ad4dad;}
 
 /* Blocos Aluno */
-#project{border:1px solid #fff; border-radius: 5px ;margin-left: 20px; background-color: #fff; height:auto;}
+#project{border:1px solid #fff; border-radius: 5px ;margin-left: 30px; background-color: #fff; height:400px;}
 #feed{border:1px solid #fff; border-radius: 5px ;margin-left: auto; background-color: #fff; margin-left: 70px;}
 #comments{width: 50%; height: 60px;border:1px solid #00000000; border-radius: 5px; background-color: rgba(97, 97, 97, 0.151); text-transform: none !important;resize: none !important;}
 #enviarcomentario{border-radius: 5px;margin-top: 35px;}
@@ -305,18 +313,18 @@ div>div>#status{border-radius: 2px;}
 /* Blocos Professor */
 #proflabel{color: #ffffff;}
 #list{color: #ffffff;}
-#painel{border:1px solid #fff; border-radius: 5px ;margin-left: auto; background-color: #fff; margin-left: 70px; height: 500px;}
-div>div>div>#orientations{background-color:#0e63c4 ;width: 350px; height: 150px; border-radius: 5px; margin-left: 20px;}
-div>div>div>div>#apresentations{background-color:#0e63c4 ;width: 350px; height: 150px; border-radius: 5px; margin-left: 20px;}
-div>div>div>div>div>#sendProject{background-color:#0e63c4 ;width: 350px; height: 200px; border-radius: 5px; margin-left: 20px; margin-top: 20px;}
+#painel{border:1px solid #fff; border-radius: 5px ;margin-left: auto;margin-bottom: 30px; background-color: #fff; height: 500px;}
+div>div>div>#orientations{background-color:#0e63c4 ;width: 350px; height: 150px; border-radius: 5px; margin-left: 100px;}
+div>div>div>div>#apresentations{background-color:#0e63c4 ;width: 350px; height: 150px; border-radius: 5px; margin-left: 100px;}
+div>div>div>div>div>#sendProject{background-color:#0e63c4 ;width: 350px; height: 150px; border-radius: 5px; margin-left: 100px; margin-top: 20px;}
 
 /* Bloco Coordenador*/
 #list{color: #ffffff;}
-#painelCoord{border:1px solid #fff; border-radius: 5px ;margin-left: auto; background-color: #fff; margin-left: 70px; height: 500px;}
-div>div>div>div>#student{background-color:#0e63c4 ;width: 350px; height: 150px; border-radius: 5px; margin-left: 20px;}
-div>div>div>div>#newProfessor{background-color:#0e63c4 ;width: 350px; height: 150px; border-radius: 5px; margin-left: 20px; }
-div>div>div>div>div>#approved{background-color:#0e63c4 ;width: 350px; height: 150px; border-radius: 5px; margin-left: 20px; margin-top: 20px;}
-div>div>div>div>div>#sendDoc{background-color:#0e63c4 ;width: 350px; height: 200px; border-radius: 5px; margin-left: 20px;margin-top: 20px;}
+#painelCoord{border:1px solid #fff; border-radius: 5px ;margin-left: auto; background-color: #fff; height: 500px;}
+div>div>div>div>#student{background-color:#0e63c4 ;width: 350px; height: 150px; border-radius: 5px; margin-left: 100px;}
+div>div>div>div>#newProfessor{background-color:#0e63c4 ;width: 350px; height: 150px; border-radius: 5px; margin-left: 100px; }
+div>div>div>div>div>#approved{background-color:#0e63c4 ;width: 350px; height: 150px; border-radius: 5px; margin-left: 100px; margin-top: 20px;}
+div>div>div>div>div>#sendDoc{background-color:#0e63c4 ;width: 700px; height: 150px; border-radius: 5px; margin-left: 100px;margin-top: 20px;}
 
 /*Animacao de fundo*/
 canvas {
@@ -378,7 +386,7 @@ footer{
   a {
       font-size: 14px;
       line-height: 1.7;
-      color: #666666;
+      color: #ffffff;
       margin: 0px;
       transition: all 0.4s;
       -webkit-transition: all 0.4s;
@@ -449,7 +457,7 @@ footer{
   iframe {
       border: none !important;
   }
-  #brand-logo{margin-top: -20px;margin-bottom: -20px;}
+  
   /*//////////////////////////////////////////////////////////////////
   [ Utility ]*/
   .txt1 {

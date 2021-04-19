@@ -4,10 +4,10 @@
  * @var \App\Model\Entity\Professor[]|\Cake\Collection\CollectionInterface $professor
  */
 ?>
+<div class="professor index content"></div>
 <div class="container-fluid">
-<div id="particles-container"></div>
-    <div class="wrapper">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light" >
+<div class="wrapper">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" >
             <a class="navbar-brand pull-right" ><img src="" id="brand-logo"></a>
             <hr/>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,18 +27,19 @@
                         </div>
                     </div>
                 <div>
-                    <button type="button" class="btn btn-light" href="#" <?$this->Html->script('main', ['block' => 'modalB']);?>"> Projetos aprovados</button>
+                    <button type="button" class="btn btn-light" href="#" onclick="PopupB()" > Projetos aprovados</button>
                 </div>
             </div>
             <div class="nav justify-content-end">
-                <!--Area referente ao login-->
+                <h6> Olá, <!--Inserir instrucao pra retornar nome do coordenador.--><?= $this->Html->link(__('Sair'), ['action' => 'logout'], ['class' => 'logout']) ?></h6>
             </div>
-    </nav>
+        </nav>
     </div>
+    <br>
     <div class="row">   
-        <div class="col-md-9" id="painel" >
+        <div class="col-lg" id="painel" >
             <br />
-            <label>Painel</label>
+            <label>Menu principal</label>
             <br />
             <div class="dropdown-divider"></div>
             <div class="row">
@@ -52,7 +53,7 @@
                             <li><a href=" ">Sistema de gerenciamento de trabalho de conclusão de curso</a></li>
                         </ul>
                 </div>
-                <div class="col-md-4 " id="apresentations">
+                <div class="col-md-4" id="apresentations">
                     <br/>
                     <label id="proflabel">Próximas apresentações</label>
                     <div class="dropdown-divider"></div>
@@ -66,48 +67,48 @@
                     <br/>
                     <label id="proflabel">Enviar projetos aprovados</label>
                     <div class="dropdown-divider"></div>
-                        <form>
-                            <input type= "file" class="btn btn-primary btn-md " id="addFile" >
-                            <br/>
-                            <br/>
-                            <input type="Reset" class="btn btn-danger btn-md" role="button" value="Limpar">
-                            <input type="submit" class="btn btn-success btn-md" role="button" value="Enviar">
-                        </form>
-                </div>
+                <form>
+                        <label for="addFile" class="btn btn-primary btn-sm">Enviar documento</label>
+                        <input type= "file" id="addFile" >
+                    <br/>
+                        <input type="Reset" class="btn btn-danger btn-sm" role="button" value="Limpar">
+                        <input type="submit" class="btn btn-success btn-sm" role="button" value="Enviar">
+                </form>
             </div>
         </div>
     </div>
-    <div id="modalb" class="modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
+</div>
+<div id="modalb" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title">Projetos Aprovados</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                    <h5 class="modal-title">Projetos Aprovados</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="modal-body">
+            <div class="modal-body">
                 <p><!--INCLUIR AQUI EVENTO PARA LISTAR DO BANCO--></p>
                 <!--Placeholder para apresentação-->
-                    <form>
-                        <label for="fstatus">Selecione o ano:</label>
-                        <select id="fstatus" name="fstatus">
+                <form>
+                    <label for="fstatus">Selecione o ano:</label>
+                    <select id="fstatus" name="fstatus">
+                        <option value=" "><a href="#">SELECIONE</a></option>
+                        <option value="2019"><a href="#">2019</a></option>
+                        <option value="2020"><a href="#">2020</a></option>
+                    </select><br>
+                    <label for="fstatus">Selecione o período:</label>
+                        <select id="fstatus" name="fperiodo">
                             <option value=" "><a href="#">SELECIONE</a></option>
-                            <option value="2019"><a href="#">2019</a></option>
-                            <option value="2020"><a href="#">2020</a></option>
-                        </select><br>
-                        <label for="fstatus">Selecione o período:</label>
-                            <select id="fstatus" name="fperiodo">
-                                <option value=" "><a href="#">SELECIONE</a></option>
-                                <option value="1"><a href="#">1</a></option>
-                                <option value="2"><a href="#">2</a></option>
-                            </select><br><br>
-                        <a href="">SGTCC - Sistema de gerenciamento de trabalho de conclusão de curso</a>
-                    </form>
-                </div>
-                <div class="modal-footer">
+                            <option value="1"><a href="#">1</a></option>
+                            <option value="2"><a href="#">2</a></option>
+                        </select><br><br>
+                    <a href="">SGTCC - Sistema de gerenciamento de trabalho de conclusão de curso</a>
+                </form>
+            </div>
+            <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                </div>
+            </div>
         </div>
     </div>
 </div>
