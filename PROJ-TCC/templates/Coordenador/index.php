@@ -2,8 +2,15 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Coordenador[]|\Cake\Collection\CollectionInterface $coordenador
+ * @var \App\Model\Entity\Professor[]|\Cake\Collection\CollectionInterface $professor
+ * @var \App\Model\Entity\Aluno[]|\Cake\Collection\CollectionInterface $aluno
+ * @var \App\Model\Entity\Professor $professor
+
  */
+
 ?>
+
+
 <div class="coordenador index content"></div>
 <div class="container-fluid">
 <div id="particles-container"></div>
@@ -48,7 +55,7 @@
             <div class="row">
                 <div class="col-md-4 " id="student">
                     <br/>
-                    <label id="proflabel">Novo aluno</label>
+                    <label id="proflabel">Alunos</label>
                     <div class="dropdown-divider"></div>
                         <br/> 
                         <a href="#" class="btn btn-success btn-sm" onclick="PopupC()">Cadastrar</a>
@@ -57,15 +64,16 @@
                 </div>
                 <div class="col-md-4" id="newProfessor">
                     <br/>
-                    <label id="proflabel">Novo professor</label>
+                    <label id="proflabel">Professores</label>
                     <div class="dropdown-divider"></div>
                         <br/>
                         <a href="#" class="btn btn-success btn-sm" onclick="PopupD()">Cadastrar</a>
+                        <!-- <?= $this->Html->link(__('Alterar'), ['action' => 'PopupG()'], ['class' => 'btn btn-warning btn-sm'], ['onclick'=>'edit_Professor']) ?> -->
                         <a href="#" class="btn btn-warning btn-sm" onclick="PopupG()">Alterar</a>
                 </div>
                 <div class="col-md-4" id="approved">
                     <br/>
-                    <label id="proflabel">Novo projeto</label>
+                    <label id="proflabel">Projetos</label>
                     <div class="dropdown-divider"></div>
                         <br/>
                         <a href="#" class="btn btn-success btn-sm" onclick="PopupE()">Cadastrar</a>
@@ -73,7 +81,7 @@
                 </div>
                 <div class="col-md-4" id="sendDoc">
                     <br/>
-                    <label id="proflabel">Enviar documentos de referência</label>
+                    <label id="proflabel">Documentos de referência</label>
                     <div class="dropdown-divider"></div>
                         <label for="addFile" class="btn btn-primary btn-sm">Enviar documento</label>
                         <input type= "file" id="addFile" >
@@ -191,17 +199,16 @@
                     <p><!--INCLUIR AQUI EVENTO PARA LISTAR DO BANCO--></p>
                     <!--placeholder será alterado-->
                     <form>
-                        <label for="fnomecompleto">Nome completo:</label>
-                        <input type="text" id="fnomecompleto" name="fnomecompleto"><br>
-                        <label for="flogin">Login:</label>
-                        <input type="text" id="flogin" name="flogin"><br>
-                        <label for="fsenha">Senha:</label>
-                        <input type="password" id="fsenha" name="fsenha"><br>
-                        <label for="femail">Email:</label>
-                        <input type="text" id="femail" name="femail"><br>
-                        <label for="flogin">Telefone:</label>
-                        <input type="text" id="flogin" name="flogin"><br><br>
-                        <input type="submit" class="btn btn-success" value="Salvar">
+                    <?= $this->Form->create($professor)?>
+                        <?php 
+                            echo $this->Form->control(('loginProf'),['placeholder'=>'Login','type'=>'text', 'id'=>'flogin']);
+                            echo $this->Form->control(('senhaProf'),['placeholder'=>'Senha','type'=>'password', 'id'=>'fsenha']);
+                            echo $this->Form->control(('nomeProf'),['placeholder'=>'Nome completo','type'=>'text', 'id'=>'fnomecompleto']);
+                            echo $this->Form->control(('emailProf'),['placeholder'=>'Email','type'=>'text', 'id'=>'femail']);
+                            echo $this->Form->control('cdAccount');
+                            ?>
+                            <?= $this->Html->link(__('Salvar'), ['controller'=>'coordenador','action'=>'addp'], ['class' => 'btn btn-success']) ?>
+                            <?= $this->Form->end(); ?>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -286,7 +293,9 @@
                         <label for="fstatus">Login:</label>
                         <select id="fstatus" name="fstatus">
                             <option value=" "><a href="#">SELECIONE</a></option>
-                            <option value="Brunelle"><a href="#">Brunelle</a></option>
+                            <?php foreach ($aluno as $a): ?>
+                                <option value=<?php echo($p['loginAluno'][0]); ?>><?php echo($p['nomeAluno']);?></option>
+                            <?php endforeach; ?>
                         </select><br>
                         <label for="fsmatricula">Matrícula:</label>
                         <input type="text" id="fsmatricula" name="fsmatricula" value="15010462" readonly><br>
@@ -312,7 +321,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Alterar dados do professor</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -323,21 +333,29 @@
                         <label for="fstatus">Login:</label>
                         <select id="fstatus" name="fstatus">
                             <option value=" "><a href="#">SELECIONE</a></option>
-                            <option value="Brunelle"><a href="#">Brunelle</a></option>
+                            <?php foreach ($professor as $p): ?>
+                                <option value=<?php echo($p['loginProf']); ?> selected="selected"><?php echo($p['loginProf']);?></option>
+                            <?php endforeach; ?>
                         </select><br>
-                        <label for="fmatricula">Matrícula:</label>
-                        <input type="text" id="fmatricula" name="fmatricula" value="15010462" readonly><br>
-                        <label for="fnomecompleto">Nome completo:</label>
-                        <input type="text" id="fnomecompleto" name="fnomecompleto" value="Brunelle Lopes" readonly><br>
-                        <label for="flogin">Login:</label>
-                        <input type="text" id="flogin" name="flogin" value="Brunelle" readonly><br>
-                        <label for="fsenha">Senha:</label>
-                        <input type="password" id="fsenha" name="fsenha"><br>
-                        <label for="femail">Email:</label>
-                        <input type="text" id="femail" name="femail" value="brunellelopes@gmail.com" readonly><br>
-                        <label for="flogin">Telefone:</label>
-                        <input type="text" id="flogin" name="flogin" value="4002-8922"><br><br>
-                        <input type="submit" class="btn btn-success" value="Salvar">
+                            <!-- <td><?= $this->Number->format($professor->cdProf);?></td> -->
+                            <?= $this->Form->create($professor)?>
+                                <label for="fnomecompleto">Nome completo:</label>
+                                <input type="text" id="fnomecompleto" name="fnomecompleto" value="<?php echo($p['nomeProf']) ?>" readonly><?php echo $this->Form->control(('nomeProf'),['placeholder'=>'Nome completo','type'=>'text', 'id'=>'fnomecompleto']);?> <br>
+                                <br>
+                                <label for="flogin">Login:</label>
+                                <input type="text" id="flogin" name="flogin" value="<?php echo($p['loginProf']) ?>" readonly><br>
+                                <br>
+                                <label for="fsenha">Senha:</label> 
+                                <?php echo $this->Form->control(('senhaProf'),['placeholder'=>'Nova senha','type'=>'password', 'id'=>'fsenha']);?>
+                                <br>
+                                <label for="femail">Email:</label>
+                                <input type="text" id="femail" name="femail" value="<?php echo($p['emailProf']) ?>" readonly> <?php echo $this->Form->control(('emailProf'),['placeholder'=>'Email','type'=>'text', 'id'=>'femail']);?> <br>
+                                <br>
+                                <label for="flogin">Telefone:</label>
+                                <input type="text" id="flogin" name="flogin" value="<?php echo($p['celProf']) ?>" readonly> <?php echo $this->Form->control(('celProf'),['placeholder'=>'Telefone','type'=>'text', 'id'=>'fcel']);?> <br><br>
+                                <br>
+                            <!-- <?= $this->Html->link(__('Salvar'), ['controller'=>'coordenador'],['action'=>'editp',$professor->loginProf], ['class' => 'btn btn-success']) ?> -->
+                            <?= $this->Form->end(); ?>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -362,7 +380,9 @@
                         <label for="fcodigo">Código de projeto:</label>
                         <select id="fcodigo" name="fcodigo">
                             <option value=" "><a href="#">SELECIONE</a></option>
-                            <option value="20200801"><a href="#">20200801</a></option>
+                            <?php foreach ($projeto as $pj): ?>
+                                <option value=<?php echo($pj['loginProf'][0]); ?>><?php echo($pj['nomeProf']);?></option>
+                            <?php endforeach; ?>
                         </select><br>
 
                         <label for="fstatus">Login professor:</label>
@@ -416,6 +436,8 @@
         </div>
     </div>
 </div>
+
+
 
 
 <!--<div class="coordenador index content">

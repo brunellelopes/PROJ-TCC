@@ -6,13 +6,14 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Avaliacao Entity
+ * Login Entity
  *
- * @property int $cdAvaliacao
- * @property string|null $comentario
- * @property int|null $cdProj
+ * @property int $id
+ * @property string $login
+ * @property string $password
+ * @property int $cdAccount
  */
-class Avaliacao extends Entity
+class Login extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -24,7 +25,17 @@ class Avaliacao extends Entity
      * @var array
      */
     protected $_accessible = [
-        'comentario' => true,
-        'cdProj' => true,
+        'login' => true,
+        'password' => true,
+        'cdAccount' => true,
+    ];
+
+    /**
+     * Fields that are excluded from JSON versions of the entity.
+     *
+     * @var array
+     */
+    protected $_hidden = [
+        'password',
     ];
 }

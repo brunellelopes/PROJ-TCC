@@ -38,6 +38,8 @@ class AvaliacaoTable extends Table
         parent::initialize($config);
 
         $this->setTable('avaliacao');
+        $this->setDisplayField('cdAvaliacao');
+        $this->setPrimaryKey('cdAvaliacao');
     }
 
     /**
@@ -48,6 +50,10 @@ class AvaliacaoTable extends Table
      */
     public function validationDefault(Validator $validator): Validator
     {
+        $validator
+            ->integer('cdAvaliacao')
+            ->allowEmptyString('cdAvaliacao', null, 'create');
+
         $validator
             ->scalar('comentario')
             ->allowEmptyString('comentario');

@@ -35,7 +35,7 @@ use Phinx\Db\Action\Action;
                     <?= $this->Form->input(('login'),['placeholder'=>'login','id'=>'login']) ?>
                 <br>
                 <br>
-                    <?= $this->Form->password(('senha'),['placeholder'=>'senha', 'id'=>'login']) ?>
+                    <?= $this->Form->password(('password'),['placeholder'=>'senha', 'id'=>'login']) ?>
                 <br>
                 <br>
                     <button class="btn btn-primary button" id="buttonLogin" <?= $this->Form->button(('Acessar'),['action'=>'login'],['class' => 'button float-right'])?></button>

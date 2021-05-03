@@ -72,22 +72,29 @@ class UsersController extends AppController
     }
     public function login()
     {
-        
-        if ($this->request->is('post')) {
-            $user = $this->Auth->identify();
-            if ($user) {
-                $this->Auth->setUser($user);
-            }
-            else{
-                return $this->redirect($this->Auth->redirectUrl());
-            }
-        }
+        $this->loadComponent('Flash');
+        $this->loadComponent('Auth', [
+            'authorize'=> 'Controller',//adicionado essa linha
+            'authenticate' => [
+                'Form' => [
+                    'fields' => [
+                        'username' => 'loginAluno',
+                        'password' => 'SenhaAluno'
+                    ]
+                ]
+            ],
+            'unauthorizedRedirect' => $this->referer()
+        ]);
+    
+        // Permite a ação display, assim nosso pages controller
+        // continua a funcionar.
+        $this->Auth->allow(['display']);
     }
     public function logout()
     {
         $this->Flash->success('You are now logged out.');
         return $this->redirect(([
-            'controller' => 'Users',
+            'controller' => 'Login',
             'action' => 'logout'
         ]));
     }

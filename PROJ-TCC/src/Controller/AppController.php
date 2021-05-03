@@ -107,4 +107,23 @@ class AppController extends Controller
         // Negação padrão
         return false;
     }
+    // public function adde(){
+    //     $professor = $this->loadModel('Professor');
+    //     $ProfessorTabela = $this->Professor;
+    //     if ($this->request->is('post')) {
+    //         $loginProf = $this->request->getData('loginProf');
+    //         $senhaProf = $this->request->getData('senhaProf');
+    //         $query = "INSERT INTO Professor (loginProf, senhaProf) VALUES ('$loginProf', $senhaProf);";
+    //         $ProfessorTabela ->newEntity();
+    //         if ($professor) {
+    //             $ProfessorTabela = $query;
+    //             $this->Flash->success(__('The professor has been saved.'));
+    //             //Retornar um modal com mensagem de sucesso.
+    //         }else{
+    //             $this->Flash->error(__('O professor nao pode ser salvo! Tente novamente.'));
+    //         }
+    //     }
+    //     return $this->redirect(['action' => 'index']);
+    // }
+
 }
