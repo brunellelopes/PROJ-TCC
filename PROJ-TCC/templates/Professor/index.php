@@ -2,6 +2,7 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Professor[]|\Cake\Collection\CollectionInterface $professor
+ * @var \App\Model\Entity\Projeto[]|\Cake\Collection\CollectionInterface $projeto
  */
 ?>
 <div class="professor index content"></div>
@@ -48,9 +49,10 @@
                     <label id="proflabel">Atuais orientações</label>
                     <div class="dropdown-divider"></div>
                         <ul id="list">
-                            <!--CADA CAMPO, PRECISA SER PREENCHIDO COM UM FOR PARA NOME DE PROJETO-->
+                            <?php foreach ($projeto as $pj): ?>
                             <!--Placeholder para apresentação-->
-                            <li><a href=" ">Sistema de gerenciamento de trabalho de conclusão de curso</a></li>
+                            <?php endforeach; ?>
+                                <li><a href=" ">Sistema de gerenciamento de trabalho de conclusão de curso</a></li>
                         </ul>
                 </div>
                 <div class="col-md-4" id="apresentations">
@@ -59,7 +61,9 @@
                     <div class="dropdown-divider"></div>
                     <!--Placeholder para apresentação-->
                         <ul id="list">
-                            <li>Projeto Gerenciamento de TCC: 20/12/2020</li><!--CADA CAMPO, PRECISA SER PREENCHIDO COM UM FOR PARA DATA-->
+                            <?php foreach ($projeto as $pj): ?>
+                            <?php endforeach; ?>
+                                <li>Projeto Gerenciamento de TCC: 20/12/2020</li><!--CADA CAMPO, PRECISA SER PREENCHIDO COM UM FOR PARA DATA-->
                         </ul>
                     <br/>
                 </div>
@@ -93,12 +97,16 @@
                 <form>
                     <label for="fstatus">Selecione o ano:</label>
                     <select id="fstatus" name="fstatus">
+                        <?php foreach ($projeto as $pj): ?>
+                        <?php endforeach; ?>
                         <option value=" "><a href="#">SELECIONE</a></option>
                         <option value="2019"><a href="#">2019</a></option>
                         <option value="2020"><a href="#">2020</a></option>
                     </select><br>
                     <label for="fstatus">Selecione o período:</label>
                         <select id="fstatus" name="fperiodo">
+                            <?php foreach ($projeto as $pj): ?>
+                            <?php endforeach; ?>
                             <option value=" "><a href="#">SELECIONE</a></option>
                             <option value="1"><a href="#">1</a></option>
                             <option value="2"><a href="#">2</a></option>

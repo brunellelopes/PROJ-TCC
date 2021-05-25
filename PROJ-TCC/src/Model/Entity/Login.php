@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Model\Entity;
+use Cake\Validation\Validator;
 
 use Cake\ORM\Entity;
 
@@ -38,4 +39,14 @@ class Login extends Entity
     protected $_hidden = [
         'password',
     ];
+
+    public function validationDefault(Validator $validator)
+    {
+        return $validator
+            ->add('cdAccount', 'inList', [
+                'rule' => ['inList', ['coordenador', 'professor','aluno']],
+                'message' => 'Por favor informe uma função válida',
+                'storage' => 'Session'
+            ]);
+    }
 }

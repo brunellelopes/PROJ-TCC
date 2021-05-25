@@ -55,18 +55,6 @@ use Phinx\Db\Action\Action;
             <div class="content">
                 <div class="row">
                     <div class="column">
-                        <div class="message default text-center">
-                        </div>
-                        <!-- <div id="url-rewriting-warning" class="alert url-rewriting">
-                            <ul>
-                                <li class="bullet problem">
-                                    URL rewriting is not properly configured on your server.<br />
-                                    1) <a target="_blank" rel="noopener" href="https://book.cakephp.org/4/en/installation.html#url-rewriting">Help me configure it</a><br />
-                                    2) <a target="_blank" rel="noopener" href="https://book.cakephp.org/4/en/development/configuration.html#general-configuration">I don't / can't use URL rewriting</a>
-                                </li>
-                            </ul>
-                        </div> -->
-                    </div>
                 </div>
                 <div class="row">
                     <div class="column">

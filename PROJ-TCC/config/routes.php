@@ -50,7 +50,7 @@ $routes->scope('/', function (RouteBuilder $builder) {
      * its action called 'display', and we pass a param to select the view file
      * to use (in this case, templates/Pages/home.php)...
      */
-    $builder->connect('/', ['controller' => 'Users', 'action' => 'display', 'login']);
+    $builder->connect('/', ['controller' => 'Login', 'action' =>'login']);
     $builder->connect('/:coordenador/#',['controller'=>'Coordenador', 'action' => 'add-professor']);
     $builder->connect('/:coordenador/#',[]);
     $builder->connect('/:professor/#',[]);
@@ -60,7 +60,7 @@ $routes->scope('/', function (RouteBuilder $builder) {
     /*
      * ...and connect the rest of 'Pages' controller's URLs.
      */
-    $builder->connect('/Users/*', 'Users::display');
+    $builder->connect('/login/*', 'Login::display');
 
     /*
      * Connect catchall routes for all controllers.

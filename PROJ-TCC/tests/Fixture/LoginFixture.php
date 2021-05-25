@@ -27,8 +27,13 @@ class LoginFixture extends TestFixture
         'login' => ['type' => 'string', 'length' => 15, 'null' => false, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
         'password' => ['type' => 'string', 'length' => 10, 'null' => false, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
         'cdAccount' => ['type' => 'integer', 'length' => null, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        '_indexes' => [
+            'FK_Login_Accounts' => ['type' => 'index', 'columns' => ['cdAccount'], 'length' => []],
+        ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
+            'login' => ['type' => 'unique', 'columns' => ['login'], 'length' => []],
+            'FK_Login_Accounts' => ['type' => 'foreign', 'columns' => ['cdAccount'], 'references' => ['accounts', 'cdAccount'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',

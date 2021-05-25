@@ -58,7 +58,8 @@ class LoginTable extends Table
             ->scalar('login')
             ->maxLength('login', 15)
             ->requirePresence('login', 'create')
-            ->notEmptyString('login');
+            ->notEmptyString('login')
+            ->add('login', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->scalar('password')

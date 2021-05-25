@@ -18,6 +18,7 @@ use Cake\ORM\Locator\TableLocator;
  * @property \App\Model\Table\AlunoTable $Aluno
  * @property \App\Model\Table\ProfessorTable $Professor
  * @property \App\Model\Table\ProjetoTable $Projeto
+ * @property \App\Model\Table\LoginTable $Login
  * @method \App\Model\Entity\Coordenador[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  * @method \App\Model\Entity\Aluno[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  * @method \App\Model\Entity\Professor[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
@@ -35,12 +36,18 @@ class CoordenadorController extends AppController
     {
         $aluno = $this->loadModel('Aluno');
         $professor = $this->loadModel('Professor');
+        $login = $this->loadModel('Login');
+        $projeto = $this->loadModel('Projeto');
         $coordenador = $this->paginate($this->Coordenador);
         $professor = $this->paginate($this->Professor);
         $aluno = $this->paginate($this->Aluno);
+        $login = $this->paginate($this->Login);
+        $projeto = $this->paginate($this->Projeto);
         $this->set(compact('coordenador'));
         $this->set(compact('professor'));
         $this->set(compact('aluno'));
+        $this->set(compact('login'));
+        $this->set(compact('projeto'));
     }
 
     /**
@@ -125,11 +132,14 @@ class CoordenadorController extends AppController
     
     public function addp(){
         $professor = $this->loadModel('Professor');
+        $login = $this->loadModel('Login');
         $professor = $this->Professor->newEmptyEntity();
-        if ($this->request->is('post')) {
+        if ($this->request->is('post')) {//Registra o evento de post para enviar os dados pro banco
             $professor = $this->Professor->patchEntity($professor, $this->request->getData());
-            if ($this->Professor->save($professor)) {
+            //variavel professor recebeu os dados do formulario por meio do request ser post 
+            if ($this->Login->save($this->Professor['loginProf'])) {
                 //$this->Flash->success(__('The professor has been saved.'));
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The professor could not be saved. Please, try again.'));
@@ -139,25 +149,81 @@ class CoordenadorController extends AppController
 
     public function editp($id = null){
         $professor = $this->loadModel('Professor');
+        $login = $this->loadModel('Login');
         $professor = $this->Professor->get($id, [
             'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $professor = $this->Professor->patchEntity($professor, $this->request->getData());
             if ($this->Professor->save($professor)) {
+                $this->Login->save($login);
                 return $this->redirect(['action' => 'index']);
             }
         }
         $this->set(compact('professor'));
     }
 
-    public function addAluno($id = null){
+    public function adda($id = null){
+        $aluno = $this->loadModel('Aluno');
+        $login = $this->loadModel('Login');
+        $aluno = $this->Aluno->newEmptyEntity();
+        if ($this->request->is('post')) {
+            $professor = $this->Aluno->patchEntity($aluno, $this->request->getData());
+            if ($this->Aluno->save($aluno)) {
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The Aluno could not be saved. Please, try again.'));
+        }
+        $this->set(compact('aluno')); 
+    }
 
+    public function edita($id = null){
+        $aluno = $this->loadModel('Aluno');
+        $login = $this->loadModel('Login');
+        $aluno = $this->Aluno->get($id, [
+            'contain' => [],
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $aluno = $this->Aluno->patchEntity($aluno, $this->request->getData());
+            if ($this->Aluno->save($aluno)) {
+                return $this->redirect(['action' => 'index']);
+            }
+        }
+        $this->set(compact('aluno'));
+    }
+
+    public function addpj($id = null){
+        $projeto = $this->loadModel('Projeto');
+        $projeto = $this->Projeto->newEmptyEntity();
+        if ($this->request->is('post')) {
+            $projeto = $this->Projeto->patchEntity($projeto, $this->request->getData());
+            if ($this->Projeto->save($projeto)) {
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The Aluno could not be saved. Please, try again.'));
+        }
+        $this->set(compact('projeto')); 
+    }
+
+    public function editpj($id = null){
+        $projeto = $this->loadModel('Projeto');
+        $projeto = $this->Projeto->get($id, [
+            'contain' => [],
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $projeto = $this->Projeto->patchEntity($projeto, $this->request->getData());
+            if ($this->Projeto->save($projeto)) {
+                return $this->redirect(['action' => 'index']);
+            }
+        }
+        $this->set(compact('projeto'));
     }
 
     
     public function logout($id = null){
-        $this->Flash->success('You are now logged out.');
-        return $this->redirect($this->Auth->logout());
+        return $this->redirect(([
+            'controller' => 'Login',
+            'action' => 'logout'
+        ]));
     }
 }

@@ -9,7 +9,7 @@ use Cake\ORM\Entity;
  * Account Entity
  *
  * @property int $cdAccount
- * @property string|null $descAccount
+ * @property string $descAccount
  */
 class Account extends Entity
 {

@@ -292,9 +292,9 @@
                     <form>
                         <label for="fstatus">Login:</label>
                         <select id="fstatus" name="fstatus">
-                            <option value=" "><a href="#">SELECIONE</a></option>
                             <?php foreach ($aluno as $a): ?>
-                                <option value=<?php echo($p['loginAluno'][0]); ?>><?php echo($p['nomeAluno']);?></option>
+                                <option value=" "><a href="#">SELECIONE</a></option>
+                                <option value=<?php echo($a['loginAluno']);?> selected="selected"> <?php echo($a['loginAluno']);?> </option>
                             <?php endforeach; ?>
                         </select><br>
                         <label for="fsmatricula">Matrícula:</label>
@@ -334,25 +334,25 @@
                         <select id="fstatus" name="fstatus">
                             <option value=" "><a href="#">SELECIONE</a></option>
                             <?php foreach ($professor as $p): ?>
-                                <option value=<?php echo($p['loginProf']); ?> selected="selected"><?php echo($p['loginProf']);?></option>
+                                <option value=<?php if($p['loginProf'] != null): echo($p['loginProf']); endif; ?> selected="selected"><?php echo($p['loginProf']);?></option>
                             <?php endforeach; ?>
                         </select><br>
                             <!-- <td><?= $this->Number->format($professor->cdProf);?></td> -->
                             <?= $this->Form->create($professor)?>
                                 <label for="fnomecompleto">Nome completo:</label>
-                                <input type="text" id="fnomecompleto" name="fnomecompleto" value="<?php echo($p['nomeProf']) ?>" readonly><?php echo $this->Form->control(('nomeProf'),['placeholder'=>'Nome completo','type'=>'text', 'id'=>'fnomecompleto']);?> <br>
+                                <input type="text" id="fnomecompleto" name="fnomecompleto" value=<?php if($p['nomeProf'] != null): echo($p['nomeProf']); endif; ?> readonly><?php echo $this->Form->control(('nomeProf'),['placeholder'=>'Nome completo','type'=>'text', 'id'=>'fnomecompleto']);?> <br>
                                 <br>
                                 <label for="flogin">Login:</label>
-                                <input type="text" id="flogin" name="flogin" value="<?php echo($p['loginProf']) ?>" readonly><br>
+                                <input type="text" id="flogin" name="flogin" value=<?php echo($p['loginProf']) ?> readonly><br>
                                 <br>
-                                <label for="fsenha">Senha:</label> 
+                                <label for="fsenha">Nova senha:</label> 
                                 <?php echo $this->Form->control(('senhaProf'),['placeholder'=>'Nova senha','type'=>'password', 'id'=>'fsenha']);?>
                                 <br>
                                 <label for="femail">Email:</label>
-                                <input type="text" id="femail" name="femail" value="<?php echo($p['emailProf']) ?>" readonly> <?php echo $this->Form->control(('emailProf'),['placeholder'=>'Email','type'=>'text', 'id'=>'femail']);?> <br>
+                                <input type="text" id="femail" name="femail" value=<?php echo($p['emailProf']); ?> readonly> <?php echo $this->Form->control(('emailProf'),['placeholder'=>'Email','type'=>'text', 'id'=>'femail']);?> <br>
                                 <br>
                                 <label for="flogin">Telefone:</label>
-                                <input type="text" id="flogin" name="flogin" value="<?php echo($p['celProf']) ?>" readonly> <?php echo $this->Form->control(('celProf'),['placeholder'=>'Telefone','type'=>'text', 'id'=>'fcel']);?> <br><br>
+                                <input type="text" id="flogin" name="flogin" value="<?php echo($p['celProf']); ?>" readonly> <?php echo $this->Form->control(('celProf'),['placeholder'=>'Telefone','type'=>'text', 'id'=>'fcel']);?> <br><br>
                                 <br>
                             <!-- <?= $this->Html->link(__('Salvar'), ['controller'=>'coordenador'],['action'=>'editp',$professor->loginProf], ['class' => 'btn btn-success']) ?> -->
                             <?= $this->Form->end(); ?>

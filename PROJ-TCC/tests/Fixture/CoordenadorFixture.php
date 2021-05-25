@@ -36,6 +36,7 @@ class CoordenadorFixture extends TestFixture
             'primary' => ['type' => 'primary', 'columns' => ['cdCoord'], 'length' => []],
             'loginCoord' => ['type' => 'unique', 'columns' => ['loginCoord', 'emailCoord'], 'length' => []],
             'FK_Coordenador_Account' => ['type' => 'foreign', 'columns' => ['cdAccount'], 'references' => ['accounts', 'cdAccount'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
+            'FK_Coord_Login' => ['type' => 'foreign', 'columns' => ['loginCoord'], 'references' => ['login', 'login'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',

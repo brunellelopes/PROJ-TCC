@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -14,6 +15,7 @@ declare(strict_types=1);
  * @since     0.2.9
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace App\Controller;
 
 use App\Model\Entity\Aluno;
@@ -56,74 +58,43 @@ class AppController extends Controller
             $this->Auth->loginRedirect = array('controller' => 'Aluno', 'action' => 'index');
         }
     }*/
-    /*public function initialize(): void
+    public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Auth', [
-                'Form' => [
-                    'fields' => [
-                        'username' => 'login',
-                        'password' => 'senha'
-                    ]
-                ],
+            'authorize' => ['Controller'],
             'loginAction' => [
+                'controller'=> 'Login',
+                'action'=> 'login',
                 'authError' => 'Você deve fazer login para ter acesso a essa área!',
-                'loginError'=> 'Combinação de usuário e senha errada!'
+                'loginError' => 'Combinação de usuário e senha errada!'
             ],
-            'logoutAction' =>[
-                'controller' => 'Users',
+            'Form' => [
+                'fields' => [
+                    'username' => 'login',
+                    'password' => 'password'
+                ]
+            ],
+            'logoutAction' => [
+                'controller' => 'Login',
                 'action' => 'logout'
-            ]
+            ],
         ]);
-        $this->loadComponent('Flash');*/
+        $this->loadComponent('Flash');
+    }
+    public function isAuthorized($user)
+    {
+        // Admin pode acessar todas as actions
+        
 
-        // Permite a ação display, assim nosso pages controller
-        // continua a funcionar.
-        /*
+        // Bloqueia acesso por padrão
+        return false;
+    }
+    // Permite a ação display, assim nosso pages controller
+    // continua a funcionar.
+    /*
         * Enable the following component for recommended CakePHP form protection settings.
         * see https://book.cakephp.org/4/en/controllers/components/form-protection.html
         */
-        //$this->loadComponent('FormProtection');
-    //}
-    
-    public function isAuthorized($user = null){
-         // Qualquer usuário registrado pode acessar funções públicas
-        if (!$this->request->getParam('prefix')) {
-            return true;
-        }
-        // Somente administradores podem acessar funções 
-        if ($this->request->getParam('prefix') == 'Coordenador') {
-            return (bool)($user['role'] === 'Coordenador');
-        }
-        if ($this->request->getParam('prefix') == 'Professor') {
-            return (bool)($user['role'] === 'Professor');
-        }
-        if ($this->request->getParam('prefix') == 'Aluno') {
-            $this->Auth->allow('index');
-            return (bool)($user['role'] === 'Aluno');
-        }
-
-        // Negação padrão
-        return false;
-    }
-    // public function adde(){
-    //     $professor = $this->loadModel('Professor');
-    //     $ProfessorTabela = $this->Professor;
-    //     if ($this->request->is('post')) {
-    //         $loginProf = $this->request->getData('loginProf');
-    //         $senhaProf = $this->request->getData('senhaProf');
-    //         $query = "INSERT INTO Professor (loginProf, senhaProf) VALUES ('$loginProf', $senhaProf);";
-    //         $ProfessorTabela ->newEntity();
-    //         if ($professor) {
-    //             $ProfessorTabela = $query;
-    //             $this->Flash->success(__('The professor has been saved.'));
-    //             //Retornar um modal com mensagem de sucesso.
-    //         }else{
-    //             $this->Flash->error(__('O professor nao pode ser salvo! Tente novamente.'));
-    //         }
-    //     }
-    //     return $this->redirect(['action' => 'index']);
-    // }
-
 }

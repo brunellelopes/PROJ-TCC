@@ -57,7 +57,8 @@ class AccountsTable extends Table
         $validator
             ->scalar('descAccount')
             ->maxLength('descAccount', 15)
-            ->allowEmptyString('descAccount');
+            ->requirePresence('descAccount', 'create')
+            ->notEmptyString('descAccount');
 
         return $validator;
     }
