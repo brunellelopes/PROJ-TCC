@@ -10,8 +10,8 @@
             <h4 class="heading"><?= __('Actions') ?></h4>
             <?= $this->Form->postLink(
                 __('Delete'),
-                ['action' => 'delete', $account->codAccount],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $account->codAccount), 'class' => 'side-nav-item']
+                ['action' => 'delete', $account->cdAccount],
+                ['confirm' => __('Are you sure you want to delete # {0}?', $account->cdAccount), 'class' => 'side-nav-item']
             ) ?>
             <?= $this->Html->link(__('List Accounts'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
@@ -22,7 +22,6 @@
             <fieldset>
                 <legend><?= __('Edit Account') ?></legend>
                 <?php
-                    echo $this->Form->control('cdAccount');
                     echo $this->Form->control('descAccount');
                 ?>
             </fieldset>

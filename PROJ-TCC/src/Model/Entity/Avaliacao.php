@@ -8,6 +8,7 @@ use Cake\ORM\Entity;
 /**
  * Avaliacao Entity
  *
+ * @property int $cdAvaliacao
  * @property string|null $comentario
  * @property int|null $cdProj
  */

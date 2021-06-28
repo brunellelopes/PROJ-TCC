@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Model\Entity\Aluno;
+
 /**
  * Aluno Controller
  *
@@ -19,7 +21,6 @@ class AlunoController extends AppController
     public function index()
     {
         $aluno = $this->paginate($this->Aluno);
-
         $this->set(compact('aluno'));
     }
 
@@ -51,7 +52,6 @@ class AlunoController extends AppController
             $aluno = $this->Aluno->patchEntity($aluno, $this->request->getData());
             if ($this->Aluno->save($aluno)) {
                 $this->Flash->success(__('The aluno has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The aluno could not be saved. Please, try again.'));
@@ -101,5 +101,39 @@ class AlunoController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function painel(){
+        //MESMA FUNCAO DO INDEX
+    }
+
+    public function mural(){
+        //
+    }
+
+    public function addDoc($doc = null){
+        $send = $doc;
+        //RECEBER O PARAMETRO DO OBJETO A SER ENVIADO
+        //FAZER O ENVIO DO OBJETO PARA O BANCO DE DADOS,OU ENVIAR O NOME PARA O BANCO 
+        //E ARMAZENAR O ARQUIVO EM UM LOCAL DE ARMAZENAMENTO
+    }
+
+    public function viewDoc(){
+        //ARCHTETCTURE
+            //DEFINIR UMA VARIAVEL DE CONTROLE
+            //SWITCH CASE()
+            //CASE 1: --VISUALIZAR HISTORICO
+                //QUERY PRA VISUALIUZAR
+            //CASE 2: --VISUALIZAR DOCUMENTO ENVIADO
+                //QUERY PARA VISUALIZAR OU APENAR RESGATAR O DOCUMENTO
+    }
+
+
+    public function logout($id = null){
+        $this->Flash->success('You are now logged out.');
+        return $this->redirect(([
+            'controller' => 'Users',
+            'action' => 'login'
+        ]));
     }
 }

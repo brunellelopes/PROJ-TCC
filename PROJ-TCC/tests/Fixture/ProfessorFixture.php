@@ -36,6 +36,7 @@ class ProfessorFixture extends TestFixture
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['cdProf'], 'length' => []],
             'loginProf' => ['type' => 'unique', 'columns' => ['loginProf', 'emailProf'], 'length' => []],
+            'FK_Professor_Login' => ['type' => 'foreign', 'columns' => ['loginProf'], 'references' => ['login', 'login'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
             'FK_Professor_Account' => ['type' => 'foreign', 'columns' => ['cdAccount'], 'references' => ['accounts', 'cdAccount'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
         ],
         '_options' => [

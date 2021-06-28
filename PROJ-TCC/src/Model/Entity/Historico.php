@@ -8,6 +8,7 @@ use Cake\ORM\Entity;
 /**
  * Historico Entity
  *
+ * @property int $cdHist
  * @property string|null $versaoProj
  * @property string|null $nmArquivo
  * @property \Cake\I18n\FrozenDate|null $dtVersao

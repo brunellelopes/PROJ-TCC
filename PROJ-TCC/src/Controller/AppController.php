@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -14,13 +15,21 @@ declare(strict_types=1);
  * @since     0.2.9
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace App\Controller;
 
+use App\Model\Entity\Aluno;
+use App\Model\Entity\Coordenador;
+use App\Model\Entity\Professor;
 use Cake\Controller\Controller;
+use Cake\Event\EventInterface;
+use Cake\Http\Session;
+
+
 
 /**
  * Application Controller
- *
+ * 
  * Add your application-wide methods in the class below, your controllers
  * will inherit them.
  *
@@ -37,54 +46,59 @@ class AppController extends Controller
      *
      * @return void
      */
+
+    public function isAuthorized($user)
+    {
+        // Here is where we should verify the role and give access based on role
+
+        return true;
+    }
+    
     public function initialize(): void
     {
         parent::initialize();
-
         $this->loadComponent('RequestHandler');
-        /*$this->loadComponent('Auth', [
+        $this->loadComponent('Flash');
+        $this->loadComponent('Auth', [
+            'authorize' => 'Controller',
             'authenticate' => [
                 'Form' => [
                     'fields' => [
-                        'username' => 'email',
+                        'username' => 'login',
                         'password' => 'password'
                     ]
-                ]
+                ],
             ],
             'loginAction' => [
-                'controller' => 'Users',
+                'plugin' => false,
+                'controller' => 'Login',
                 'action' => 'login'
+            ],
+            'logoutRedirect' => [
+                'plugin' => null,
+                'controller' => 'Login',
+                'action' => 'logout'
+            ],
+            'unauthorizedRedirect' => [
+                'controller' => 'Login',
+                'action' => 'login',
+                'prefix' => false
+            ],
+            'authError' => 'Voce precisa se autenticar para acessar!',
+            'flash' => [
+                'element' => 'error'
             ]
-        ]);*/
-        $this->loadComponent('Flash');
+        ]);
+        // Always enable the CSRF component.
 
-        // Permite a ação display, assim nosso pages controller
-        // continua a funcionar.
-        //$this->Auth->allow(['display']);
-        /*
-         * Enable the following component for recommended CakePHP form protection settings.
-         * see https://book.cakephp.org/4/en/controllers/components/form-protection.html
-         */
-        //$this->loadComponent('FormProtection');
+        // Allow the display action so our pages controller
+        // continues to work.
+        $this->Auth->allow(['display']);
     }
-
-    public function Login(){
-        if ($this->request->is('post')) {
-            $coordenador = $this->Auth->identify();
-            $professor = $this->Auth->identify();
-            $aluno = $this->Auth->identify();
-            if ($coordenador) {
-                $this->Auth->setUser($coordenador);
-                return $this->redirect($this->Auth->redirectUrl());
-            }else if($professor){
-                $this->Auth->setUser($professor);
-                return $this->redirect($this->Auth->redirectUrl());
-            }else if($aluno){
-                $this->Auth->setUser($aluno);
-                return $this->redirect($this->Auth->redirectUrl());
-            }
-            $this->Flash->error('Usuario e/ou senha incorretos.');
-            
-        }
-    }
+    // Permite a ação display, assim nosso pages controller
+    // continua a funcionar.
+    /*
+        * Enable the following component for recommended CakePHP form protection settings.
+        * see https://book.cakephp.org/4/en/controllers/components/form-protection.html
+        */
 }

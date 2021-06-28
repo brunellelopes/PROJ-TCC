@@ -3,10 +3,20 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Datasource\EntityInterface;
+use Cake\Datasource\FactoryLocator;
+use Cake\ORM\Locator\LocatorAwareTrait;
+use Cake\ORM\TableRegistry;
+use Cake\ORM\Query;
+use Cake\Core\App;
+use Cake\ORM\Locator\TableLocator;
+use PDO;
+
 /**
  * Professor Controller
  *
  * @property \App\Model\Table\ProfessorTable $Professor
+ * @property \App\Model\Table\ProjetoTable $Projeto
  * @method \App\Model\Entity\Professor[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class ProfessorController extends AppController
@@ -20,7 +30,10 @@ class ProfessorController extends AppController
     {
         $professor = $this->paginate($this->Professor);
 
+        $projeto = $this->loadModel('Projeto');
+        $projeto = $this->paginate($this->Projeto);
         $this->set(compact('professor'));
+        $this->set(compact('projeto'));
     }
 
     /**
@@ -30,21 +43,21 @@ class ProfessorController extends AppController
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    /*public function view($id = null)
     {
         $professor = $this->Professor->get($id, [
             'contain' => [],
         ]);
 
         $this->set(compact('professor'));
-    }
+    }*/
 
     /**
      * Add method
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    /*public function add()
     {
         $professor = $this->Professor->newEmptyEntity();
         if ($this->request->is('post')) {
@@ -57,7 +70,7 @@ class ProfessorController extends AppController
             $this->Flash->error(__('The professor could not be saved. Please, try again.'));
         }
         $this->set(compact('professor'));
-    }
+    }*/
 
     /**
      * Edit method
@@ -66,7 +79,7 @@ class ProfessorController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($id = null)
+    /*public function edit($id = null)
     {
         $professor = $this->Professor->get($id, [
             'contain' => [],
@@ -81,7 +94,7 @@ class ProfessorController extends AppController
             $this->Flash->error(__('The professor could not be saved. Please, try again.'));
         }
         $this->set(compact('professor'));
-    }
+    }*/
 
     /**
      * Delete method
@@ -90,7 +103,7 @@ class ProfessorController extends AppController
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
+    /*public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $professor = $this->Professor->get($id);
@@ -101,5 +114,19 @@ class ProfessorController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }*/
+
+    public function logout($id = null){
+        return $this->redirect(([
+            'controller' => 'Login',
+            'action' => 'logout'
+        ]));
+    }
+
+    public function loadpj($id=null){
+        return $this->redirect([
+            'controller'=> 'Projeto',
+            'action'=> 'loadpj'
+        ]);
     }
 }

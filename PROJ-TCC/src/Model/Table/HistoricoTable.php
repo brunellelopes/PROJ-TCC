@@ -38,6 +38,8 @@ class HistoricoTable extends Table
         parent::initialize($config);
 
         $this->setTable('historico');
+        $this->setDisplayField('cdHist');
+        $this->setPrimaryKey('cdHist');
     }
 
     /**
@@ -48,6 +50,10 @@ class HistoricoTable extends Table
      */
     public function validationDefault(Validator $validator): Validator
     {
+        $validator
+            ->integer('cdHist')
+            ->allowEmptyString('cdHist', null, 'create');
+
         $validator
             ->scalar('versaoProj')
             ->maxLength('versaoProj', 10)

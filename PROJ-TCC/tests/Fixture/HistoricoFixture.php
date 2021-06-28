@@ -23,6 +23,7 @@ class HistoricoFixture extends TestFixture
      */
     // phpcs:disable
     public $fields = [
+        'cdHist' => ['type' => 'integer', 'length' => null, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
         'versaoProj' => ['type' => 'string', 'length' => 10, 'null' => true, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
         'nmArquivo' => ['type' => 'string', 'length' => 255, 'null' => true, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null],
         'dtVersao' => ['type' => 'date', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
@@ -31,6 +32,7 @@ class HistoricoFixture extends TestFixture
             'FK_Historico_cdProj' => ['type' => 'index', 'columns' => ['cdProj'], 'length' => []],
         ],
         '_constraints' => [
+            'primary' => ['type' => 'primary', 'columns' => ['cdHist'], 'length' => []],
             'FK_Historico_cdProj' => ['type' => 'foreign', 'columns' => ['cdProj'], 'references' => ['projeto', 'cdProj'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
         ],
         '_options' => [
@@ -48,9 +50,10 @@ class HistoricoFixture extends TestFixture
     {
         $this->records = [
             [
+                'cdHist' => 1,
                 'versaoProj' => 'Lorem ip',
                 'nmArquivo' => 'Lorem ipsum dolor sit amet',
-                'dtVersao' => '2021-03-25',
+                'dtVersao' => '2021-05-12',
                 'cdProj' => 1,
             ],
         ];

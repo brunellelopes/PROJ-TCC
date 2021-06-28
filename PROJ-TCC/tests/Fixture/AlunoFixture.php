@@ -35,7 +35,8 @@ class AlunoFixture extends TestFixture
         ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['cdAluno'], 'length' => []],
-            'matAluno' => ['type' => 'unique', 'columns' => ['matAluno', 'emailAluno', 'loginAluno'], 'length' => []],
+            'loginAluno' => ['type' => 'unique', 'columns' => ['loginAluno', 'matAluno', 'emailAluno'], 'length' => []],
+            'FK_Aluno_Login' => ['type' => 'foreign', 'columns' => ['loginAluno'], 'references' => ['login', 'login'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
             'FK_Aluno_Account' => ['type' => 'foreign', 'columns' => ['cdAccount'], 'references' => ['accounts', 'cdAccount'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
         ],
         '_options' => [
