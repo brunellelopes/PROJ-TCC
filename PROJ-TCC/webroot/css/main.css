@@ -201,12 +201,6 @@ input#login{
     margin-left: 30%;
 }
 
-/* LOGIN */
-
-#login{
-    align-items: center;
-}
-
 /* Paginator */
 .paginator {
     text-align: right;

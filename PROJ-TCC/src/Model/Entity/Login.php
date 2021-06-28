@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace App\Model\Entity;
 use Cake\Validation\Validator;
+use Cake\ORM\Locator\LocatorInterface;
+use Cake\ORM\TableRegistry;
+
 
 use Cake\ORM\Entity;
 
@@ -40,13 +43,4 @@ class Login extends Entity
         'password',
     ];
 
-    public function validationDefault(Validator $validator)
-    {
-        return $validator
-            ->add('cdAccount', 'inList', [
-                'rule' => ['inList', ['coordenador', 'professor','aluno']],
-                'message' => 'Por favor informe uma função válida',
-                'storage' => 'Session'
-            ]);
-    }
 }

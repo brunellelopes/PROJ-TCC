@@ -51,10 +51,10 @@ $routes->scope('/', function (RouteBuilder $builder) {
      * to use (in this case, templates/Pages/home.php)...
      */
     $builder->connect('/', ['controller' => 'Login', 'action' =>'login']);
-    $builder->connect('/:coordenador/#',['controller'=>'Coordenador', 'action' => 'add-professor']);
-    $builder->connect('/:coordenador/#',[]);
-    $builder->connect('/:professor/#',[]);
-    $builder->connect('/:aluno/#',[]);
+    //$builder->connect('/:coordenador/#',['controller'=>'Coordenador', 'action' => 'addp']);
+    $builder->connect('/:coordenador/index',[]);
+    $builder->connect('/:professor/index',[]);
+    $builder->connect('/:aluno/index',[]);
     
 
     /*

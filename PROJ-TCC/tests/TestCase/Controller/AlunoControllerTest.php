@@ -22,7 +22,7 @@ class AlunoControllerTest extends TestCase
      * @var array
      */
     protected $fixtures = [
-        'app.Aluno',
+        'app.Login',
     ];
 
     /**

@@ -47,49 +47,53 @@ class AppController extends Controller
      * @return void
      */
 
-    /*public function beforeFilter(EventInterface $event)
+    public function isAuthorized($user)
     {
+        // Here is where we should verify the role and give access based on role
 
-        if($this->Auth->user('cdAccount') == 'coordenador'){
-            $this->Auth->loginRedirect = array('controller' => 'Coordenador', 'action' => 'index');
-        }else if($this->Auth->user('role') == 'professor'){
-            $this->Auth->loginRedirect = array('controller' => 'Professor', 'action' => 'index');
-        }else if($this->Auth->user('role') == 'aluno'){
-            $this->Auth->loginRedirect = array('controller' => 'Aluno', 'action' => 'index');
-        }
-    }*/
+        return true;
+    }
+    
     public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('RequestHandler');
+        $this->loadComponent('Flash');
         $this->loadComponent('Auth', [
-            'authorize' => ['Controller'],
+            'authorize' => 'Controller',
+            'authenticate' => [
+                'Form' => [
+                    'fields' => [
+                        'username' => 'login',
+                        'password' => 'password'
+                    ]
+                ],
+            ],
             'loginAction' => [
-                'controller'=> 'Login',
-                'action'=> 'login',
-                'authError' => 'Você deve fazer login para ter acesso a essa área!',
-                'loginError' => 'Combinação de usuário e senha errada!'
+                'plugin' => false,
+                'controller' => 'Login',
+                'action' => 'login'
             ],
-            'Form' => [
-                'fields' => [
-                    'username' => 'login',
-                    'password' => 'password'
-                ]
-            ],
-            'logoutAction' => [
+            'logoutRedirect' => [
+                'plugin' => null,
                 'controller' => 'Login',
                 'action' => 'logout'
             ],
+            'unauthorizedRedirect' => [
+                'controller' => 'Login',
+                'action' => 'login',
+                'prefix' => false
+            ],
+            'authError' => 'Voce precisa se autenticar para acessar!',
+            'flash' => [
+                'element' => 'error'
+            ]
         ]);
-        $this->loadComponent('Flash');
-    }
-    public function isAuthorized($user)
-    {
-        // Admin pode acessar todas as actions
-        
+        // Always enable the CSRF component.
 
-        // Bloqueia acesso por padrão
-        return false;
+        // Allow the display action so our pages controller
+        // continues to work.
+        $this->Auth->allow(['display']);
     }
     // Permite a ação display, assim nosso pages controller
     // continua a funcionar.

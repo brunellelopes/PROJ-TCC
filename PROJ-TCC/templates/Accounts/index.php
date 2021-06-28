@@ -22,9 +22,9 @@
                     <td><?= $this->Number->format($account->cdAccount) ?></td>
                     <td><?= h($account->descAccount) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $account->codAccount]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $account->codAccount]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $account->codAccount], ['confirm' => __('Are you sure you want to delete # {0}?', $account->codAccount)]) ?>
+                        <?= $this->Html->link(__('View'), ['action' => 'view', $account->cdAccount]) ?>
+                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $account->cdAccount]) ?>
+                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $account->cdAccount], ['confirm' => __('Are you sure you want to delete # {0}?', $account->cdAccount)]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

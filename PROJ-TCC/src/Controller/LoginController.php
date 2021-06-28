@@ -6,10 +6,13 @@ namespace App\Controller;
 
 use App\Model\Entity\Login;
 use Cake\Core\Configure;
+use Cake\Event\EventInterface;
 use Cake\Http\Exception\ForbiddenException;
 use Cake\Http\Exception\NotFoundException;
 use Cake\Http\Response;
 use Cake\View\Exception\MissingTemplateException;
+
+use function PHPSTORM_META\type;
 
 /**
  * Application Controller and Login Controller
@@ -33,12 +36,13 @@ class LoginController extends AppController
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
-    // public function index()
-    // {
-    //     $login = $this->paginate($this->Login);
-
-    //     $this->set(compact('login'));
-    // }
+    
+    public function index()
+    {
+        $login = $this->paginate($this->Login);
+        $session = $this->request->getSession();
+        $this->set(compact('login'));
+    }
 
     /**
      * View method
@@ -48,30 +52,49 @@ class LoginController extends AppController
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
 
+
     public function login()
     {
-        $this->paginate($this->Login);
-        $user = $this->Auth->identify();
-        $Login = $this->loadModel('Login');
-        if ($user) {
-            if ($Login('cdAccount') == 1) {
-                $this->Auth->redirectUrl();
+        // Permite a ação display, assim nosso pages controller
+        // continua a funcionar.
+        $this->Auth->allow(['display']);
+        $login = $this->paginate($this->Login);
+        $session = $this->request->getSession();
+        $usuario = $login;
+        $this->set(compact('login'));
+        $this->loadComponent('Flash');
+        if($this->request->is('post')){
+            $usuario = $this->Auth->identify();
+            $acesso = $usuario;
+            if($acesso['cdAccount'] === '1'){         
+                $this->redirect(array('controller' => 'coordenador', 'action' => 'index')); 
             }
-            /*if($user['cdAccount'] === 1){
-                    return print_r($user['login']);
-                }
-                if($user['cdAccount'] === 2){
-                    return $this->redirect($this->professor);
-                }
-                if($user['cdAccount'] === 3){
-                    return $this->redirect($this->aluno);
-                }*/
-        } else {
-            $this->Flash->error(__('Usuário ou senha inválido. Tente novamente.'));
+            else{
+                $this->Flash->error(__('Usuario ou senha incorretos.'));
+            } 
+            $this->Flash->error(__('Preencha com o usuario e a senha.'));
         }
+        /*
+        if ($this->request->is('post')) {
+            $usuario = $this->Auth->identify();
+                $this->Auth->setUser($usuario);
+                if($login('cdAccount') === 1 && $usuario('cdAccount') === 1){
+                    $this->redirect(array('controller' => 'coordenador', 'action' => 'index'));      
+                }
+                else{
+                    $this->Flash->error(__('Usuario ou senha incorretos.'));
+                }
+                return $this->redirect($this->Auth->redirectUrl());
+            }
+            $this->Flash->error(__('Preencha com o usuario e a senha.'));
+            */
     }
     public function logout()
     {
         return $this->redirect($this->Auth->logout());
+    }
+    public function parentNode()
+    {
+        return null;
     }
 }

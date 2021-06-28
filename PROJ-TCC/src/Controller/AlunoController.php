@@ -52,7 +52,6 @@ class AlunoController extends AppController
             $aluno = $this->Aluno->patchEntity($aluno, $this->request->getData());
             if ($this->Aluno->save($aluno)) {
                 $this->Flash->success(__('The aluno has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The aluno could not be saved. Please, try again.'));
@@ -130,9 +129,6 @@ class AlunoController extends AppController
     }
 
 
-    public function login(){
-        
-    }
     public function logout($id = null){
         $this->Flash->success('You are now logged out.');
         return $this->redirect(([
