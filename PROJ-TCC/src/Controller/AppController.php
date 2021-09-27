@@ -47,6 +47,17 @@ class AppController extends Controller
      * @return void
      */
 
+    /*public function beforeFilter(EventInterface $event)
+    { //teste
+
+        if($this->Auth->user('cdAccount') == 'coordenador'){
+            $this->Auth->loginRedirect = array('controller' => 'Coordenador', 'action' => 'index');
+        }else if($this->Auth->user('role') == 'professor'){
+            $this->Auth->loginRedirect = array('controller' => 'Professor', 'action' => 'index');
+        }else if($this->Auth->user('role') == 'aluno'){
+            $this->Auth->loginRedirect = array('controller' => 'Aluno', 'action' => 'index');
+        }
+    }*/
     public function isAuthorized($user)
     {
         // Here is where we should verify the role and give access based on role
@@ -77,6 +88,10 @@ class AppController extends Controller
             'logoutRedirect' => [
                 'plugin' => null,
                 'controller' => 'Login',
+            ],
+            'logoutRedirect' => [
+                'plugin' => false,
+                'controller' => 'Login',
                 'action' => 'logout'
             ],
             'unauthorizedRedirect' => [
@@ -87,8 +102,8 @@ class AppController extends Controller
             'authError' => 'Voce precisa se autenticar para acessar!',
             'flash' => [
                 'element' => 'error'
-            ]
-        ]);
+                ]
+            ]);
         // Always enable the CSRF component.
 
         // Allow the display action so our pages controller

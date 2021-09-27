@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -113,20 +114,21 @@ class ProfessorController extends AppController
             $this->Flash->error(__('The professor could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
-    }*/
+        return $this->redirect(['action' => 'index']);*/
 
-    public function logout($id = null){
+    public function logout($id = null)
+    {
         return $this->redirect(([
             'controller' => 'Login',
             'action' => 'logout'
         ]));
     }
 
-    public function loadpj($id=null){
+    public function loadpj($id = null)
+    {
         return $this->redirect([
-            'controller'=> 'Projeto',
-            'action'=> 'loadpj'
+            'controller' => 'Projeto',
+            'action' => 'loadpj'
         ]);
     }
 }

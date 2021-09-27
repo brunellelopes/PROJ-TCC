@@ -76,7 +76,13 @@ class LoginController extends AppController
         }
         /*
         if ($this->request->is('post')) {
-            $usuario = $this->Auth->identify();
+            $log = $this->paginate($this->Login);
+        $session = $this->request->getSession();
+        $login = $log;
+        $this->set(compact('login'));
+        $this->loadComponent('Flash');
+        /*if ($this->request->is('post')) {
+             $usuario = $this->Auth->identify();
                 $this->Auth->setUser($usuario);
                 if($login('cdAccount') === 1 && $usuario('cdAccount') === 1){
                     $this->redirect(array('controller' => 'coordenador', 'action' => 'index'));      
@@ -85,16 +91,12 @@ class LoginController extends AppController
                     $this->Flash->error(__('Usuario ou senha incorretos.'));
                 }
                 return $this->redirect($this->Auth->redirectUrl());
-            }
+                 }
             $this->Flash->error(__('Preencha com o usuario e a senha.'));
             */
     }
-    public function logout()
-    {
+
+    public function logout(){
         return $this->redirect($this->Auth->logout());
-    }
-    public function parentNode()
-    {
-        return null;
     }
 }

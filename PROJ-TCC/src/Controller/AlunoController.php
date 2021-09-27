@@ -103,36 +103,43 @@ class AlunoController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    public function painel(){
-        //MESMA FUNCAO DO INDEX
-    }
-
     public function mural(){
         //
     }
 
     public function addDoc($doc = null){
         $send = $doc;
+        $file = array($send);
         //RECEBER O PARAMETRO DO OBJETO A SER ENVIADO
         //FAZER O ENVIO DO OBJETO PARA O BANCO DE DADOS,OU ENVIAR O NOME PARA O BANCO 
         //E ARMAZENAR O ARQUIVO EM UM LOCAL DE ARMAZENAMENTO
+        if($send->file_exists($file) == false){
+            //Envia diretamente pro servidor
+        }else{
+            //Comando de sobreescrever 
+        }
     }
 
-    public function viewDoc(){
-        //ARCHTETCTURE
-            //DEFINIR UMA VARIAVEL DE CONTROLE
-            //SWITCH CASE()
-            //CASE 1: --VISUALIZAR HISTORICO
-                //QUERY PRA VISUALIUZAR
-            //CASE 2: --VISUALIZAR DOCUMENTO ENVIADO
-                //QUERY PARA VISUALIZAR OU APENAR RESGATAR O DOCUMENTO
+    public function viewDocs($obj = null){
+        $doc = $obj;
+        switch($doc){
+            case 1:
+                //Ver historico
+                $this->request->getQuery("SELECT * FROM historico WHERE id= 3");
+                break;
+                case 2:
+                    //ver doc enviado
+                    //$this->request-> --Inserir comando para localizar todos os arquivos de uma pasta 
+                    break;
+        }
+        
     }
 
 
     public function logout($id = null){
         $this->Flash->success('You are now logged out.');
         return $this->redirect(([
-            'controller' => 'Users',
+            'controller' => 'Login',
             'action' => 'login'
         ]));
     }
