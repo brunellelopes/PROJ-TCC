@@ -36,12 +36,8 @@ class LoginController extends AppController
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
-    
-    public function index()
-    {
-        $login = $this->paginate($this->Login);
-        $session = $this->request->getSession();
-        $this->set(compact('login'));
+    public function index(){
+        $log = $this->paginate($this->Login);
     }
 
     /**
@@ -57,23 +53,21 @@ class LoginController extends AppController
     {
         // Permite a ação display, assim nosso pages controller
         // continua a funcionar.
-        $this->Auth->allow(['display']);
-        $login = $this->paginate($this->Login);
-        $session = $this->request->getSession();
-        $usuario = $login;
-        $this->set(compact('login'));
         $this->loadComponent('Flash');
         if($this->request->is('post')){
-            $usuario = $this->Auth->identify();
-            $acesso = $usuario;
-            if($acesso['cdAccount'] === '1'){         
-                $this->redirect(array('controller' => 'coordenador', 'action' => 'index')); 
+            $user = $this->Auth->identify();
+            if($user) {
+                $this->Auth->setUser($user);
+                return $this->redirect($this->Auth->redirectUrl());
+                //$this->redirect(array('controller' => 'coordenador', 'action' => 'index')); 
+            }   
+                // if($user('cdAccount') === '1'){      
+                // }
+                else{
+                    $this->Flash->error(__('Usuario ou senha incorretos.'));
+                } 
+                $this->Flash->error(__('Preencha com o usuario e a senha.'));
             }
-            else{
-                $this->Flash->error(__('Usuario ou senha incorretos.'));
-            } 
-            $this->Flash->error(__('Preencha com o usuario e a senha.'));
-        }
         /*
         if ($this->request->is('post')) {
             $log = $this->paginate($this->Login);
@@ -82,7 +76,7 @@ class LoginController extends AppController
         $this->set(compact('login'));
         $this->loadComponent('Flash');
         /*if ($this->request->is('post')) {
-             $usuario = $this->Auth->identify();
+            $usuario = $this->Auth->identify();
                 $this->Auth->setUser($usuario);
                 if($login('cdAccount') === 1 && $usuario('cdAccount') === 1){
                     $this->redirect(array('controller' => 'coordenador', 'action' => 'index'));      
@@ -91,7 +85,7 @@ class LoginController extends AppController
                     $this->Flash->error(__('Usuario ou senha incorretos.'));
                 }
                 return $this->redirect($this->Auth->redirectUrl());
-                 }
+                }
             $this->Flash->error(__('Preencha com o usuario e a senha.'));
             */
     }

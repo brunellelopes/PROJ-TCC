@@ -30,14 +30,15 @@ use Phinx\Db\Action\Action;
         </div>
         <h4 style="text-align: center;">LOGIN</h4>
             <form>
-                <?= $this->Form->create(); ?>
+                <?= $this->Form->create() ?>
                 <br>
-                    <?= $this->Form->control(('login'),['placeholder'=>'login']) ?>
-                <br>
-                <br>
-                    <?= $this->Form->control(('password'),['placeholder'=>'senha']) ?>
+                    <?php echo $this->Form->input(('login'),['placeholder'=>'login']) ?>
                 <br>
                 <br>
+                    <?php echo $this->Form->input(('password'),['placeholder'=>'senha'], ['type' => 'password']) ?>
+                <br>
+                <br>
+                <?= $this->Form->button(__('Submit')) ?>
                     <button class="btn btn-primary button" id="buttonLogin" <?= $this->Form->button(('Acessar'),['action'=>'login'],['class' => 'button float-right'])?></button>
                 <?= $this->Form->end(); ?>
         </form> 

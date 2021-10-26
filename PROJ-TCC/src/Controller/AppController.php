@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 /**
@@ -15,7 +14,6 @@ declare(strict_types=1);
  * @since     0.2.9
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
-
 namespace App\Controller;
 
 use App\Model\Entity\Aluno;
@@ -46,74 +44,34 @@ class AppController extends Controller
      *
      * @return void
      */
-
-    /*public function beforeFilter(EventInterface $event)
-    { //teste
-
-        if($this->Auth->user('cdAccount') == 'coordenador'){
-            $this->Auth->loginRedirect = array('controller' => 'Coordenador', 'action' => 'index');
-        }else if($this->Auth->user('role') == 'professor'){
-            $this->Auth->loginRedirect = array('controller' => 'Professor', 'action' => 'index');
-        }else if($this->Auth->user('role') == 'aluno'){
-            $this->Auth->loginRedirect = array('controller' => 'Aluno', 'action' => 'index');
-        }
-    }*/
-    public function isAuthorized($user)
-    {
-        // Here is where we should verify the role and give access based on role
-
-        return true;
-    }
-    
     public function initialize(): void
     {
         parent::initialize();
         $this->loadComponent('RequestHandler');
-        $this->loadComponent('Flash');
         $this->loadComponent('Auth', [
-            'authorize' => 'Controller',
-            'authenticate' => [
                 'Form' => [
                     'fields' => [
                         'username' => 'login',
-                        'password' => 'password'
+                        'password' => 'senha'
                     ]
                 ],
-            ],
             'loginAction' => [
-                'plugin' => false,
-                'controller' => 'Login',
-                'action' => 'login'
+                'authError' => 'Você deve fazer login para ter acesso a essa área!',
+                'loginError'=> 'Combinação de usuário e senha errada!'
             ],
-            'logoutRedirect' => [
-                'plugin' => null,
-                'controller' => 'Login',
-            ],
-            'logoutRedirect' => [
-                'plugin' => false,
-                'controller' => 'Login',
+            'logoutAction' =>[
+                'controller' => 'Users',
                 'action' => 'logout'
-            ],
-            'unauthorizedRedirect' => [
-                'controller' => 'Login',
-                'action' => 'login',
-                'prefix' => false
-            ],
-            'authError' => 'Voce precisa se autenticar para acessar!',
-            'flash' => [
-                'element' => 'error'
-                ]
-            ]);
-        // Always enable the CSRF component.
+            ]
+        ]);
+        $this->loadComponent('Flash');
 
-        // Allow the display action so our pages controller
-        // continues to work.
-        $this->Auth->allow(['display']);
-    }
-    // Permite a ação display, assim nosso pages controller
-    // continua a funcionar.
-    /*
+        // Permite a ação display, assim nosso pages controller
+        // continua a funcionar.
+        /*
         * Enable the following component for recommended CakePHP form protection settings.
         * see https://book.cakephp.org/4/en/controllers/components/form-protection.html
         */
+        //$this->loadComponent('FormProtection');
+    }
 }
