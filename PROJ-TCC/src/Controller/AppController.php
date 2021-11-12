@@ -18,10 +18,15 @@ namespace App\Controller;
 
 use App\Model\Entity\Aluno;
 use App\Model\Entity\Coordenador;
+use App\Model\Entity\Login;
 use App\Model\Entity\Professor;
 use Cake\Controller\Controller;
 use Cake\Event\EventInterface;
 use Cake\Http\Session;
+use Cake\Utility\Security;
+use Cake\Auth\DefaultPasswordHasher;
+use Cake\ORM\Table;
+use Cake\Utility\Text;
 
 
 
@@ -33,6 +38,27 @@ use Cake\Http\Session;
  *
  * @link https://book.cakephp.org/4/en/controllers.html#the-app-controller
  */
+
+class LoginTable extends Table{
+    
+    public function beforeSave(EventInterface $event)
+    {
+        $entity = $event->getData('entity');
+
+        if ($entity->isNew()) {
+            $hasher = new DefaultPasswordHasher();
+
+            // Gera uma API 'token'
+            $entity->api_key_plain = Security::hash(Security::randomBytes(32), 'sha256', false);
+
+            // Criptografe o token para que BasicAuthenticate
+            // possa verificá-lo durante o login.
+            $entity->api_key = $hasher->hash($entity->api_key_plain);
+        }
+        return true;
+    }
+}
+
 class AppController extends Controller
 {
     /**
@@ -48,24 +74,29 @@ class AppController extends Controller
     {
         parent::initialize();
         $this->loadComponent('RequestHandler');
+        $this->loadComponent('Flash');
         $this->loadComponent('Auth', [
+            'authorize' => 'Controller',
+            'authenticate' => [
+                'Basic' => [
                 'Form' => [
                     'fields' => [
-                        'username' => 'login',
-                        'password' => 'senha'
-                    ]
-                ],
-            'loginAction' => [
-                'authError' => 'Você deve fazer login para ter acesso a essa área!',
-                'loginError'=> 'Combinação de usuário e senha errada!'
+                        'username' => 'login', 'password' => 'password',
+                        'userModel' => 'Login'
+                    ],
+                ]
             ],
-            'logoutAction' =>[
-                'controller' => 'Users',
-                'action' => 'logout'
+        ],
+        'logoutRedirect' => [
+            'controller' => 'Login',
+            'action' => 'logout'
+        ],
+        'authError' => 'Voce precisa se autenticar para acessar!',
+        'flash' => [
+            'element' => 'error'
             ]
         ]);
-        $this->loadComponent('Flash');
-
+        $this->Auth->allow(['login', 'index', 'add']);
         // Permite a ação display, assim nosso pages controller
         // continua a funcionar.
         /*

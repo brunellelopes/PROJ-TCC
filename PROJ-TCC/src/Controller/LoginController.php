@@ -19,13 +19,10 @@ use function PHPSTORM_META\type;
  *
  * @property \App\Model\Table\CoordenadorTable $coordenador
  * @property \App\Model\Table\ProfessorTable $professor
- * @property \App\Model\Table\AlunoTable $aluno
- * @property \App\Model\Table\LoginTable $Login
+ * @property \App\Model\Table\loginTable $login
  * @method \App\Model\Entity\Login[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  * @method \App\Model\Entity\Coordenador[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  * @method \App\Model\Entity\Professor[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
- * @method \App\Model\Entity\Aluno[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
-
 
 /**
  */
@@ -36,8 +33,23 @@ class LoginController extends AppController
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
-    public function index(){
-        $log = $this->paginate($this->Login);
+    public function login()
+    {
+        if ($this->request->is('post')) {
+            $user = $this->Auth->identify();
+            if ($user) {
+                $this->Auth->setUser($user);
+                return $this->redirect(['controller' => 'Coordenador', 'action' => 'index']);
+            } else {
+                $this->Flash->error('Usuario ou senha incorretos.');
+            }
+        }
+    }
+
+    public function index()
+    {
+        $login = $this->paginate($this->Login);
+        $this->set(compact('login'));
     }
 
     /**
@@ -48,49 +60,32 @@ class LoginController extends AppController
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
 
-
-    public function login()
+    public function beforeFilter(EventInterface $event)
     {
-        // Permite a ação display, assim nosso pages controller
-        // continua a funcionar.
-        $this->loadComponent('Flash');
-        if($this->request->is('post')){
-            $user = $this->Auth->identify();
-            if($user) {
-                $this->Auth->setUser($user);
-                return $this->redirect($this->Auth->redirectUrl());
-                //$this->redirect(array('controller' => 'coordenador', 'action' => 'index')); 
-            }   
-                // if($user('cdAccount') === '1'){      
-                // }
-                else{
-                    $this->Flash->error(__('Usuario ou senha incorretos.'));
-                } 
-                $this->Flash->error(__('Preencha com o usuario e a senha.'));
-            }
-        /*
-        if ($this->request->is('post')) {
-            $log = $this->paginate($this->Login);
-        $session = $this->request->getSession();
-        $login = $log;
-        $this->set(compact('login'));
-        $this->loadComponent('Flash');
-        /*if ($this->request->is('post')) {
-            $usuario = $this->Auth->identify();
-                $this->Auth->setUser($usuario);
-                if($login('cdAccount') === 1 && $usuario('cdAccount') === 1){
-                    $this->redirect(array('controller' => 'coordenador', 'action' => 'index'));      
-                }
-                else{
-                    $this->Flash->error(__('Usuario ou senha incorretos.'));
-                }
-                return $this->redirect($this->Auth->redirectUrl());
-                }
-            $this->Flash->error(__('Preencha com o usuario e a senha.'));
-            */
+
+        //Verifica se ocorreu erro de autenticaçao
+        if (!$this->Auth->user()) {
+            $this->Auth->setConfig('authError', false);
+            $this->Auth->setConfig('authError', "Oops. Você nao tem autorizaçao para acessar essa página.");
+        }
     }
 
-    public function logout(){
+    public function add()
+    {
+        $login = $this->Login->newEmptyEntity();
+        if ($this->request->is('post')) {
+            $login = $this->Login->patchEntity($login, $this->request->getData());
+            if ($this->Login->save($login)) {
+                $this->Flash->success(__('The login has been saved.'));
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The login could not be saved. Please, try again.'));
+        }
+        $this->set(compact('login'));
+    }
+
+    public function logout()
+    {
         return $this->redirect($this->Auth->logout());
     }
 }

@@ -29,18 +29,15 @@ use Phinx\Db\Action\Action;
             <p>Insira seu login e senha.</p>
         </div>
         <h4 style="text-align: center;">LOGIN</h4>
-            <form>
-                <?= $this->Form->create() ?>
-                <br>
-                    <?php echo $this->Form->input(('login'),['placeholder'=>'login']) ?>
-                <br>
-                <br>
-                    <?php echo $this->Form->input(('password'),['placeholder'=>'senha'], ['type' => 'password']) ?>
-                <br>
-                <br>
-                <?= $this->Form->button(__('Submit')) ?>
-                    <button class="btn btn-primary button" id="buttonLogin" <?= $this->Form->button(('Acessar'),['action'=>'login'],['class' => 'button float-right'])?></button>
-                <?= $this->Form->end(); ?>
-        </form> 
+            <?= $this->Form->create() ?>
+            <br>
+                <?= $this->Form->control(('login')); ?>
+            <br>
+            <br>
+                <?= $this->Form->control(('password'),['placeholder'=>'senha'], ['type' => 'password']); ?>
+            <br>
+            <br>
+                <button class="btn btn-primary button" id="buttonLogin" <?= $this->Form->submit(('Acessar')) ?> </button>
+            <?= $this->Form->end(); ?>
     </div>
 </div>

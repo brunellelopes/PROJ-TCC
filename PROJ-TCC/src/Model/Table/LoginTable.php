@@ -7,7 +7,6 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-
 /**
  * Login Model
  *
@@ -37,9 +36,13 @@ class LoginTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('login');
+        $this->setTable('Login');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
+
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
+        ]);
     }
 
     /**

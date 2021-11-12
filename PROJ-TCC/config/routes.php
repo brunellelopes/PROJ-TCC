@@ -23,6 +23,7 @@
 
 use Cake\Routing\Route\DashedRoute;
 use Cake\Routing\RouteBuilder;
+use Cake\Routing\Router;
 
 /*
  * The default class to use for all routes
@@ -51,11 +52,12 @@ $routes->scope('/', function (RouteBuilder $builder) {
      * to use (in this case, templates/Pages/home.php)...
      */
 
-    $builder->connect('/', ['controller' => 'Login', 'action' =>'login']);
+    
+    //$builder->connect('/', ['controller' => 'Login', 'action' =>'login']);
     //$builder->connect('/:coordenador/#',['controller'=>'Coordenador', 'action' => 'addp']);
-    $builder->connect('/coordenador/index',['controller' => 'Coordenador', 'action' => 'index']);
-    $builder->connect('/professor/index',['controller' => 'Professor', 'action' => 'index']);
-    $builder->connect('/aluno/index',['controller' => 'Aluno', 'action' => 'index']);
+    $builder->connect('/',['controller' => 'Coordenador', 'action' => 'index']);
+    $builder->connect('/',['controller' => 'Professor', 'action' => 'index']);
+    $builder->connect('/',['controller' => 'Aluno', 'action' => 'index']);
     
 
 
