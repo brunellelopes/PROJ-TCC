@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -129,12 +130,13 @@ class CoordenadorController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
-    
-    public function addp(){
+
+    public function addp()
+    {
         $professor = $this->loadModel('Professor');
         $login = $this->loadModel('Login');
         $professor = $this->Professor->newEmptyEntity();
-        if ($this->request->is('post')) {//Registra o evento de post para enviar os dados pro banco
+        if ($this->request->is('post')) { //Registra o evento de post para enviar os dados pro banco
             $professor = $this->Professor->patchEntity($professor, $this->request->getData());
             //variavel professor recebeu os dados do formulario por meio do request ser post 
             if ($this->Login->save($this->Professor['loginProf'])) {
@@ -144,10 +146,11 @@ class CoordenadorController extends AppController
             }
             $this->Flash->error(__('The professor could not be saved. Please, try again.'));
         }
-        $this->set(compact('professor')); 
+        $this->set(compact('professor'));
     }
 
-    public function editp($id = null){
+    public function editp($id = null)
+    {
         $professor = $this->loadModel('Professor');
         $login = $this->loadModel('Login');
         $professor = $this->Professor->get($id, [
@@ -156,6 +159,7 @@ class CoordenadorController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $professor = $this->Professor->patchEntity($professor, $this->request->getData());
             if ($this->Professor->save($professor)) {
+                $this->Professor->save($professor);
                 $this->Login->save($login);
                 return $this->redirect(['action' => 'index']);
             }
@@ -163,7 +167,8 @@ class CoordenadorController extends AppController
         $this->set(compact('professor'));
     }
 
-    public function adda($id = null){
+    public function adda($id = null)
+    {
         $aluno = $this->loadModel('Aluno');
         $login = $this->loadModel('Login');
         $aluno = $this->Aluno->newEmptyEntity();
@@ -174,10 +179,11 @@ class CoordenadorController extends AppController
             }
             $this->Flash->error(__('The Aluno could not be saved. Please, try again.'));
         }
-        $this->set(compact('aluno')); 
+        $this->set(compact('aluno'));
     }
 
-    public function edita($id = null){
+    public function edita($id = null)
+    {
         $aluno = $this->loadModel('Aluno');
         $login = $this->loadModel('Login');
         $aluno = $this->Aluno->get($id, [
@@ -192,7 +198,8 @@ class CoordenadorController extends AppController
         $this->set(compact('aluno'));
     }
 
-    public function addpj($id = null){
+    public function addpj($id = null)
+    {
         $projeto = $this->loadModel('Projeto');
         $projeto = $this->Projeto->newEmptyEntity();
         if ($this->request->is('post')) {
@@ -202,10 +209,11 @@ class CoordenadorController extends AppController
             }
             $this->Flash->error(__('The Aluno could not be saved. Please, try again.'));
         }
-        $this->set(compact('projeto')); 
+        $this->set(compact('projeto'));
     }
 
-    public function editpj($id = null){
+    public function editpj($id = null)
+    {
         $projeto = $this->loadModel('Projeto');
         $projeto = $this->Projeto->get($id, [
             'contain' => [],
@@ -219,11 +227,26 @@ class CoordenadorController extends AppController
         $this->set(compact('projeto'));
     }
 
-    
-    public function logout($id = null){
+    public function upload($coordenador)
+    {
+        //$files = $this->request->getData('attachments');
+        $coordenador = $this->Professor->patchEntity($coordenador, $this->request->getData());
+
+            if ($this->request->is('post')) {
+                $pdf = $this->request->getData('application/pdf');
+                $name = $pdf->getClientFilename();
+                $file = $name->getUploadedFile();
+                $targetPath = "webroot/documents/".$file;
+                $pdf->moveTo($targetPath);
+            }
+    }
+
+
+    public function logout($id = null)
+    {
         return $this->redirect(([
             'controller' => 'Login',
-            'action' => 'logout'
+            'action' => 'login'
         ]));
     }
 }

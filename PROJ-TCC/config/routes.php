@@ -55,6 +55,7 @@ $routes->scope('/', function (RouteBuilder $builder) {
     
     //$builder->connect('/', ['controller' => 'Login', 'action' =>'login']);
     //$builder->connect('/:coordenador/#',['controller'=>'Coordenador', 'action' => 'addp']);
+    $builder->connect('/',['controller' => 'Login', 'action' => 'index']);
     $builder->connect('/',['controller' => 'Coordenador', 'action' => 'index']);
     $builder->connect('/',['controller' => 'Professor', 'action' => 'index']);
     $builder->connect('/',['controller' => 'Aluno', 'action' => 'index']);

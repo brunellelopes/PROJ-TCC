@@ -40,9 +40,7 @@ class LoginTable extends Table
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
-        $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
-        ]);
+        //$this->belongsTo('Users');
     }
 
     /**

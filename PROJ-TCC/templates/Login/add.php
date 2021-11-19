@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Login $Login
+ * @var \App\Model\Entity\Login $login
  */
 ?>
 <div class="row">
@@ -12,7 +12,7 @@
         </div>
     </aside>
     <div class="column-responsive column-80">
-        <div class="Login form content">
+        <div class="login form content">
             <?= $this->Form->create($login) ?>
             <fieldset>
                 <legend><?= __('Add Login') ?></legend>

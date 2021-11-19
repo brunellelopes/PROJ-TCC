@@ -6,7 +6,6 @@
 ?>
 <div class="login index content">
     <?= $this->Html->link(__('New Login'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <?= $this->Html->Link(('Retornar ao Login'),['controller' => 'Login' ,'action'=>'logout'],['class' => 'button float-right']) ?>
     <h3><?= __('Login') ?></h3>
     <div class="table-responsive">
         <table>

@@ -76,16 +76,17 @@ class AppController extends Controller
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('Auth', [
-            'authorize' => 'Controller',
             'authenticate' => [
                 'Basic' => [
-                'Form' => [
                     'fields' => [
-                        'username' => 'login', 'password' => 'password',
+                        'login' => 'login', 'password' => 'password',
                         'userModel' => 'Login'
-                    ],
-                ]
+                ],
             ],
+        ],
+        'loginRedirect' =>[
+            'controller' => 'Login',
+            'action' => 'index'
         ],
         'logoutRedirect' => [
             'controller' => 'Login',
@@ -96,7 +97,7 @@ class AppController extends Controller
             'element' => 'error'
             ]
         ]);
-        $this->Auth->allow(['login', 'index', 'add']);
+        $this->Auth->allow(['login','index']);
         // Permite a ação display, assim nosso pages controller
         // continua a funcionar.
         /*

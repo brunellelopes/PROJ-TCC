@@ -48,12 +48,17 @@
             <div class="dropdown-divider"></div>
                 <div id="envios">
                 Enviar documento
-                <label for="addFile" class="btn btn-primary btn-sm">Enviar documento</label>
-                <input type="file" name="documents" id="addFile" >
-                <br>
-                <br>
-                <a href="#" class="btn btn-danger btn-sm" role="button" type="Reset">Limpar</a>
-                <a href="#" class="btn btn-success btn-sm" role="button" type="submit">Enviar</a>
+                <?= $this->Form->create($aluno, ['type' => 'file']) ?>
+                    <div class="dropdown-divider"></div>
+                    <?php echo $this->Form->file('file',
+                        ['label'=>'addFile',
+                            'class'=>'btn btn-primary btn-sm',
+                            'type' => 'file', 
+                            'accept' => ['application/pdf']]); ?>
+                    <br />
+                    <?php echo $this->Form->button('Enviar', ['class' => 'btn btn-success btn-sm'], ['action' => 'upload']) ?>
+                    <?php echo $this->Form->button('Reset', ['class' => 'btn btn-danger btn-sm']) ?>
+                    <?= $this->Form->end(); ?>
             </div>
             <br />
                 <div id="status">
@@ -69,11 +74,13 @@
             <br />
                 <section>
                 <!--Placeholder para apresentação-->
-                    <p id="professorFeed">Orientador: Documentação revisada. </p>
+                    <p id="professorFeed"> Ainda em implementação </p>
                 </section>
+                <?= $this->Form->create() ?>
                 <div class="dropdown-divider"></div>
-                <textarea id="comments" placeholder="Insira seu comentário..."></textarea>
-                <button class="btn btn-success btn-lg" id="enviarcomentario">Enviar</button>
+                <?php echo $this->Form->textarea('Insira seu comentário...', ['id' => 'comments', 'placeholder'=>'Insira seu comentário...' ]); ?>
+                <?php echo $this->Form->button('Enviar', ['class' => 'btn btn-success btn-lg'], ['action' => 'upload']) ?>
+                <?= $this->Form->end() ?>
             </div>
         <div class="col-md-2" id="final">
             <br />

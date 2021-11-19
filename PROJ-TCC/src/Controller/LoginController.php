@@ -39,7 +39,7 @@ class LoginController extends AppController
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
-                return $this->redirect(['controller' => 'Coordenador', 'action' => 'index']);
+                $this->redirect(['controller' => 'Login', 'action' => 'index']);
             } else {
                 $this->Flash->error('Usuario ou senha incorretos.');
             }
