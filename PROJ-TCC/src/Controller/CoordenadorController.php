@@ -133,8 +133,6 @@ class CoordenadorController extends AppController
 
     public function addp()
     {
-        $professor = $this->loadModel('Professor');
-        $login = $this->loadModel('Login');
         $professor = $this->Professor->newEmptyEntity();
         if ($this->request->is('post')) { //Registra o evento de post para enviar os dados pro banco
             $professor = $this->Professor->patchEntity($professor, $this->request->getData());
@@ -167,14 +165,15 @@ class CoordenadorController extends AppController
         $this->set(compact('professor'));
     }
 
-    public function adda($id = null)
+    public function adda()
     {
-        $aluno = $this->loadModel('Aluno');
-        $login = $this->loadModel('Login');
         $aluno = $this->Aluno->newEmptyEntity();
+        $login = $this->Login->newEmptyEntity();
         if ($this->request->is('post')) {
-            $professor = $this->Aluno->patchEntity($aluno, $this->request->getData());
-            if ($this->Aluno->save($aluno)) {
+            $aluno = $this->Aluno->patchEntity($aluno, $this->request->getData());
+            $login = $this->Aluno->patchEntity($login, $this->request->getData());
+            if ($this->Aluno->save($aluno) && $this->Login->save($login)) {
+                $this->Flash->success(__('The aluno has been saved.'));
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The Aluno could not be saved. Please, try again.'));
@@ -225,20 +224,6 @@ class CoordenadorController extends AppController
             }
         }
         $this->set(compact('projeto'));
-    }
-
-    public function upload($coordenador)
-    {
-        //$files = $this->request->getData('attachments');
-        $coordenador = $this->Professor->patchEntity($coordenador, $this->request->getData());
-
-            if ($this->request->is('post')) {
-                $pdf = $this->request->getData('application/pdf');
-                $name = $pdf->getClientFilename();
-                $file = $name->getUploadedFile();
-                $targetPath = "webroot/documents/".$file;
-                $pdf->moveTo($targetPath);
-            }
     }
 
 

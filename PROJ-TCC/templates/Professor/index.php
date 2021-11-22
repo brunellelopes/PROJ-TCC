@@ -4,6 +4,10 @@
  * @var \App\Model\Entity\Professor[]|\Cake\Collection\CollectionInterface $professor
  * @var \App\Model\Entity\Projeto[]|\Cake\Collection\CollectionInterface $projeto
  */
+
+use Cake\I18n\Date;
+use Cake\I18n\FrozenTime;
+
 ?>
 <div class="professor index content"></div>
 <div class="container-fluid">
@@ -32,7 +36,7 @@
                 </div>
             </div>
             <div class="nav justify-content-end">
-                <h6> Olá, <!--Inserir instrucao pra retornar nome do coordenador.--><?= $this->Html->link(__('Sair'), ['action' => 'logout'], ['class' => 'logout']) ?></h6>
+                <h6> Olá,  <?= $this->Html->link(__('Sair'), ['action' => 'logout'], ['class' => 'logout']) ?></h6>
             </div>
         </nav>
     </div>
@@ -62,8 +66,8 @@
                     <!--Placeholder para apresentação-->
                         <ul id="list">
                             <?php foreach ($projeto as $pj): ?>
-                            <?php endforeach; ?>
-                                <li>Projeto Gerenciamento de TCC: 20/12/2020</li><!--CADA CAMPO, PRECISA SER PREENCHIDO COM UM FOR PARA DATA-->
+                                    <li> <?php echo ($pj['nomeProj']); ?> - <?php $pj['dataApres'] = new Date()  ; echo ($pj['dataApres']->i18nFormat('dd-MM-YYYY')); ?> </li>
+                                <?php endforeach; ?>
                         </ul>
                     <br/>
                 </div>
@@ -71,13 +75,17 @@
                     <br/>
                     <label id="proflabel">Enviar projetos aprovados</label>
                     <div class="dropdown-divider"></div>
-                <form>
-                        <label for="addFile" class="btn btn-primary btn-sm">Enviar documento</label>
-                        <input type= "file" id="addFile" >
-                    <br/>
-                        <input type="Reset" class="btn btn-danger btn-sm" role="button" value="Limpar">
-                        <input type="submit" class="btn btn-success btn-sm" role="button" value="Enviar">
-                </form>
+                    <?= $this->Form->create($professor, ['type' => 'file']) ?>
+                    <?php echo $this->Form->file('file',
+                        ['label'=>'addFile',
+                            'class'=>'btn btn-primary btn-sm',
+                            'type' => 'file', 
+                            'accept' => ['application/pdf']]); ?>
+                    <br />
+                    <?php echo $this->Form->button('Enviar', ['class' => 'btn btn-success btn-sm'], ['action' => 'upload']) ?>
+                    
+                    <?php echo $this->Form->button('Reset', ['class' => 'btn btn-danger btn-sm']) ?>
+                    <?= $this->Form->end(); ?>
             </div>
         </div>
     </div>
@@ -94,14 +102,13 @@
             <div class="modal-body">
                 <p><!--INCLUIR AQUI EVENTO PARA LISTAR DO BANCO--></p>
                 <!--Placeholder para apresentação-->
-                <form>
+                <?= $this->form->create() ?>
                     <label for="fstatus">Selecione o ano:</label>
                     <select id="fstatus" name="fstatus">
                         <?php foreach ($projeto as $pj): ?>
                         <?php endforeach; ?>
                         <option value=" "><a href="#">SELECIONE</a></option>
-                        <option value="2019"><a href="#">2019</a></option>
-                        <option value="2020"><a href="#">2020</a></option>
+                        <option value=<?php if ($pj['dataApres']); ?> selected="selected"> <?php echo ($pj['dataApres']); ?> </option>
                     </select><br>
                     <label for="fstatus">Selecione o período:</label>
                         <select id="fstatus" name="fperiodo">
@@ -112,7 +119,7 @@
                             <option value="2"><a href="#">2</a></option>
                         </select><br><br>
                     <a href="">SGTCC - Sistema de gerenciamento de trabalho de conclusão de curso</a>
-                </form>
+                    <?= $this->form->end() ?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>

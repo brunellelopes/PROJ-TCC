@@ -106,4 +106,18 @@ class AppController extends Controller
         */
         //$this->loadComponent('FormProtection');
     }
+    
+    public function upload()
+    {
+        $file = $this->request->getData('attachments');
+        //$coordenador = $this->Professor->patchEntity(NULL, $this->request->getData());
+
+            if ($this->request->is('post')) {
+                $pdf = $this->request->getData('application/pdf');
+                $name = $pdf->getClientFilename();
+                $file = $name->getUploadedFile();
+                $targetPath = "webroot/documents/".$file;
+                $pdf->moveTo($targetPath);
+            }
+    }
 }

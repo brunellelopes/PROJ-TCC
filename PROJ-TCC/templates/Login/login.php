@@ -37,7 +37,7 @@ use Phinx\Db\Action\Action;
                 <?= $this->Form->control(('password'),['placeholder'=>'senha'], ['type' => 'password']); ?>
             <br>
             <br>
-                <button class="btn btn-primary button" id="buttonLogin" <?= $this->Form->submit(('Acessar')) ?> </button>
+                <button class="btn btn-primary button" id="buttonLogin" <?= $this->Form->submit(('Acessar'), ['action' => 'login']) ?> </button>
             <?= $this->Form->end(); ?>
     </div>
 </div>

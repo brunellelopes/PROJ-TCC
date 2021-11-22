@@ -90,13 +90,4 @@ class AlunoTable extends Table
 
         return $validator;
     }
-
-    public function findAuth(\Cake\ORM\Query $query, array $options)
-    {
-        $query
-            ->select(['id', 'login', 'password', 'cdAccount'])
-            ->where(['Login.active' => 1]);
-    
-        return $query;
-    }
 }

@@ -3,9 +3,9 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Coordenador[]|\Cake\Collection\CollectionInterface $coordenador
- * @var \App\Model\Entity\Professor[]|\Cake\Collection\CollectionInterface $professor
  * @var \App\Model\Entity\Aluno[]|\Cake\Collection\CollectionInterface $aluno
  * @var \App\Model\Entity\Professor $professor
+ * @var \App\Model\Entity\Aluno $aluno
 
  */
 
@@ -176,19 +176,19 @@
                         <!--INCLUIR AQUI EVENTO PARA LISTAR DO BANCO-->
                     </p>
                     <!--placeholder será alterado-->
-                    <form>
-                        <label for="fsmatricula">Matrícula:</label>
-                        <input type="text" id="fsmatricula" name="fsmatricula"><br>
-                        <label for="fsnomecompleto">Nome completo:</label>
-                        <input type="text" id="fsnomecompleto" name="fsnomecompleto"><br>
-                        <label for="fslogin">Login:</label>
-                        <input type="text" id="fslogin" name="fsogin"><br>
-                        <label for="fssenha">Senha:</label>
-                        <input type="password" id="fssenha" name="fssenha"><br>
-                        <label for="fsemail">Email:</label>
-                        <input type="text" id="fsemail" name="fsemail"><br><br>
-                        <input type="submit" class="btn btn-success" value="Salvar">
-                    </form>
+                        <?= $this->Form->create($aluno) ?>
+                        <fieldset>
+                            <?php 
+                                echo $this->Form->control('matAluno', ['placeholder' => 'Matricula', 'type' => 'number', 'id' => 'fsmatricula']);
+                                echo $this->Form->control('nomeAluno', ['placeholder' => 'Nome completo', 'type' => 'text', 'id' => 'fsnomecompleto']);
+                                echo $this->Form->control('loginAluno', ['placeholder' => 'Login', 'type' => 'text', 'id' => 'fslogin']);
+                                echo $this->Form->control('senhaAluno', ['placeholder' => 'Nova senha', 'type' => 'password', 'id' => 'fssenha']);
+                                echo $this->Form->control('emailAluno', ['placeholder' => 'Email', 'type' => 'text', 'id' => 'fsemail']); 
+                                echo $this->Form->control('cdAccount'); 
+                            ?>
+                        </fieldset>
+                        <?= $this->Form->button('Salvar', ['class' => 'btn btn-success btn-sm'],['type'=> 'submit'], ['action' => 'adda']) ?>
+                        <?= $this->Form->end() ?>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -218,7 +218,7 @@
                     echo $this->Form->control(('emailProf'), ['placeholder' => 'Email', 'type' => 'text', 'id' => 'femail']);
                     echo $this->Form->control('cdAccount');
                     ?>
-                    <?= $this->Html->link(__('Salvar'), ['action' => 'addp'], ['class' => 'btn btn-success']) ?>
+                    <?= $this->Form->button(__('Salvar'), ['action' => 'addp'], ['class' => 'btn btn-success']) ?>
                     <?= $this->Form->end(); ?>
                 </div>
                 <div class="modal-footer">
