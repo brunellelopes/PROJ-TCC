@@ -2,11 +2,6 @@
 declare(strict_types=1);
 
 namespace App\Model\Entity;
-use Cake\Validation\Validator;
-use Cake\ORM\Locator\LocatorInterface;
-use Cake\ORM\TableRegistry;
-use Cake\Auth\DefaultPasswordHasher;
-
 
 use Cake\ORM\Entity;
 
@@ -43,11 +38,4 @@ class Login extends Entity
     protected $_hidden = [
         'password',
     ];
-
-    protected function _setPassword($password)
-    {
-        if (strlen($password) > 0) {
-            return (new DefaultPasswordHasher)->hash($password);
-        }
-    }
 }

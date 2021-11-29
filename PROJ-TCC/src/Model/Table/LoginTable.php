@@ -7,6 +7,9 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Auth\DefaultPasswordHasher;
+use Cake\ORM\Entity;
+
 /**
  * Login Model
  *
@@ -36,11 +39,9 @@ class LoginTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('Login');
+        $this->setTable('login');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
-
-        //$this->belongsTo('Users');
     }
 
     /**
@@ -73,6 +74,23 @@ class LoginTable extends Table
             ->requirePresence('cdAccount', 'create')
             ->notEmptyString('cdAccount');
 
+            $validator
+            ->scalar('nome')
+            ->maxLength('nome', 50)
+            ->requirePresence('nome', 'create')
+            ->notEmptyString('nome');
+
+        $validator
+            ->scalar('email')
+            ->maxLength('email', 40)
+            ->requirePresence('email', 'create')
+            ->notEmptyString('email');
+
+        $validator
+            ->scalar('cel')
+            ->maxLength('cel', 11)
+            ->allowEmptyString('cel');
+
         return $validator;
     }
 
@@ -90,12 +108,11 @@ class LoginTable extends Table
         return $rules;
     }
 
-    public function findAuth(\Cake\ORM\Query $query, array $options)
-{
-    $query
-        ->select(['id', 'login', 'password', 'cdAccount'])
-        ->where(['Login.active' => 1]);
+    protected function _setPassword($password)
+    {
+        if (strlen($password) > 0) {
+            return (new DefaultPasswordHasher)->hash($password);
+        }
+    }
 
-    return $query;
-}
 }

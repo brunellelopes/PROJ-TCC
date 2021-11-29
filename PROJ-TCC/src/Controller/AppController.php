@@ -97,7 +97,7 @@ class AppController extends Controller
             'element' => 'error'
             ]
         ]);
-        $this->Auth->allow(['login','index']);
+        $this->Auth->allow(['login','index', 'addp']);
         // Permite a ação display, assim nosso pages controller
         // continua a funcionar.
         /*
@@ -109,9 +109,8 @@ class AppController extends Controller
     
     public function upload()
     {
+        //Dividir por subpastas 
         $file = $this->request->getData('attachments');
-        //$coordenador = $this->Professor->patchEntity(NULL, $this->request->getData());
-
             if ($this->request->is('post')) {
                 $pdf = $this->request->getData('application/pdf');
                 $name = $pdf->getClientFilename();

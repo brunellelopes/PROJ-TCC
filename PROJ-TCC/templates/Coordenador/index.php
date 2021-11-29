@@ -176,18 +176,18 @@
                         <!--INCLUIR AQUI EVENTO PARA LISTAR DO BANCO-->
                     </p>
                     <!--placeholder será alterado-->
-                        <?= $this->Form->create($aluno) ?>
+                        <?= $this->Form->create(NULL, ['url' =>['action' => 'adda']]) ?>
                         <fieldset>
                             <?php 
-                                echo $this->Form->control('matAluno', ['placeholder' => 'Matricula', 'type' => 'number', 'id' => 'fsmatricula']);
-                                echo $this->Form->control('nomeAluno', ['placeholder' => 'Nome completo', 'type' => 'text', 'id' => 'fsnomecompleto']);
-                                echo $this->Form->control('loginAluno', ['placeholder' => 'Login', 'type' => 'text', 'id' => 'fslogin']);
-                                echo $this->Form->control('senhaAluno', ['placeholder' => 'Nova senha', 'type' => 'password', 'id' => 'fssenha']);
-                                echo $this->Form->control('emailAluno', ['placeholder' => 'Email', 'type' => 'text', 'id' => 'fsemail']); 
+                                echo $this->Form->control('mat', ['placeholder' => 'Matricula', 'type' => 'number', 'id' => 'fsmatricula']);
+                                echo $this->Form->control('nome', ['placeholder' => 'Nome completo', 'type' => 'text', 'id' => 'fsnomecompleto']);
+                                echo $this->Form->control('login', ['placeholder' => 'Login', 'type' => 'text', 'id' => 'fslogin']);
+                                echo $this->Form->control('password', ['placeholder' => 'Nova senha', 'type' => 'password', 'id' => 'fssenha']);
+                                echo $this->Form->control('email', ['placeholder' => 'Email', 'type' => 'text', 'id' => 'fsemail']); 
                                 echo $this->Form->control('cdAccount'); 
                             ?>
                         </fieldset>
-                        <?= $this->Form->button('Salvar', ['class' => 'btn btn-success btn-sm'],['type'=> 'submit'], ['action' => 'adda']) ?>
+                        <?= $this->Form->button('Salvar', ['class' => 'btn btn-success btn-sm'],['type'=> 'submit']) ?>
                         <?= $this->Form->end() ?>
                 </div>
                 <div class="modal-footer">
@@ -210,15 +210,18 @@
                         <!--INCLUIR AQUI EVENTO PARA LISTAR DO BANCO-->
                     </p>
                     <!--placeholder será alterado-->
-                    <?= $this->Form->create($professor) ?>
-                    <?php
-                    echo $this->Form->control(('loginProf'), ['placeholder' => 'Login', 'type' => 'text', 'id' => 'flogin']);
-                    echo $this->Form->control(('senhaProf'), ['placeholder' => 'Senha', 'type' => 'password', 'id' => 'fsenha']);
-                    echo $this->Form->control(('nomeProf'), ['placeholder' => 'Nome completo', 'type' => 'text', 'id' => 'fnomecompleto']);
-                    echo $this->Form->control(('emailProf'), ['placeholder' => 'Email', 'type' => 'text', 'id' => 'femail']);
-                    echo $this->Form->control('cdAccount');
-                    ?>
-                    <?= $this->Form->button(__('Salvar'), ['action' => 'addp'], ['class' => 'btn btn-success']) ?>
+                    <?= $this->Form->create(NULL, ['url' =>['action' => 'addp']]) ?>
+                    <fieldset>
+                        <?php
+                            echo $this->Form->control(('login' ), ['placeholder' => 'Login', 'type' => 'text', 'id' => 'flogin']);
+                            echo $this->Form->control(('senha' ), ['placeholder' => 'Senha', 'type' => 'password', 'id' => 'fsenha']);
+                            echo $this->Form->control(('nome' ), ['placeholder' => 'Nome completo', 'type' => 'text', 'id' => 'fnomecompleto']);
+                            echo $this->Form->control(('email' ), ['placeholder' => 'Email', 'type' => 'text', 'id' => 'femail']);
+                            echo $this->Form->control(('cel' ), ['placeholder' => 'Celular', 'type' => 'text', 'id' => 'fcel']);
+                            echo $this->Form->select('cdAccount' , ['empty' => 'Escolha', 1, 2, 3]);
+                        ?>
+                        </fieldset>
+                    <?= $this->Form->button(__('Salvar')) ?>
                     <?= $this->Form->end(); ?>
                 </div>
                 <div class="modal-footer">

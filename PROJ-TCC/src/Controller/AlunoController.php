@@ -107,18 +107,6 @@ class AlunoController extends AppController
         //
     }
 
-    public function addDoc($doc = null){
-        $send = $doc;
-        $file = array($send);
-        //RECEBER O PARAMETRO DO OBJETO A SER ENVIADO
-        //FAZER O ENVIO DO OBJETO PARA O BANCO DE DADOS,OU ENVIAR O NOME PARA O BANCO 
-        //E ARMAZENAR O ARQUIVO EM UM LOCAL DE ARMAZENAMENTO
-        if($send->file_exists($file) == false){
-            //Envia diretamente pro servidor
-        }else{
-            //Comando de sobreescrever 
-        }
-    }
 
     public function viewDocs($obj = null){
         $doc = $obj;

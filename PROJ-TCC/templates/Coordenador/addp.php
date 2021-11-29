@@ -12,16 +12,16 @@
         </div>
     </aside>
     <div class="column-responsive column-80">
-        <div class="professor form content">
-            <?= $this->Form->create($professor) ?>
+        <div class="login form content">
+            <?= $this->Form->create() ?>
             <fieldset>
                 <legend><?= __('Add Professor') ?></legend>
                 <?php
-                    echo $this->Form->control('loginProf');
-                    echo $this->Form->control('senhaProf');
-                    echo $this->Form->control('nomeProf');
-                    echo $this->Form->control('emailProf');
-                    echo $this->Form->control('celProf');
+                    echo $this->Form->control('login');
+                    echo $this->Form->control('password');
+                    echo $this->Form->control('nome');
+                    echo $this->Form->control('email');
+                    echo $this->Form->control('cel');
                     echo $this->Form->control('cdAccount');
                 ?>
             </fieldset>

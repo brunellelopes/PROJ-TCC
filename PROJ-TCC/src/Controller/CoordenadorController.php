@@ -133,18 +133,30 @@ class CoordenadorController extends AppController
 
     public function addp()
     {
-        $professor = $this->Professor->newEmptyEntity();
-        if ($this->request->is('post')) { //Registra o evento de post para enviar os dados pro banco
-            $professor = $this->Professor->patchEntity($professor, $this->request->getData());
-            //variavel professor recebeu os dados do formulario por meio do request ser post 
-            if ($this->Login->save($this->Professor['loginProf'])) {
-                //$this->Flash->success(__('The professor has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+        $querys = TableRegistry::getTableLocator()->get('Professor');
+        $login = $this->loadModel('Login');
+        $login = $this->Login->newEmptyEntity();
+        if ($this->request->is('post')) {
+            //Registra o evento de post para enviar os dados pro banco
+            $login = $this->Login->patchEntity($login, $this->request->getData());
+            if ($this->Login->save($login)) {
+                $professor = $querys->query();
+                $professor->insert(
+                    ['loginProf', 'senhaProf', 'nomeProf', 'emailProf', 'celProf', 'cdAccount'])
+                    ->values([
+                        'loginProf' => $login['login'],
+                        'senhaProf' => $login['password'],
+                        'nomeProf' =>  "nome",
+                        'emailProf' => "email",
+                        'celProf' => "cel",
+                        'cdAccount' => 2
+                        ])->execute();
+                $this->Flash->success(__('O professor foi salvo com sucesso.'));
+                return $this->redirect(['Controller' => 'coordenador','action' => 'index']);
             }
-            $this->Flash->error(__('The professor could not be saved. Please, try again.'));
+            $this->Flash->error(__('O professor não pode ser salvo em nossa base de dados. Por favor, tente novamente.'));
         }
-        $this->set(compact('professor'));
+        $this->set(compact('login'));
     }
 
     public function editp($id = null)
@@ -154,10 +166,9 @@ class CoordenadorController extends AppController
         $professor = $this->Professor->get($id, [
             'contain' => [],
         ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
+        if ($this->request->is('post')) {
             $professor = $this->Professor->patchEntity($professor, $this->request->getData());
             if ($this->Professor->save($professor)) {
-                $this->Professor->save($professor);
                 $this->Login->save($login);
                 return $this->redirect(['action' => 'index']);
             }
@@ -167,18 +178,30 @@ class CoordenadorController extends AppController
 
     public function adda()
     {
-        $aluno = $this->Aluno->newEmptyEntity();
+        $querys = TableRegistry::getTableLocator()->get('Aluno');
+        $login = $this->loadModel('Login');
         $login = $this->Login->newEmptyEntity();
         if ($this->request->is('post')) {
-            $aluno = $this->Aluno->patchEntity($aluno, $this->request->getData());
-            $login = $this->Aluno->patchEntity($login, $this->request->getData());
-            if ($this->Aluno->save($aluno) && $this->Login->save($login)) {
-                $this->Flash->success(__('The aluno has been saved.'));
-                return $this->redirect(['action' => 'index']);
+            //Registra o evento de post para enviar os dados pro banco
+            $login = $this->Login->patchEntity($login, $this->request->getData());
+            if ($this->Login->save($login)) {
+                $aluno = $querys->query();
+                $aluno->insert(
+                    ['loginAluno', 'senhaAluno','matAluno', 'nomeAluno', 'emailAluno', 'cdAccount'])
+                    ->values([
+                        'loginAluno' => $login['login'],
+                        'senhaAluno' => $login['password'],
+                        'matAluno' =>  "123456789",
+                        'nomeAluno' => "Aluno sample",
+                        'emailAluno' => "sample@samplemail.com",
+                        'cdAccount' => 3
+                        ])->execute();
+                $this->Flash->success(__('O aluno foi salvo com sucesso.'));
+                return $this->redirect(['Controller' => 'coordenador','action' => 'index']);
             }
-            $this->Flash->error(__('The Aluno could not be saved. Please, try again.'));
+            $this->Flash->error(__('O Aluno não pode ser salvo em nossa base de dados. Por favor, tente novamente.'));
         }
-        $this->set(compact('aluno'));
+        $this->set(compact('login'));
     }
 
     public function edita($id = null)
