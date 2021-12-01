@@ -214,15 +214,15 @@
                     <fieldset>
                         <?php
                             echo $this->Form->control(('login' ), ['placeholder' => 'Login', 'type' => 'text', 'id' => 'flogin']);
-                            echo $this->Form->control(('senha' ), ['placeholder' => 'Senha', 'type' => 'password', 'id' => 'fsenha']);
+                            echo $this->Form->control(('password' ), ['placeholder' => 'Senha', 'type' => 'password', 'id' => 'fsenha']);
                             echo $this->Form->control(('nome' ), ['placeholder' => 'Nome completo', 'type' => 'text', 'id' => 'fnomecompleto']);
                             echo $this->Form->control(('email' ), ['placeholder' => 'Email', 'type' => 'text', 'id' => 'femail']);
                             echo $this->Form->control(('cel' ), ['placeholder' => 'Celular', 'type' => 'text', 'id' => 'fcel']);
-                            echo $this->Form->select('cdAccount' , ['empty' => 'Escolha', 1, 2, 3]);
+                            echo $this->Form->select('cdAccount' , ['empty' => 'Escolha', '1'=> 'Coordenador','2' => 'Professor', '3'=> 'Aluno']);
                         ?>
                         </fieldset>
-                    <?= $this->Form->button(__('Salvar')) ?>
-                    <?= $this->Form->end(); ?>
+                        <?= $this->Form->button('Salvar', ['class' => 'btn btn-success btn-sm'],['type'=> 'submit']) ?>                    
+                        <?= $this->Form->end(); ?>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -244,7 +244,27 @@
                         <!--INCLUIR AQUI EVENTO PARA LISTAR DO BANCO-->
                     </p>
                     <!--placeholder será alterado-->
-                    <form>
+                    <?= $this->Form->create(NULL, ['url' =>['action' => 'addpj']]) ?>
+                    <fieldset>
+                        <?php
+                        //Ultimo formulario que falta de insert
+                            echo $this->Form->select('loginProf');
+                            echo $this->Form->control(('cdCoord' ), ['placeholder' => 'Login do coordenador', 'type' => 'text', 'id' => '']);
+                            echo $this->Form->control(('cdAluno' ), ['placeholder' => 'Login do aluno 1', 'type' => 'text', 'id' => 'floginAluno1']);
+                            echo $this->Form->control(('cdAluno2' ), ['placeholder' => 'Login do aluno 2', 'type' => 'text', 'id' => 'floginAluno2']);
+                            echo $this->Form->control(('cdAluno3' ), ['placeholder' => 'Login do aluno 3', 'type' => 'text', 'id' => 'floginAluno3']);
+                            echo $this->Form->control(('cdAluno4' ), ['placeholder' => 'Login do aluno 4', 'type' => 'text', 'id' => 'floginAluno4']);
+                            echo $this->Form->control(('nomeProj' ), ['placeholder' => 'Nome do projeto', 'type' => 'text', 'id' => 'fnomeProj']);
+                            echo $this->Form->control(('descProj' ), ['placeholder' => 'Descrição', 'type' => 'text', 'id' => 'fdescproj']);
+                            echo $this->Form->date(('dtInicio' ), ['placeholder' => 'Data de inicio', 'type' => 'date', 'id' => 'fstartdate']);
+                            echo $this->Form->date(('dtFim' ), ['placeholder' => 'Data final', 'type' => 'date', 'id' => 'fenddate']);
+                            echo $this->Form->date(('dtApres' ), ['placeholder' => 'Data de apresentção', 'type' => 'date', 'id' => 'fapresdate']);
+                            echo $this->Form->select('statusProj' , ['empty' => 'Escolha', '1'=> 'Em andamento','2' => 'Concluído: Aguardando apresentação a banca', '3'=> 'Aprovado', '4' => 'Reprovado']);
+                        ?>
+                        </fieldset>
+                        <?= $this->Form->button('Salvar', ['class' => 'btn btn-success btn-sm'],['type'=> 'submit']) ?>                    
+                        <?= $this->Form->end(); ?>
+                    <!-- <form>
                         <label for="floginProfessor">Login professor:</label>
                         <input type="text" id="floginProfessor" name="floginProfessor"><br>
 
@@ -284,7 +304,7 @@
                             <option value="concluido-reprovado"><a href="#">Reprovado</a></option>
                         </select><br><br>
                         <input type="submit" class="btn btn-success" value="Salvar">
-                    </form>
+                    </form> -->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>

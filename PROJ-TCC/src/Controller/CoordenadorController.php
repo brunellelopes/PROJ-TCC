@@ -170,7 +170,7 @@ class CoordenadorController extends AppController
             $professor = $this->Professor->patchEntity($professor, $this->request->getData());
             if ($this->Professor->save($professor)) {
                 $this->Login->save($login);
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['Controller' => 'coordenador','action' => 'index']);
             }
         }
         $this->set(compact('professor'));
@@ -191,13 +191,13 @@ class CoordenadorController extends AppController
                     ->values([
                         'loginAluno' => $login['login'],
                         'senhaAluno' => $login['password'],
-                        'matAluno' =>  "123456789",
-                        'nomeAluno' => "Aluno sample",
-                        'emailAluno' => "sample@samplemail.com",
+                        'matAluno' =>  $login['mat'],
+                        'nomeAluno' => $login['nome'],
+                        'emailAluno' => $login['email'],
                         'cdAccount' => 3
                         ])->execute();
                 $this->Flash->success(__('O aluno foi salvo com sucesso.'));
-                return $this->redirect(['Controller' => 'coordenador','action' => 'index']);
+                return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('O Aluno não pode ser salvo em nossa base de dados. Por favor, tente novamente.'));
         }

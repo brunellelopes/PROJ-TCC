@@ -18,7 +18,13 @@
     function PopupD(){
         $("#modald").modal({
             show:true
-        });
+        })
+        // $(document).ready(function(){
+        //     $('#manda').click(function(){
+        //         $.post("http://"+localhost+"/coordenador/addp/");
+        //     });
+        // });
+        ;
     }
     function PopupE(){
         $("#modale").modal({

@@ -97,7 +97,7 @@ class AppController extends Controller
             'element' => 'error'
             ]
         ]);
-        $this->Auth->allow(['login','index', 'addp']);
+        $this->Auth->allow(['login','index', 'addp', 'adda']);
         // Permite a ação display, assim nosso pages controller
         // continua a funcionar.
         /*
