@@ -9,7 +9,7 @@
             <div id="particles-container"> </div>
             <div class="wrapper">
                 <nav class="navbar navbar-expand navbar-light bg-light" >
-                    <a class="navbar-brand pull-right" ><img src= <?=$this->Html->image('logo-feuc-site.png', ['url'=>'#'], ['id'=>'brand-logo']);?>></a>
+                    <?=$this->Html->image('logo-feuc-site.png', ['class' => 'navbar-brand pull-right'], ['url'=>'#'], ['id'=>'brand-logo']);?>
                     <hr/>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>

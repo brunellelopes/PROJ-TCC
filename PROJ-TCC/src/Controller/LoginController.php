@@ -4,26 +4,36 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Datasource\EntityInterface;
+use Cake\Datasource\FactoryLocator;
+use Cake\ORM\Locator\LocatorAwareTrait;
 use App\Model\Entity\Login;
 use Cake\Core\Configure;
+use Cake\ORM\TableRegistry;
 use Cake\Event\EventInterface;
 use Cake\Http\Exception\ForbiddenException;
 use Cake\Http\Exception\NotFoundException;
 use Cake\Http\Response;
+use Cake\ORM\Locator\TableLocator;
 use Cake\View\Exception\MissingTemplateException;
+use Cake\ORM\Table;
+
 
 use function PHPSTORM_META\type;
 
 /**
  * Application Controller and Login Controller
  *
- * @property \App\Model\Table\CoordenadorTable $coordenador
- * @property \App\Model\Table\ProfessorTable $professor
- * @property \App\Model\Table\loginTable $login
+ * @property \App\Model\Table\CoordenadorTable $Coordenador
+ * @property \App\Model\Table\AlunoTable $Aluno
+ * @property \App\Model\Table\ProfessorTable $Professor
+ * @property \App\Model\Table\ProjetoTable $Projeto
+ * @property \App\Model\Table\LoginTable $Login
  * @method \App\Model\Entity\Login[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  * @method \App\Model\Entity\Coordenador[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  * @method \App\Model\Entity\Professor[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
-
+ * @method \App\Model\Entity\Aluno[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+*/
 /**
  */
 class LoginController extends AppController
@@ -35,6 +45,13 @@ class LoginController extends AppController
      */
     public function login()
     {
+        $login = $this->paginate($this->Login);
+        $this->set(compact('login'));
+        $queryLogin = TableRegistry::getTableLocator()->get('Login');
+        $queryAluno = TableRegistry::getTableLocator()->get('Aluno');
+        $queryProfessor = TableRegistry::getTableLocator()->get('Professor');
+        $queryCoordenador = TableRegistry::getTableLocator()->get('Coordenador');
+        $ids = [1,2,3];
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
@@ -66,7 +83,7 @@ class LoginController extends AppController
         //Verifica se ocorreu erro de autenticaçao
         if (!$this->Auth->user()) {
             $this->Auth->setConfig('authError', false);
-            $this->Auth->setConfig('authError', "Oops. Você nao tem autorizaçao para acessar essa página.");
+            $this->Auth->setConfig('authError', "Oops. Você não tem autorização para acessar essa página.");
         }
     }
 
@@ -76,7 +93,7 @@ class LoginController extends AppController
         if ($this->request->is('post')) {
             $login = $this->Login->patchEntity($login, $this->request->getData());
             if ($this->Login->save($login)) {
-                $this->Flash->success(__('The login has been saved.'));
+                $this->Flash->success(__('O login foi salvo.'));
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The login could not be saved. Please, try again.'));

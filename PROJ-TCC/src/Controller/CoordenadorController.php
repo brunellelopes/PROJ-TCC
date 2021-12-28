@@ -11,6 +11,7 @@ use Cake\ORM\TableRegistry;
 use Cake\ORM\Query;
 use Cake\Core\App;
 use Cake\ORM\Locator\TableLocator;
+use Cake\I18n\Time;
 
 /**
  * Coordenador Controller
@@ -161,14 +162,22 @@ class CoordenadorController extends AppController
 
     public function editp($id = null)
     {
-        $professor = $this->loadModel('Professor');
+        $querys = TableRegistry::getTableLocator()->get('Professor');
         $login = $this->loadModel('Login');
-        $professor = $this->Professor->get($id, [
+        $login = $this->Professor->get($id, [
             'contain' => [],
         ]);
         if ($this->request->is('post')) {
-            $professor = $this->Professor->patchEntity($professor, $this->request->getData());
-            if ($this->Professor->save($professor)) {
+            $login = $this->Professor->patchEntity($login, $this->request->getData());
+            if ($this->Professor->save($login)) {
+                $professor = $querys->query();
+                $professor->update(
+                    ['nomeProf', 'senhaProf', 'celProf']
+                ) ->values([
+                    'nomeProf' => $login['login'],
+                    'senhaProf' => $login['password'],
+                    'celProf' => $login['cel']
+                ])->execute();
                 $this->Login->save($login);
                 return $this->redirect(['Controller' => 'coordenador','action' => 'index']);
             }
@@ -204,7 +213,7 @@ class CoordenadorController extends AppController
         $this->set(compact('login'));
     }
 
-    public function edita($id = null)
+    public function editA($id = null)
     {
         $aluno = $this->loadModel('Aluno');
         $login = $this->loadModel('Login');
@@ -222,14 +231,33 @@ class CoordenadorController extends AppController
 
     public function addpj($id = null)
     {
+        $query = TableRegistry::getTableLocator()->get('Projeto');
         $projeto = $this->loadModel('Projeto');
         $projeto = $this->Projeto->newEmptyEntity();
         if ($this->request->is('post')) {
             $projeto = $this->Projeto->patchEntity($projeto, $this->request->getData());
             if ($this->Projeto->save($projeto)) {
+                $projeto = $query->query();
+                $projeto->insert(
+                    ['cdProf', 'cdCoord', 'cdAluno', 'cdAluno2', 'cdAluno3'. 'cdAluno4', 'nomeProj', 'descProj',
+                    'dtInicio', 'dtFim', 'dtApres', 'statusProj'])
+                    ->values([
+                        'cdProf' => $projeto['cdProf'],
+                        'cdCoord' => $projeto['cdCoord'],
+                        'cdAluno' => $projeto['cdAluno'],
+                        'cdAluno2' =>  $projeto['cdAluno2'],
+                        'cdAluno3' => $projeto['cdAluno3'],
+                        'cdAluno4' => $projeto['cdAluno4'],
+                        'nomeProj' => $projeto['nomeProj'],
+                        'descProj' => $projeto['descProj'],
+                        'dtInicio' => $projeto['dtInicio']->date,
+                        'dtFim' => $projeto['dtFim']->date,
+                        'dtApres' => $projeto['dtApres']->date,
+                        'statusProj' => $projeto['statusProj']->value,
+                        ])->execute();
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The Aluno could not be saved. Please, try again.'));
+            $this->Flash->error(__('Ocorreu um erro e o projeto não pode ser salvo corretamente. Por favor, verifique os dados.'));
         }
         $this->set(compact('projeto'));
     }

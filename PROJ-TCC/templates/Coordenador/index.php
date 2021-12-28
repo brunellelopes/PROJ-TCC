@@ -9,6 +9,8 @@
 
  */
 
+use App\Model\Entity\Professor;
+
 ?>
 
 
@@ -17,7 +19,7 @@
     <div id="particles-container"></div>
     <div class="wrapper">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <!--<a id="brand-logo"><?= $this->Html->image('logo-png.png'); ?></a>-->
+            <?=$this->Html->image('logo-feuc-site.png', ['class' => 'navbar-brand pull-right'], ['url'=>'#'], ['id'=>'brand-logo']);?>
             <hr />
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -42,8 +44,8 @@
                 </div>
             </div>
             <div class="nav justify-content-end">
-                <h6> Olá,
-                    <!--Inserir instrucao pra retornar nome do coordenador.--><?= $this->Html->link(__('Sair'), ['action' => 'logout'], ['class' => 'logout']) ?>
+                <h6> Olá, $login['login']
+                    <?= $this->Html->link(__('Sair'), ['action' => 'logout'], ['class' => 'logout']) ?>
                 </h6>
             </div>
         </nav>
@@ -246,65 +248,35 @@
                     <!--placeholder será alterado-->
                     <?= $this->Form->create(NULL, ['url' =>['action' => 'addpj']]) ?>
                     <fieldset>
+                        <select id="fstatus" name="fstatus">
+                            <option value=" "><a href="#">SELECIONE</a></option>
+                            <?php foreach ($professor as $p) : ?>
+                                <option value=<?php if (!empty($p['loginProf'] != null)) : echo ($p['cdProf']);
+                                                endif; ?>> <?php echo ($p['nomeProf']); ?> </option>
+                                <?php endforeach; ?>
+                            </select><br>
+                            <select id="fstatus" name="fstatus">
+                            <option value=" "><a href="#">SELECIONE</a></option>
+                            <?php foreach ($coordenador as $c) : ?>
+                                <option value=<?php if (!empty($c['loginCoord'] != null)) : echo ($c['cdCoord']);
+                                                endif; ?>> <?php echo ($c['nomeCoord']); ?> </option>
+                                <?php endforeach; ?>
+                            </select><br>
                         <?php
-                        //Ultimo formulario que falta de insert
-                            echo $this->Form->select('loginProf');
-                            echo $this->Form->control(('cdCoord' ), ['placeholder' => 'Login do coordenador', 'type' => 'text', 'id' => '']);
-                            echo $this->Form->control(('cdAluno' ), ['placeholder' => 'Login do aluno 1', 'type' => 'text', 'id' => 'floginAluno1']);
-                            echo $this->Form->control(('cdAluno2' ), ['placeholder' => 'Login do aluno 2', 'type' => 'text', 'id' => 'floginAluno2']);
-                            echo $this->Form->control(('cdAluno3' ), ['placeholder' => 'Login do aluno 3', 'type' => 'text', 'id' => 'floginAluno3']);
-                            echo $this->Form->control(('cdAluno4' ), ['placeholder' => 'Login do aluno 4', 'type' => 'text', 'id' => 'floginAluno4']);
-                            echo $this->Form->control(('nomeProj' ), ['placeholder' => 'Nome do projeto', 'type' => 'text', 'id' => 'fnomeProj']);
-                            echo $this->Form->control(('descProj' ), ['placeholder' => 'Descrição', 'type' => 'text', 'id' => 'fdescproj']);
-                            echo $this->Form->date(('dtInicio' ), ['placeholder' => 'Data de inicio', 'type' => 'date', 'id' => 'fstartdate']);
-                            echo $this->Form->date(('dtFim' ), ['placeholder' => 'Data final', 'type' => 'date', 'id' => 'fenddate']);
-                            echo $this->Form->date(('dtApres' ), ['placeholder' => 'Data de apresentção', 'type' => 'date', 'id' => 'fapresdate']);
+                            echo $this->Form->control(('cdAluno' ), ['label'=>' Código do aluno 1: ', 'placeholder' => ' Código do aluno 1', 'type' => 'text', 'id' => 'floginAluno1']);
+                            echo $this->Form->control(('cdAluno2' ), ['label'=>' Código do aluno 2: ', 'placeholder' => 'Código do aluno 2', 'type' => 'text', 'id' => 'floginAluno2']);
+                            echo $this->Form->control(('cdAluno3' ), ['label'=>' Código do aluno 3: ','placeholder' => ' Código do aluno 3', 'type' => 'text', 'id' => 'floginAluno3']);
+                            echo $this->Form->control(('cdAluno4' ), ['label'=>' Código do aluno 4: ', 'placeholder' => 'Código do aluno 4', 'type' => 'text', 'id' => 'floginAluno4']);
+                            echo $this->Form->control(('nomeProj' ), ['label'=>' Nome do projeto: ','placeholder' => ' Nome do projeto', 'type' => 'text', 'id' => 'fnomeProj']);
+                            echo $this->Form->control(('descProj' ), ['label'=>' Descrição: ', 'placeholder' => 'Insira a desrição', 'type' => 'text', 'id' => 'fdescproj']);
+                            echo $this->Form->date(('dtInicio' ), ['label'=>'Data de inicio','type' => 'date', 'id' => 'fstartdate']);
+                            echo $this->Form->date(('dtFim' ), ['label'=>  'Data final', 'type' => 'date', 'id' => 'fenddate']);
+                            echo $this->Form->date(('dtApres' ), ['label'=>'Data de apresentção', 'type' => 'date', 'id' => 'fapresdate']);
                             echo $this->Form->select('statusProj' , ['empty' => 'Escolha', '1'=> 'Em andamento','2' => 'Concluído: Aguardando apresentação a banca', '3'=> 'Aprovado', '4' => 'Reprovado']);
                         ?>
                         </fieldset>
                         <?= $this->Form->button('Salvar', ['class' => 'btn btn-success btn-sm'],['type'=> 'submit']) ?>                    
                         <?= $this->Form->end(); ?>
-                    <!-- <form>
-                        <label for="floginProfessor">Login professor:</label>
-                        <input type="text" id="floginProfessor" name="floginProfessor"><br>
-
-                        <label for="floginAluno1">Login aluno 1:</label>
-                        <input type="text" id="floginAluno1" name="floginAluno1"><br>
-
-                        <label for="floginAluno2">Login aluno 2 (opcional):</label>
-                        <input type="text" id="floginAluno2" name="floginAluno2"><br>
-
-                        <label for="floginAluno3">Login aluno 3 (opcional):</label>
-                        <input type="text" id="floginAluno3" name="floginAluno3"><br>
-
-                        <label for="floginAluno4">Login aluno 4 (opcional):</label>
-                        <input type="text" id="floginAluno4" name="floginAluno4"><br>
-
-                        <label for="fnomeProj">Nome do projeto:</label>
-                        <input type="text" id="fnomeProj" name="fnomeProj"><br>
-
-                        <label for="fdescproj">Descrição do projeto:</label>
-                        <input type="text" id="fdescproj" name="fdescproj"><br>
-
-                        <label for="fstartdate">Data de início:</label>
-                        <input type="date" id="fstartdate" name="fstartdate"><br>
-
-                        <label for="fenddate">Data de fim:</label>
-                        <input type="date" id="fstartdate" name="fstartdate"><br>
-
-                        <label for="fapresdate">Data de apresentação:</label>
-                        <input type="date" id="fapresdate" name="fapresdate"><br>
-
-                        <label for="fstatus">Status do projeto:</label>
-                        <select id="fstatus" name="fstatus">
-                            <option value=" "><a href="#">SELECIONE</a></option>
-                            <option value="em-andamento"><a href="#">Em andamento</a></option>
-                            <option value="concluido-aguardando"><a href="#">Concluído: Aguardando apresentação a banca</a></option>
-                            <option value="concluido-aprovado"><a href="#">Aprovado</a></option>
-                            <option value="concluido-reprovado"><a href="#">Reprovado</a></option>
-                        </select><br><br>
-                        <input type="submit" class="btn btn-success" value="Salvar">
-                    </form> -->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -322,16 +294,17 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <?= $this->Form->create($aluno); ?>
+                    <?= $this->Form->create($aluno, ['url' =>['action' => 'editA']]) ?>
                     <p>
                         <!--INCLUIR AQUI EVENTO PARA LISTAR DO BANCO-->
                     </p>
                     <!--placeholder será alterado-->
                     <label for="fstatus">Login:</label>
                     <select id="fstatus" name="fstatus">
+                        <option value=" "><a href="#">SELECIONE</a></option>
                         <?php foreach ($aluno as $a) : ?>
-                            <option value=" "><a href="#">SELECIONE</a></option>
                             <option value=<?php if ($a['loginAluno']); ?> selected="selected"> <?php echo ($a['loginAluno']); ?> </option>
+                            <?php endforeach; ?>
                     </select><br>
                         <label for="fsmatricula">Matrícula:</label>
                         <input type="text" id="fsmatricula" name="fsmatricula" value="<?php echo ($a['matAluno']); ?>" readonly> <br>
@@ -342,7 +315,6 @@
                         <label for="fsemail">Email:</label>
                         <input type="text" id="fsemail" name="fsemail" value="<?php echo ($a['emailAluno']); ?>" readonly><br><br>
                         <input type="submit" class="btn btn-success" value="Salvar">
-                    <?php endforeach; ?>
                 <?= $this->Form->end(); ?>
                 </div>
                 <div class="modal-footer">
@@ -365,7 +337,7 @@
                         <!--INCLUIR AQUI EVENTO PARA LISTAR DO BANCO-->
                     </p>
                     <!--placeholder será alterado-->
-                    <?= $this->Form->create($professor) ?>
+                    <?= $this->Form->create($professor, ['url' =>['action' => 'editp']]) ?>
                         <label for="fstatus">Login:</label>
                         <select id="fstatus" name="fstatus">
                             <option value=" " a href="#" selected="selected">SELECIONE</a></option>
@@ -393,6 +365,7 @@
                         <?php echo $this->Form->control(('celProf'), ['placeholder' => 'Telefone', 'type' => 'text', 'id' => 'fcel']); ?> <br><br>
                         <br>
                         <!-- <?= $this->Html->link(__('Salvar'), ['controller' => 'coordenador'], ['action' => 'editp', $professor->loginProf], ['class' => 'btn btn-success']) ?> -->
+                        <?= $this->Form->button('Salvar', ['class' => 'btn btn-success btn-sm'],['type'=> 'submit']) ?>                    
                         <?= $this->Form->end(); ?>
                 </div>
                 <div class="modal-footer">

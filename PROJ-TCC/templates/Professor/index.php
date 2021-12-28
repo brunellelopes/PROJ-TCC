@@ -13,7 +13,7 @@ use Cake\I18n\FrozenTime;
 <div class="container-fluid">
 <div class="wrapper">
     <nav class="navbar navbar-expand-lg navbar-light bg-light" >
-            <a class="navbar-brand pull-right" ><img src="" id="brand-logo"></a>
+        <?=$this->Html->image('logo-feuc-site.png', ['class' => 'navbar-brand pull-right'], ['url'=>'#'], ['id'=>'brand-logo']);?>
             <hr/>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -53,11 +53,14 @@ use Cake\I18n\FrozenTime;
                     <label id="proflabel">Atuais orientações</label>
                     <div class="dropdown-divider"></div>
                         <ul id="list">
-                            <?php foreach ($projeto as $pj): ?>
-                            <!--Placeholder para apresentação-->
-                            <?php endforeach; ?>
-                                <li><a href=" ">Sistema de gerenciamento de trabalho de conclusão de curso</a></li>
-                        </ul>
+                            <fieldset>
+                                <?php foreach ($projeto as $pj): ?>
+                                    <!--Placeholder para apresentação-->
+                                    <li><?php echo $pj['nomeProj'] ?></li>
+                                    <?php endforeach; ?>
+                                    <li><a href=" ">Sistema de gerenciamento de trabalho de conclusão de curso</a></li>
+                                </ul>
+                            </fieldset>
                 </div>
                 <div class="col-md-4" id="apresentations">
                     <br/>
@@ -105,20 +108,18 @@ use Cake\I18n\FrozenTime;
                 <?= $this->form->create() ?>
                     <label for="fstatus">Selecione o ano:</label>
                     <select id="fstatus" name="fstatus">
+                        <option value=""><a href="#">SELECIONE</a></option>
                         <?php foreach ($projeto as $pj): ?>
                         <?php endforeach; ?>
-                        <option value=" "><a href="#">SELECIONE</a></option>
-                        <option value=<?php if ($pj['dataApres']); ?> selected="selected"> <?php echo ($pj['dataApres']); ?> </option>
+                            <option value=<?php if ($pj['dataApres']); ?> selected="selected"> <?php $pj['dataApres'] = new Date()  ; echo ($pj['dataApres']->i18nFormat('YYYY'));  ?> </option>
                     </select><br>
                     <label for="fstatus">Selecione o período:</label>
                         <select id="fstatus" name="fperiodo">
-                            <?php foreach ($projeto as $pj): ?>
-                            <?php endforeach; ?>
                             <option value=" "><a href="#">SELECIONE</a></option>
                             <option value="1"><a href="#">1</a></option>
                             <option value="2"><a href="#">2</a></option>
                         </select><br><br>
-                    <a href="">SGTCC - Sistema de gerenciamento de trabalho de conclusão de curso</a>
+                        <li><?php if($pj['statusProj'] == "Aprovado"); ?> <?php echo $pj['nomeProj'] ?></li>
                     <?= $this->form->end() ?>
             </div>
             <div class="modal-footer">

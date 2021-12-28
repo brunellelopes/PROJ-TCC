@@ -31,10 +31,8 @@ use Phinx\Db\Action\Action;
         <h4 style="text-align: center;">LOGIN</h4>
             <?= $this->Form->create(NULL, ['url' => ['action'=>'login']]) ?>
             <br>
-                <?php 
-                    echo $this->Form->control(('login')); 
-                    echo $this->Form->control(('password'),['placeholder'=>'senha'], ['type' => 'password']);
-                    ?>
+                <?= $this->Form->control(('login'), ['label'=>'Login']); ?>
+                <?= $this->Form->control(('password'),['label'=>'Senha'] , ['type' => 'password']); ?>
             <br>
             <br>
             <?= $this->Form->button(('Acessar'), ['type'=>'submit'], ['class'=>'btn btn-primary button']) ?>

@@ -78,26 +78,16 @@ class AppController extends Controller
         $this->loadComponent('Auth', [
             'authenticate' => [
                 'Basic' => [
-                    'fields' => [
-                        'login' => 'login', 'password' => 'password',
+                    'Form' => [
+                        'fields' => ['username' => 'login', 'password' => 'password'],
+                        'finder' => 'auth',
                         'userModel' => 'Login'
                 ],
             ],
         ],
-        'loginRedirect' =>[
-            'controller' => 'Login',
-            'action' => 'index'
-        ],
-        'logoutRedirect' => [
-            'controller' => 'Login',
-            'action' => 'logout'
-        ],
         'authError' => 'Voce precisa se autenticar para acessar!',
-        'flash' => [
-            'element' => 'error'
-            ]
         ]);
-        $this->Auth->allow(['login','index', 'addp', 'adda']);
+        //$this->Auth->allow(['index', 'addp', 'adda', 'addpj']);
         // Permite a ação display, assim nosso pages controller
         // continua a funcionar.
         /*
