@@ -100,8 +100,7 @@ class AppController extends Controller
     public function upload()
     {
         //Dividir por subpastas 
-        $file = $this->request->getData('attachments');
-            if ($this->request->is('post')) {
+        if ($this->request->is('post')) {
                 $pdf = $this->request->getData('application/pdf');
                 $name = $pdf->getClientFilename();
                 $file = $name->getUploadedFile();

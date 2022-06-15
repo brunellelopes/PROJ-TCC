@@ -153,7 +153,7 @@
                     <div class="modal-body">
                     <p><!--INCLUIR AQUI EVENTO PARA LISTAR DO BANCO--></p>
                     <!--Placeholder para apresentação-->
-                        <form>
+                        <!-- <form>
                             <label for="fstatus">Selecione o ano:</label>
                             <select id="fstatus" name="fpano">
                                 <option value=" "><a href="#">SELECIONE</a></option>
@@ -167,7 +167,18 @@
                                 <option value="2"><a href="#">2</a></option>
                             </select><br><br>
                             <a href="">SGTCC - Sistema de gerenciamento de trabalho de conclusão de curso</a>
-                        </form>
+                        </form> -->
+                        <? $this->Form->create(NULL, ['url' => ['action' => '']]) ?>
+                        <?php
+                            echo $this->Form->select('', [
+                                'empty'=>'SELECIONE O ANO'
+                                ]
+                                );
+                        ?>
+                            <?php foreach($projeto as $art):
+                                if(date(($art['dtApres'] != null))):echo (date($art['dtApres'],'YYYY')); endif ?>
+                            <?php endforeach ?>
+                    <? $this->Form->end(); ?>
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>

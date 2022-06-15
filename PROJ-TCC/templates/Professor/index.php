@@ -36,7 +36,9 @@ use Cake\I18n\FrozenTime;
                 </div>
             </div>
             <div class="nav justify-content-end">
-                <h6> Olá,  <?= $this->Html->link(__('Sair'), ['action' => 'logout'], ['class' => 'logout']) ?></h6>
+                <h6> Olá,  <?= $this->$login['login']?>
+                    <?= $this->Html->link(__('Sair'), ['action' => 'logout'], ['class' => 'logout']) ?>
+                </h6>
             </div>
         </nav>
     </div>
@@ -58,7 +60,6 @@ use Cake\I18n\FrozenTime;
                                     <!--Placeholder para apresentação-->
                                     <li><?php echo $pj['nomeProj'] ?></li>
                                     <?php endforeach; ?>
-                                    <li><a href=" ">Sistema de gerenciamento de trabalho de conclusão de curso</a></li>
                                 </ul>
                             </fieldset>
                 </div>

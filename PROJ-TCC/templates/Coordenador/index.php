@@ -44,7 +44,7 @@ use App\Model\Entity\Professor;
                 </div>
             </div>
             <div class="nav justify-content-end">
-                <h6> Olá, $login['login']
+                <h6> Olá, <?= $this->$login['login']?>
                     <?= $this->Html->link(__('Sair'), ['action' => 'logout'], ['class' => 'logout']) ?>
                 </h6>
             </div>
@@ -87,12 +87,12 @@ use App\Model\Entity\Professor;
                 <div class="col-md-4" id="sendDoc">
                     <br />
                     <label id="proflabel">Documentos de referência</label>
-                    <?= $this->Form->create($coordenador, ['type' => 'file']) ?>
-                    <div class="dropdown-divider"></div>
-                    <label for="addFile" class="btn btn-primary btn-sm"><?php echo $this->Form->file('file', ['type' => 'file', 'accept' => 'application/pdf']); ?></label>
-                    <br />
-                    <?php echo $this->Form->button('Enviar', ['class' => 'btn btn-success btn-sm'], ['action' => 'upload']) ?>
-                    <?php echo $this->Form->button('Reset', ['class' => 'btn btn-danger btn-sm']) ?>
+                        <?= $this->Form->create($coordenador, ['type' => 'file']) ?>
+                            <div class="dropdown-divider"></div>
+                            <label for="addFile" class="btn btn-primary btn-sm"><?php echo $this->Form->file('file', ['type' => 'file', 'accept' => 'application/pdf']); ?></label>
+                            <br />
+                            <?php echo $this->Form->button('Enviar', ['class' => 'btn btn-success btn-sm'], ['action' => 'upload']) ?>
+                            <?php echo $this->Form->button('Reset', ['class' => 'btn btn-danger btn-sm']) ?>
                     <?= $this->Form->end(); ?>
                 </div>
             </div>
@@ -112,16 +112,29 @@ use App\Model\Entity\Professor;
                     <p>
                         <!--INCLUIR AQUI EVENTO PARA LISTAR DO BANCO-->
                     </p>
-                    <form>
+                    <!-- <form>
                         <label for="fpstatus">Selecione o relatório:</label>
                         <select id="fpstatus" name="fpstatus">
+                        echo $this->Form->select('cdAccount' , ['empty' => 'Escolha', '1'=> 'Coordenador','2' => 'Professor', '3'=> 'Aluno']);
                             <option value=" "><a href="#">SELECIONE</a></option>
                             <option value="aprovado"><a href="#">Aprovados</a></option>
                             <option value="reprovado"><a href="#">Reprovados</a></option>
                             <option value="maiores-notas"><a href="#">Maiores notas</a></option>
                             <option value="aguardando"><a href="#">Aguardando apresentação</a></option>
                         </select><br>
-                    </form><br><br>
+                    </form><br><br> -->
+                    <? $this->Form->create(NULL, ['url' => ['action' => 'relatorio']]) ?>
+                        <?php
+                            echo $this->Form->select('', [
+                                'empty'=>'SELECIONE',
+                                '1'=>'Aprovado',
+                                '2'=>'reprovado',
+                                '3'=>'Maiores notas',
+                                '4'=>'Aguardando apresentação']
+                            );
+                        ?>
+                    <? $this->Form->end(); ?>
+                    <br><br>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -142,7 +155,7 @@ use App\Model\Entity\Professor;
                     <p>
                         <!--INCLUIR AQUI EVENTO PARA LISTAR DO BANCO-->
                     </p>
-                    <form>
+                    <!-- <form>
                         <label for="fastatus">Selecione o ano:</label>
                         <select id="fastatus" name="fastatus">
                             <option value=" "><a href="#">SELECIONE</a></option>
@@ -156,7 +169,18 @@ use App\Model\Entity\Professor;
                             <option value="2"><a href="#">2</a></option>
                         </select><br><br>
                         <a href="">SGTCC - Sistema de gerenciamento de trabalho de conclusão de curso</a>
-                    </form>
+                    </form> -->
+                    <? $this->Form->create(NULL, ['url' => ['action' => '']]) ?>
+                        <?php
+                            echo $this->Form->select('', [
+                                'empty'=>'SELECIONE O ANO'
+                                ]
+                                );
+                        ?>
+                            <?php foreach($projeto as $art):
+                                if(date(($art['dtApres'] != null))):echo (date($art['dtApres'],'YYYY')); endif ?>
+                            <?php endforeach ?>
+                    <? $this->Form->end(); ?>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -304,8 +328,7 @@ use App\Model\Entity\Professor;
                         <option value=" "><a href="#">SELECIONE</a></option>
                         <?php foreach ($aluno as $a) : ?>
                             <option value=<?php if ($a['loginAluno']); ?> selected="selected"> <?php echo ($a['loginAluno']); ?> </option>
-                            <?php endforeach; ?>
-                    </select><br>
+                        </select><br>
                         <label for="fsmatricula">Matrícula:</label>
                         <input type="text" id="fsmatricula" name="fsmatricula" value="<?php echo ($a['matAluno']); ?>" readonly> <br>
                         <label for="fsnomecompleto">Nome completo:</label>
@@ -315,9 +338,10 @@ use App\Model\Entity\Professor;
                         <label for="fsemail">Email:</label>
                         <input type="text" id="fsemail" name="fsemail" value="<?php echo ($a['emailAluno']); ?>" readonly><br><br>
                         <input type="submit" class="btn btn-success" value="Salvar">
-                <?= $this->Form->end(); ?>
-                </div>
-                <div class="modal-footer">
+                        <?php endforeach; ?>
+                        <?= $this->Form->end(); ?>
+                    </div>
+                    <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                 </div>
             </div>
@@ -346,12 +370,11 @@ use App\Model\Entity\Professor;
                                                 endif; ?>>
                                     <?php echo ($p['loginProf']); ?>
                                 </option>
-                            <?php endforeach; ?>
-                        </select><br>
-                        <!-- <td><?= $this->Number->format($professor->cdProf); ?></td> -->
-                        <label for="fnomecompleto">Nome completo:</label>
-                        <input type="text" id="fnomecompleto" name="<?php echo $p['nomeProf']; ?>" value="<?php if (!empty($p['loginProf'])) : echo ($p['nomeProf']); endif; ?>" readonly>
-                        <?php echo $this->Form->control(('nomeCompleto: '), ['placeholder' => 'Nome completo', 'type' => 'text', 'id' => 'fnomecompleto']); ?> <br>
+                            </select><br>
+                            <!-- <td><?= $this->Number->format($professor->cdProf); ?></td> -->
+                            <label for="fnomecompleto">Nome completo:</label>
+                            <input type="text" id="fnomecompleto" name="<?php echo $p['nomeProf']; ?>" value="<?php if (!empty($p['loginProf'])) : echo ($p['nomeProf']); endif; ?>" readonly>
+                            <?php echo $this->Form->control(('nomeCompleto: '), ['placeholder' => 'Nome completo', 'type' => 'text', 'id' => 'fnomecompleto']); ?> <br>
                         <br>
                         <label for="flogin">Login:</label>
                         <input type="text" id="flogin" name="flogin" value=<?php echo ($p['loginProf']) ?> readonly><br>
@@ -365,10 +388,11 @@ use App\Model\Entity\Professor;
                         <?php echo $this->Form->control(('celProf'), ['placeholder' => 'Telefone', 'type' => 'text', 'id' => 'fcel']); ?> <br><br>
                         <br>
                         <!-- <?= $this->Html->link(__('Salvar'), ['controller' => 'coordenador'], ['action' => 'editp', $professor->loginProf], ['class' => 'btn btn-success']) ?> -->
+                        <?php endforeach; ?>
                         <?= $this->Form->button('Salvar', ['class' => 'btn btn-success btn-sm'],['type'=> 'submit']) ?>                    
                         <?= $this->Form->end(); ?>
-                </div>
-                <div class="modal-footer">
+                    </div>
+                    <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                 </div>
             </div>
