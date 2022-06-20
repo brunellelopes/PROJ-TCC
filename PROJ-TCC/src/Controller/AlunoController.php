@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -103,28 +104,52 @@ class AlunoController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    public function mural(){
+    public function mural()
+    {
         //
     }
 
 
-    public function viewDocs($obj = null){
+    public function viewDocs($obj = null)
+    {
         $doc = $obj;
-        switch($doc){
+        switch ($doc) {
             case 1:
                 //Ver historico
                 $this->request->getQuery("SELECT * FROM historico WHERE id= 3");
                 break;
-                case 2:
-                    //ver doc enviado
-                    //$this->request-> --Inserir comando para localizar todos os arquivos de uma pasta 
-                    break;
+            case 2:
+                //ver doc enviado
+                //$this->request-> --Inserir comando para localizar todos os arquivos de uma pasta 
+                break;
         }
-        
     }
 
+    /*public function isAuthorized($user)
+    {
+        $action = $this->request->params['action'];
 
-    public function logout($id = null){
+        // As ações add e index são permitidas sempre.
+        if (in_array($action, ['index'])) {
+            return true;
+        }
+        // Todas as outras ações requerem um id.
+        if (!$this->request->getParam('pass.3')) {
+            return false;
+        }
+
+        // Checa se o bookmark pertence ao user atual.
+        $id = $this->request->getParam('pass.0');
+        $aluno = $this->Aluno->get($id);
+        if ($aluno->user_id == $user['id']) {
+            return true;
+        }
+        return parent::isAuthorized($user);
+    }*/
+
+
+    public function logout($id = null)
+    {
         $this->Flash->success('You are now logged out.');
         return $this->redirect(([
             'controller' => 'Login',

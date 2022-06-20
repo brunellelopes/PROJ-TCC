@@ -28,6 +28,14 @@ use Cake\Http\MiddlewareQueue;
 use Cake\ORM\Locator\TableLocator;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
+use Authorization\AuthorizationService;
+use Authorization\AuthorizationServiceInterface;
+use Authorization\AuthorizationServiceProviderInterface;
+use Authorization\Middleware\AuthorizationMiddleware;
+use Authorization\Policy\OrmResolver;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+
 
 /**
  * Application setup class.
@@ -103,6 +111,7 @@ class Application extends BaseApplication
             ->add(new CsrfProtectionMiddleware([
                 'httponly' => true,
             ]));
+            
 
         return $middlewareQueue;
     }
@@ -134,6 +143,7 @@ class Application extends BaseApplication
         }
 
         $this->addPlugin('Migrations');
+        $this->addPlugin('Authorization');
 
         // Load more plugins here
     }

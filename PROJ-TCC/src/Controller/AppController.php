@@ -96,6 +96,11 @@ class AppController extends Controller
         */
         //$this->loadComponent('FormProtection');
     }
+
+    public function isAuthorized($user)
+    {
+        return false;
+    }
     
     public function upload()
     {
